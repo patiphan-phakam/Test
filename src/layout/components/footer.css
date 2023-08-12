@@ -1,0 +1,16 @@
+.ant-layout-footer {
+  padding: 0;
+}
+
+.footer-section1 {
+  background-color: #cce7cf;
+  padding: 30px;
+  width: 100%;
+}
+
+.footer-section2 {
+  background-color: #1b5e20;
+  padding: 30px;
+  width: 100%;
+  color: white;
+}
