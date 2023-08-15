@@ -61,7 +61,7 @@ export const Footers = () => {
           <Col md={6} xs={24}>
             <Row>
               <Col md={24}>
-                <h5>About</h5>
+                <h5 style={{ color: "#D4AF37" }}>About</h5>
               </Col>
             </Row>
             <Row>
@@ -103,7 +103,7 @@ export const Footers = () => {
           <Col md={6} xs={24}>
             <Row>
               <Col md={24}>
-                <h5>Top Destinations</h5>
+                <h5 style={{ color: "#D4AF37" }}>Top Destinations</h5>
               </Col>
             </Row>
             <Row>
@@ -132,7 +132,7 @@ export const Footers = () => {
             <Row>
               <Col className="subscribe">
                 <Input placeholder="Your Email"></Input>
-                <Button type="primary">
+                <Button type="primary" style={{ backgroundColor: "#D4AF37" }}>
                   <ArrowRightOutlined />
                 </Button>
               </Col>

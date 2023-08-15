@@ -46,7 +46,8 @@ const CardCarousel: React.FC<CardCarouselProps> = ({ dataList }) => {
               key={item.title}
               style={{ margin: "0 2rem" }}
               cover={
-                <img
+                <Image
+                  preview={false}
                   alt="example"
                   src="https://gw.alipayobjects.com/zos/rmsportal/JiqGstEfoWAOHiTxclqi.png"
                 />
