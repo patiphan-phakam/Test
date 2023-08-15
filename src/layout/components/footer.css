@@ -14,3 +14,38 @@
   width: 100%;
   color: white;
 }
+
+.scrollable-footer {
+  width: 100%;
+  bottom: 0;
+}
+
+.address-content {
+  margin-top: 0.5rem;
+}
+
+.address-text {
+  margin: 0;
+}
+
+.about-menu {
+  margin: 0.2rem 0;
+}
+
+.menu-list {
+  color: white;
+}
+
+.menu-list:hover {
+  color: white;
+  border-bottom: 1px solid white;
+}
+
+.destinations-text {
+  margin: 0.2rem 0;
+}
+
+.subscribe {
+  display: flex;
+  margin-top: 1rem;
+}

@@ -1,6 +1,6 @@
 import { Content } from "antd/es/layout/layout";
 import "./layout.css";
-import { Layout, Menu, MenuProps } from "antd";
+import { Layout, MenuProps } from "antd";
 import { Navbar } from "./Navbar";
 import { Footers } from "./Footer";
 import { useState } from "react";

@@ -1,0 +1,23 @@
+.carousel-slide {
+  justify-content: center;
+  align-items: center;
+}
+
+.carousel-slide img {
+  width: 100%;
+}
+
+.home-content {
+  background-color: #1b5e20;
+  border-radius: 15px;
+  margin-top: -2rem;
+  position: relative;
+}
+
+.home-content-header {
+  margin-top: 5rem;
+}
+
+.home-content-center {
+  text-align: center;
+}
