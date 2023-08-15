@@ -14,10 +14,12 @@ export const Recommend: React.FC<{}> = () => {
 
   return (
     <>
-      <Row>
-        <h2 style={{ color: "#1b5e20" }}>แนะนำ</h2>
-      </Row>
-      <CardCarousel dataList={dataList} />
+      <div style={{ marginBottom: "5rem" }}>
+        <Row>
+          <h2 style={{ color: "#1b5e20", marginLeft: "5rem" }}>แนะนำ</h2>
+        </Row>
+        <CardCarousel dataList={dataList} />
+      </div>
     </>
   );
 };

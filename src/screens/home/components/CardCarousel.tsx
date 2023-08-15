@@ -45,8 +45,15 @@ const CardCarousel: React.FC<CardCarouselProps> = ({ dataList }) => {
           {dataList.slice(0, 5).map((item) => (
             <Card
               key={item.title}
-              style={{ margin: "0 0.5rem" }}
-              cover={<Image preview={false} alt="example" src={popurlar1} />}
+              style={{ margin: "0 0.5rem", height: "100%" }}
+              cover={
+                <Image
+                  preview={false}
+                  alt="example"
+                  src={popurlar1}
+                  width={"100%"}
+                />
+              }
             >
               <Meta title={item.title} description={item.description} />
             </Card>

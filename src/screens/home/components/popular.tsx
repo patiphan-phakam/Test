@@ -15,7 +15,7 @@ export const Popular: React.FC<{}> = () => {
   return (
     <>
       <Row>
-        <h2 style={{ color: "#1b5e20" }}>ยอดนิยม</h2>
+        <h2 style={{ color: "#1b5e20", marginLeft: "5rem" }}>ยอดนิยม</h2>
       </Row>
       <CardCarousel dataList={dataList} />
     </>

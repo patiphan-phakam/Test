@@ -61,7 +61,7 @@ export const Footers = () => {
           <Col md={6} xs={24}>
             <Row>
               <Col md={24}>
-                <h5 style={{ color: "#D4AF37" }}>About</h5>
+                <h4 style={{ color: "#D4AF37" }}>About</h4>
               </Col>
             </Row>
             <Row>
@@ -103,7 +103,7 @@ export const Footers = () => {
           <Col md={6} xs={24}>
             <Row>
               <Col md={24}>
-                <h5 style={{ color: "#D4AF37" }}>Top Destinations</h5>
+                <h4 style={{ color: "#D4AF37" }}>Top Destinations</h4>
               </Col>
             </Row>
             <Row>
