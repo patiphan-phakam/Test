@@ -15,7 +15,7 @@ export const Recommend: React.FC<{}> = () => {
   return (
     <>
       <Row>
-        <h2>แนะนำ</h2>
+        <h2 style={{ color: "#1b5e20" }}>แนะนำ</h2>
       </Row>
       <CardCarousel dataList={dataList} />
     </>

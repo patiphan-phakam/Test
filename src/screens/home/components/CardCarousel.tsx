@@ -1,8 +1,9 @@
 import React from "react";
-import { Avatar, Card, Image } from "antd";
+import { Card, Image } from "antd";
 import Carousel from "react-multi-carousel";
 import "react-multi-carousel/lib/styles.css";
 import Meta from "antd/es/card/Meta";
+import popurlar1 from "../../../images/popular-1.png";
 
 interface CardData {
   title: string;
@@ -44,22 +45,10 @@ const CardCarousel: React.FC<CardCarouselProps> = ({ dataList }) => {
           {dataList.slice(0, 5).map((item) => (
             <Card
               key={item.title}
-              style={{ margin: "0 2rem" }}
-              cover={
-                <Image
-                  preview={false}
-                  alt="example"
-                  src="https://gw.alipayobjects.com/zos/rmsportal/JiqGstEfoWAOHiTxclqi.png"
-                />
-              }
+              style={{ margin: "0 0.5rem" }}
+              cover={<Image preview={false} alt="example" src={popurlar1} />}
             >
-              <Meta
-                avatar={
-                  <Avatar src="https://xsgames.co/randomusers/avatar.php?g=pixel" />
-                }
-                title={item.title}
-                description={item.description}
-              />
+              <Meta title={item.title} description={item.description} />
             </Card>
           ))}
         </Carousel>

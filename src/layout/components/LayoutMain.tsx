@@ -78,7 +78,7 @@ export const LayoutMain: React.FC<prop> = ({ children, menuItems }) => {
             </ul>
           </SlidingMenu>
 
-          <Content>{children}</Content>
+          <Content style={{ backgroundColor: "white" }}>{children}</Content>
         </Layout>
         <Footers />
       </Layout>

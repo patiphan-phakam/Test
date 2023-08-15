@@ -4,18 +4,18 @@ import CardCarousel from "./CardCarousel";
 
 export const Popular: React.FC<{}> = () => {
   const dataList = [
-    { title: "Card 1", description: "Description 1" },
-    { title: "Card 2", description: "Description 2" },
-    { title: "Card 3", description: "Description 3" },
-    { title: "Card 4", description: "Description 4" },
-    { title: "Card 5", description: "Description 5" },
-    { title: "Card 6", description: "Description 6" },
+    { title: "บายศรีห้าชั้น 1", description: "ร้านน้องบิ๊กใบตอง 1" },
+    { title: "บายศรีห้าชั้น 2", description: "ร้านน้องบิ๊กใบตอง 2" },
+    { title: "บายศรีห้าชั้น 3", description: "ร้านน้องบิ๊กใบตอง 3" },
+    { title: "บายศรีห้าชั้น 4", description: "ร้านน้องบิ๊กใบตอง 4" },
+    { title: "บายศรีห้าชั้น 5", description: "ร้านน้องบิ๊กใบตอง 5" },
+    { title: "บายศรีห้าชั้น 6", description: "ร้านน้องบิ๊กใบตอง 6" },
   ];
 
   return (
     <>
       <Row>
-        <h2>ยอดนิยม</h2>
+        <h2 style={{ color: "#1b5e20" }}>ยอดนิยม</h2>
       </Row>
       <CardCarousel dataList={dataList} />
     </>
