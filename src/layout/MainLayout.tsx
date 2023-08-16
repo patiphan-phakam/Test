@@ -26,9 +26,11 @@ export const MainLayout: React.FC<Prop> = ({ menuItems }) => {
                 path={menuItem.path}
                 element={
                   <LayoutMain
-                    menuItems={menuItems.filter(
-                      (menuItem) => menuItem.path !== "/"
-                    )}
+                    menuItems={menuItems
+                      .filter((menuItem) => menuItem.path !== "/")
+                      .filter((menuItem) => !menuItem.path.includes("*"))}
+                    title={menuItem.label}
+                    current={menuItem.name}
                   >
                     {menuItem.component}
                   </LayoutMain>
@@ -42,9 +44,11 @@ export const MainLayout: React.FC<Prop> = ({ menuItems }) => {
               path={menuItem.path}
               element={
                 <LayoutMain
-                  menuItems={menuItems.filter(
-                    (menuItem) => menuItem.path !== "/"
-                  )}
+                  menuItems={menuItems
+                    .filter((menuItem) => menuItem.path !== "/")
+                    .filter((menuItem) => !menuItem.path.includes("*"))}
+                  title={menuItem.label}
+                  current={menuItem.name}
                 >
                   {menuItem.component}
                 </LayoutMain>

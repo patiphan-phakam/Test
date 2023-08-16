@@ -53,7 +53,7 @@ export const Navbar: React.FC<prop> = ({
             <Menu
               mode="horizontal"
               items={menu}
-              selectedKeys={[menuSelected]}
+              selectedKeys={[menuSelected ?? "home"]}
             />
           </div>
         </div>

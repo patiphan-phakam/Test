@@ -5,27 +5,26 @@ import { Navbar } from "./Navbar";
 import { Footers } from "./Footer";
 import { useState } from "react";
 import { MenuItem } from "../../App";
-import { Link, useLocation, useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { Helmet } from "react-helmet";
 import SlidingMenu from "./SlidingMenu";
 
 interface prop {
   children: React.ReactElement;
   menuItems: MenuItem[];
+  title: string;
+  current: string;
 }
 
-export const LayoutMain: React.FC<prop> = ({ children, menuItems }) => {
-  const location = useLocation();
+export const LayoutMain: React.FC<prop> = ({
+  children,
+  menuItems,
+  title,
+  current,
+}) => {
   const navigate = useNavigate();
   const [menuOpen, setMenuOpen] = useState(false);
 
-  const current =
-    menuItems.find((item) => location.pathname.replace("/", "") === item.name)
-      ?.name || "home";
-
-  const title: string =
-    menuItems.find((item) => location.pathname.replace("/", "") === item.name)
-      ?.label || "หน้าหลัก";
   const items: MenuProps["items"] = menuItems.map((menuItem) => {
     return {
       key: menuItem.name,

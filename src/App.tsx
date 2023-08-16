@@ -2,10 +2,9 @@ import { ReactElement } from "react";
 import { MainLayout } from "./layout/MainLayout";
 import { DashboardOutlined } from "@ant-design/icons/lib/icons";
 import { Home } from "./screens/home/home";
-import { Baisir } from "./screens/baisri/barisri";
 import "typeface-roboto";
 import "./app.css";
-
+import { BaisriRoute } from "./screens/baisri/baisriRoute";
 export interface MenuItem {
   label: string;
   icon: React.ReactElement;
@@ -23,7 +22,7 @@ const App = () => {
       label: "หน้าแรก",
       icon: <DashboardOutlined />,
       path: "/",
-      name: "",
+      name: "home",
       showInMenu: true,
       component: <Home />,
     },
@@ -38,10 +37,18 @@ const App = () => {
     {
       label: "บายศรี",
       icon: <DashboardOutlined />,
+      path: "/baisri/*",
+      name: "baisri",
+      showInMenu: true,
+      component: <BaisriRoute baseUrl="/baisri" />,
+    },
+    {
+      label: "บายศรี",
+      icon: <DashboardOutlined />,
       path: "/baisri",
       name: "baisri",
       showInMenu: true,
-      component: <Baisir />,
+      component: <BaisriRoute baseUrl="/baisri" />,
     },
   ];
   return <MainLayout menuItems={menuItems} />;

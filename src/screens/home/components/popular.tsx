@@ -1,23 +1,25 @@
 import { Row } from "antd";
 import "react-multi-carousel/lib/styles.css";
-import CardCarousel from "./CardCarousel";
+import CardCarousel, { ICardData } from "../../../components/CardCarousel";
 
 export const Popular: React.FC<{}> = () => {
-  const dataList = [
-    { title: "บายศรีห้าชั้น 1", description: "ร้านน้องบิ๊กใบตอง 1" },
-    { title: "บายศรีห้าชั้น 2", description: "ร้านน้องบิ๊กใบตอง 2" },
-    { title: "บายศรีห้าชั้น 3", description: "ร้านน้องบิ๊กใบตอง 3" },
-    { title: "บายศรีห้าชั้น 4", description: "ร้านน้องบิ๊กใบตอง 4" },
-    { title: "บายศรีห้าชั้น 5", description: "ร้านน้องบิ๊กใบตอง 5" },
-    { title: "บายศรีห้าชั้น 6", description: "ร้านน้องบิ๊กใบตอง 6" },
+  const dataList: ICardData[] = [
+    { id: 1, title: "Card 1", description: "Description 1" },
+    { id: 2, title: "Card 2", description: "Description 2" },
+    { id: 3, title: "Card 3", description: "Description 3" },
+    { id: 4, title: "Card 4", description: "Description 4" },
+    { id: 5, title: "Card 5", description: "Description 5" },
+    { id: 6, title: "Card 6", description: "Description 6" },
   ];
 
   return (
     <>
-      <Row>
-        <h2 style={{ color: "#1b5e20", marginLeft: "5rem" }}>ยอดนิยม</h2>
-      </Row>
-      <CardCarousel dataList={dataList} />
+      <div style={{ marginBottom: "2rem" }}>
+        <Row>
+          <h2 style={{ color: "#028910", marginLeft: "5rem" }}>ยอดนิยม</h2>
+        </Row>
+        <CardCarousel dataList={dataList} />
+      </div>
     </>
   );
 };

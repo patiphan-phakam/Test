@@ -3,33 +3,39 @@ import { Card, Image } from "antd";
 import Carousel from "react-multi-carousel";
 import "react-multi-carousel/lib/styles.css";
 import Meta from "antd/es/card/Meta";
-import popurlar1 from "../../../images/popular-1.png";
+import popurlar1 from "../images/popular-1.png";
+import { useNavigate } from "react-router-dom";
+import "./style.css";
 
-interface CardData {
+export interface ICardData {
+  id: string | number;
   title: string;
-  description: string;
+  description?: string;
 }
 
 interface CardCarouselProps {
-  dataList: CardData[];
+  dataList: ICardData[];
+  baseUrl?: string;
 }
 
-const CardCarousel: React.FC<CardCarouselProps> = ({ dataList }) => {
+const CardCarousel: React.FC<CardCarouselProps> = ({ dataList, baseUrl }) => {
+  const navigate = useNavigate();
+
   const responsive = {
     desktop: {
       breakpoint: { max: 3000, min: 1024 },
       items: 3,
-      paritialVisibilityGutter: 60,
+      partialVisibilityGutter: 60,
     },
     tablet: {
       breakpoint: { max: 1024, min: 464 },
       items: 2,
-      paritialVisibilityGutter: 50,
+      partialVisibilityGutter: 50,
     },
     mobile: {
       breakpoint: { max: 464, min: 0 },
       items: 1,
-      paritialVisibilityGutter: 30,
+      partialVisibilityGutter: 30,
     },
   };
 
@@ -44,8 +50,8 @@ const CardCarousel: React.FC<CardCarouselProps> = ({ dataList }) => {
         >
           {dataList.slice(0, 5).map((item) => (
             <Card
+              className="card-product"
               key={item.title}
-              style={{ margin: "0 0.5rem", height: "100%" }}
               cover={
                 <Image
                   preview={false}
@@ -54,6 +60,7 @@ const CardCarousel: React.FC<CardCarouselProps> = ({ dataList }) => {
                   width={"100%"}
                 />
               }
+              onClick={() => navigate(`${baseUrl}/${item.id}`)}
             >
               <Meta title={item.title} description={item.description} />
             </Card>

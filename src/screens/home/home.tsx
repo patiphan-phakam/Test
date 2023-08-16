@@ -13,6 +13,7 @@ import { Recommend } from "./components/recommend";
 import { Carousel } from "react-responsive-carousel";
 import "react-responsive-carousel/lib/styles/carousel.min.css";
 import { ArrowRightOutlined } from "@ant-design/icons";
+import { Review } from "./components/review";
 
 export const Home: React.FC<{}> = () => {
   return (
@@ -25,13 +26,28 @@ export const Home: React.FC<{}> = () => {
         stopOnHover
       >
         <div>
-          <Image preview={false} src={homePicture1} alt="Image 1" />
+          <Image
+            preview={false}
+            src={homePicture1}
+            alt="Image 1"
+            width={"100%"}
+          />
         </div>
         <div>
-          <Image preview={false} src={homePicture1} alt="Image 2" />
+          <Image
+            preview={false}
+            src={homePicture1}
+            alt="Image 2"
+            width={"100%"}
+          />
         </div>
         <div>
-          <Image preview={false} src={homePicture1} alt="Image 3" />
+          <Image
+            preview={false}
+            src={homePicture1}
+            alt="Image 3"
+            width={"100%"}
+          />
         </div>
       </Carousel>
       <div className="home-content">
@@ -128,7 +144,7 @@ export const Home: React.FC<{}> = () => {
         <Col span={24}>
           <Row>
             <Col md={16} className="container-item">
-              <h3 style={{ color: "#1b5e20" }}>เราคือหน่วยการเรียนรู้</h3>
+              <h3 style={{ color: "#028910" }}>เราคือหน่วยการเรียนรู้</h3>
               <p>
                 ทีมงานของเราคือกลุ่มคนที่คอยช่วยเหลือและพัฒนาองค์ความรู้ด้านบายศรีและพิธีกรรมให้กับชุมชนและผู้ที่สนใจเรียนรู้อนุรักษ์วัฒนธรรมพิธีกรรมท้องถิ่นไทย
                 สืบสานต่อยอดจากรุ่นสู่รุ่น
@@ -146,7 +162,7 @@ export const Home: React.FC<{}> = () => {
               <img src={homeBelive} alt="homePicture1" width={"80%"} />
             </Col>
             <Col md={16} className="container-item">
-              <h3 style={{ color: "#1b5e20" }}>การพัฒนาสังคมและชุมชน</h3>
+              <h3 style={{ color: "#028910" }}>การพัฒนาสังคมและชุมชน</h3>
               <p>
                 เราคือกลุ่มกิจการเพื่อสังคมที่พร้อมพัฒนาท้องถิ่นทางด้านอาชีพและวัฒนธรรมให้กับสังคม
               </p>
@@ -157,7 +173,7 @@ export const Home: React.FC<{}> = () => {
           </Row>
           <Row>
             <Col md={16} className="container-item">
-              <h3 style={{ color: "#1b5e20" }}>ความเชื่อ</h3>
+              <h3 style={{ color: "#028910" }}>ความเชื่อ</h3>
               <p>
                 หลายคนต้องการที่พึ่งทางจิตใจในหลายสถานการณ์ที่คนต้องการที่พึ่งและมองหาทางออกสิ่งศักดิ์สิทธิ์เป็นอีกหนึ่งหนทางที่ช่วยฟื้นฟูเยียวยาจิตใจและเป็นที่ยึดเหนี่ยวจิตใจได้
               </p>
@@ -173,6 +189,7 @@ export const Home: React.FC<{}> = () => {
       </Row>
       <Popular />
       <Recommend />
+      <Review />
     </>
   );
 };
