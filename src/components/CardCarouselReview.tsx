@@ -2,7 +2,6 @@ import React from "react";
 import { Avatar, Card, Col, Rate, Row } from "antd";
 import Carousel from "react-multi-carousel";
 import "react-multi-carousel/lib/styles.css";
-import "./style.css";
 import UserOutlined from "@ant-design/icons/lib/icons/UserOutlined";
 import dayjs from "dayjs";
 
@@ -10,7 +9,7 @@ export interface ICardDataReview {
   id: string | number;
   userId: string;
   name: string;
-  start: number;
+  star: number;
   dateTime: Date;
   store: string;
   product: string;
@@ -54,7 +53,7 @@ const CardCarouselReview: React.FC<CardCarouselProps> = ({
           responsive={responsive}
         >
           {dataList.slice(0, 5).map((review) => (
-            <Card className="card-review">
+            <Card className="card-review" key={review.id}>
               <Row>
                 <Col span={4}>
                   <Avatar icon={<UserOutlined />} />
@@ -75,7 +74,7 @@ const CardCarouselReview: React.FC<CardCarouselProps> = ({
                       <Rate
                         disabled
                         allowHalf
-                        defaultValue={review.start}
+                        defaultValue={review.star}
                         style={{ fontSize: "8px" }}
                       />
                     </div>

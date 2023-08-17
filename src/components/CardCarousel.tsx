@@ -5,7 +5,6 @@ import "react-multi-carousel/lib/styles.css";
 import Meta from "antd/es/card/Meta";
 import popurlar1 from "../images/popular-1.png";
 import { useNavigate } from "react-router-dom";
-import "./style.css";
 
 export interface ICardData {
   id: string | number;

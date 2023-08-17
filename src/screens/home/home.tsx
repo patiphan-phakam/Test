@@ -7,7 +7,6 @@ import homeCirCle3 from "../../images/home-circle-3.png";
 import homeLearn from "../../images/home-learn.png";
 import homeBelive from "../../images/home-belive.png";
 import homeSocial from "../../images/home-social.png";
-import "./home.css";
 import { Popular } from "./components/popular";
 import { Recommend } from "./components/recommend";
 import { Carousel } from "react-responsive-carousel";
