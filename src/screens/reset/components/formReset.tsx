@@ -45,7 +45,7 @@ const FormReset: React.FC<{}> = () => {
         </Button>
       </Row>
       <Space style={{ marginTop: "1rem" }}>
-        <Link style={{ color: "green" }} onClick={() => navigate("/login")}>
+        <Link className="link-action" onClick={() => navigate("/login")}>
           SIGN IN
         </Link>
       </Space>
@@ -54,7 +54,7 @@ const FormReset: React.FC<{}> = () => {
     <Row>
       <h5>Reset Password Success.Please check your email to confirm</h5>
       <Space style={{ marginTop: "1rem" }}>
-        <Link style={{ color: "green" }} onClick={() => navigate("/login")}>
+        <Link className="link-action" onClick={() => navigate("/login")}>
           SIGN IN
         </Link>
       </Space>

@@ -19,7 +19,7 @@ interface prop {
 }
 const { Link } = Typography;
 
-const FormRegister: React.FC<prop> = ({
+const FormRegisterStore: React.FC<prop> = ({
   setRemember,
   remenber,
   handleRegister,
@@ -107,12 +107,9 @@ const FormRegister: React.FC<prop> = ({
         SIGN UP
       </Button>
       <Space>
-        {/* <Link
-          onClick={() => navigate("/register/store")}
-          className="link-action"
-        >
-          SIGN UP STORE?
-        </Link> */}
+        <Link onClick={() => navigate("/register")} className="link-action">
+          SIGN UP
+        </Link>
         <Link onClick={() => navigate("/login")} className="link-action">
           SIGN IN
         </Link>
@@ -121,4 +118,4 @@ const FormRegister: React.FC<prop> = ({
   );
 };
 
-export default FormRegister;
+export default FormRegisterStore;

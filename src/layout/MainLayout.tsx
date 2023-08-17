@@ -3,8 +3,9 @@ import { Error } from "../screens/error/error";
 import LoginPage from "../screens/login/Login";
 import { LayoutMain } from "./components/LayoutMain";
 import { MenuItem } from "../App";
-import Register from "../screens/register/Register";
-import Reset from "../screens/reset/Reset";
+import RegisterPage from "../screens/register/Register";
+import RegisterStorePage from "../screens/registerStore/RegisterStore";
+import ResetPage from "../screens/reset/Reset";
 
 interface Prop {
   menuItems: MenuItem[];
@@ -60,8 +61,9 @@ export const MainLayout: React.FC<Prop> = ({ menuItems }) => {
           path="/login"
           element={<LoginPage handleLogin={handleLogin} />}
         />
-        <Route path="/register" element={<Register />} />
-        <Route path="/reset" element={<Reset />} />
+        <Route path="/register" element={<RegisterPage />} />
+        <Route path="/register/store" element={<RegisterStorePage />} />
+        <Route path="/reset" element={<ResetPage />} />
         <Route path="*" element={<Error />} />
       </Routes>
     </BrowserRouter>

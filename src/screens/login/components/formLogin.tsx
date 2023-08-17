@@ -77,18 +77,10 @@ const FormLogin: React.FC<prop> = ({ setRemember, remenber, handleLogin }) => {
         </Button>
       </Row>
       <Space style={{ marginTop: "1rem" }}>
-        <Link
-          className="font-green"
-          onClick={() => navigate("/register")}
-          style={{ borderBottom: " 1px solid green", color: "green" }}
-        >
+        <Link className="link-action" onClick={() => navigate("/register")}>
           create account
         </Link>
-        <Link
-          className="font-green"
-          style={{ borderBottom: " 1px solid green", color: "green" }}
-          onClick={() => navigate("/reset")}
-        >
+        <Link className="link-action" onClick={() => navigate("/reset")}>
           forget password?
         </Link>
       </Space>

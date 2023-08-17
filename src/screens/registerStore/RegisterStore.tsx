@@ -2,11 +2,11 @@ import { Row, Col, Image, message } from "antd";
 import "../../styles/login.css";
 import logo from "../../images/logo-mb.png";
 import { useEffect, useState } from "react";
-import FormRegister from "./components/formRegister";
+import FormRegisterStore from "./components/formRegisterStore";
 import { TUserRegister } from "../../types/loginTypes";
 import LogoutServicce from "./services/logout-service";
 
-const RegisterPage: React.FC<{}> = () => {
+const RegisterStorePage: React.FC<{}> = () => {
   const [remenber, setRemember] = useState(false);
 
   useEffect(() => {
@@ -41,7 +41,7 @@ const RegisterPage: React.FC<{}> = () => {
                 <Image preview={false} src={logo} width={"50%"} />
               </Row>
               <div style={{ marginTop: "2rem" }}>
-                <FormRegister
+                <FormRegisterStore
                   remenber={remenber}
                   setRemember={setRemember}
                   handleRegister={handleRegister}
@@ -55,4 +55,4 @@ const RegisterPage: React.FC<{}> = () => {
   );
 };
 
-export default RegisterPage;
+export default RegisterStorePage;
