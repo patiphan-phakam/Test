@@ -102,13 +102,16 @@ export const Product: React.FC<Props> = ({ baseUrl }) => {
   ];
   return (
     <>
-      <div style={{ margin: "0 5rem" }}>
+      <div
+        className="container-content"
+        style={{ marginLeft: "5rem", marginRight: "5rem" }}
+      >
         <ProductPreview images={dataProduct.preview ?? []} />
         <Row>
-          <Col md={24} style={{ marginTop: "0.5rem" }}>
+          <Col span={24} style={{ marginTop: "0.5rem" }}>
             <p className="card-name-custom">{dataProduct.product}</p>
           </Col>
-          <Col md={24} style={{ display: "flex" }}>
+          <Col span={24} style={{ display: "flex" }}>
             <Rate
               disabled
               allowHalf
@@ -126,23 +129,23 @@ export const Product: React.FC<Props> = ({ baseUrl }) => {
               {`| ขายแล้ว ${dataProduct.sold}`}
             </p>
           </Col>
-          <Col md={24}>
+          <Col span={24}>
             <p className="card-price-custom">{`฿${dataProduct.price}`}</p>
           </Col>
-          <Col md={24}>
+          <Col span={24}>
             <p className="text-description-custom">รายละเอียดสินค้า</p>
           </Col>
-          <Col md={24}>
+          <Col span={24}>
             <p className="text-detail-custom">
               บายศรีสามชั้น 1 ต้น องค์บายศรี 5 ทิศ องค์บายศรีชั้นแรกละ 11 นิ้ว
               ชั้นสอง 9 นิ้ว ชั้นสาม 7 นิ้ว องค์บายศรีประดับดอกไม้
               เหมาะใช้ในงานสู่ขวัญแต่งงาน งานบวชเป็นต้น
             </p>
           </Col>
-          <Col md={24}>
+          <Col span={24}>
             <p className="text-description-custom">{dataProduct.store}</p>
           </Col>
-          <Col md={24}>
+          <Col span={24}>
             <p className="text-store-detail-custom">
               เจ้าของโดย: คุณบิ๊ก คุณขวัญ
             </p>

@@ -22,7 +22,7 @@ export const Baisri: React.FC<Props> = ({ baseUrl }) => {
 
   return (
     <>
-      <div style={{ marginBottom: "2rem" }}>
+      <div className="container-content" style={{ marginBottom: "2rem" }}>
         <Row>
           <h2
             style={{

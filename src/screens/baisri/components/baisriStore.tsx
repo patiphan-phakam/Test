@@ -100,7 +100,7 @@ export const BaisriStore: React.FC<Props> = ({ baseUrl }) => {
   ];
   return (
     <>
-      <div style={{ marginBottom: "3rem" }}>
+      <div className="container-content" style={{ marginBottom: "3rem" }}>
         <Row>
           <Col md={24}>
             <p style={{ marginLeft: "5rem", fontSize: "20px" }}>
