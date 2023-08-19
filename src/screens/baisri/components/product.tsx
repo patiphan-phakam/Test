@@ -2,7 +2,7 @@ import React from "react";
 // import { useParams } from "react-router-dom";
 import { ProductPreview } from "./productPreview";
 import { ICardDataProduct } from "../../../components/CardCarouselProduct";
-import { Row, Col, Rate } from "antd";
+import { Row, Col, Rate, Button } from "antd";
 import CardCarouselReview, {
   ICardDataReview,
 } from "../../../components/CardCarouselReview";
@@ -154,6 +154,9 @@ export const Product: React.FC<Props> = ({ baseUrl }) => {
               พิกัด: ตำบลกมลาไสย อำเภอกมลาไสย จังหวัดกาฬสินธุ์
             </p>
           </Col>
+        </Row>
+        <Row>
+          <Button className="green-button">ซื้อ</Button>
         </Row>
         <Row style={{ display: "flex" }}>
           <h2 style={{ color: "#028910" }}>รีวิวจากลูกค้า</h2>

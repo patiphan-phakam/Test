@@ -21,14 +21,6 @@ const App = () => {
     {
       label: "หน้าแรก",
       icon: <DashboardOutlined />,
-      path: "/",
-      name: "home",
-      showInMenu: true,
-      component: <Home />,
-    },
-    {
-      label: "หน้าแรก",
-      icon: <DashboardOutlined />,
       path: "/home",
       name: "home",
       showInMenu: true,

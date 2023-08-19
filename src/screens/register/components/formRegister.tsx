@@ -55,14 +55,17 @@ const FormRegister: React.FC<prop> = ({
         <Col className="gutter-row" span={24}>
           <Form.Item
             name="username"
-            rules={[
-              { required: true, message: "Please Enter Phone Number or Email" },
-            ]}
+            rules={[{ required: true, message: "username" }]}
           >
-            <Input
-              placeholder="Phone Number or Email"
-              style={{ width: "100%" }}
-            />
+            <Input placeholder="username" style={{ width: "100%" }} />
+          </Form.Item>
+        </Col>
+        <Col className="gutter-row" span={24}>
+          <Form.Item
+            name="email"
+            rules={[{ required: true, message: "email" }]}
+          >
+            <Input placeholder="email" style={{ width: "100%" }} />
           </Form.Item>
         </Col>
         <Col className="gutter-row" span={24}>

@@ -200,6 +200,36 @@
   font-size: 18px;
 }
 
+.ant-menu-item {
+  color: #028910 !important;
+}
+
+.ant-menu-item:hover {
+  font-weight: bold;
+}
+
+.ant-menu-item-selected,
+.ant-menu-item-selected:hover,
+.ant-menu-item-selected:active {
+  color: #028910 !important;
+}
+
+a {
+  color: #028910 !important;
+}
+
+.text-red {
+  color: red !important;
+}
+
+.ant-pagination .ant-pagination-item-active {
+  border-color: #028910 !important;
+}
+
+.avatar:hover {
+  cursor: pointer;
+}
+
 @media (max-width: 1400px) {
   .card-product {
     margin: 0 3rem;

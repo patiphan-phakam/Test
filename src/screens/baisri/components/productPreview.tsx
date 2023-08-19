@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { IImage } from "../../../components/CardCarouselProduct";
-import { LeftCircleOutlined, RightCircleOutlined } from "@ant-design/icons";
+import { LeftOutlined, RightOutlined } from "@ant-design/icons";
 
 interface Props {
   images: IImage[];
@@ -26,7 +26,7 @@ export const ProductPreview: React.FC<Props> = ({ images }) => {
                 className={`icon-prev ${indexImage === 0 ? "disabled" : ""}`}
                 onClick={() => onPrev()}
               >
-                <LeftCircleOutlined />
+                <LeftOutlined />
               </div>
               <img
                 src={images[indexImage].image}
@@ -38,7 +38,7 @@ export const ProductPreview: React.FC<Props> = ({ images }) => {
                 }`}
                 onClick={() => onNext()}
               >
-                <RightCircleOutlined />
+                <RightOutlined />
               </div>
             </div>
           </>
