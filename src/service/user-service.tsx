@@ -9,5 +9,11 @@ export const UserService = (axiosInstance: AxiosInstance) => {
         .then((response: any) => response.data)
         .catch((error: any) => error);
     },
+    register: async (user: TLogin) => {
+      return await axiosInstance
+        .post(`user`, user)
+        .then((response: any) => response.data)
+        .catch((error: any) => error);
+    },
   };
 };

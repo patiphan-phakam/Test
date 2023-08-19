@@ -13,7 +13,6 @@ const RegisterPage: React.FC<{}> = () => {
     const bsRemember = localStorage.getItem("bsRemember");
     if (bsRemember) {
       if (bsRemember === "true") {
-        console.log(bsRemember);
         setRemember(true);
       }
     }

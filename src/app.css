@@ -230,6 +230,10 @@ a {
   cursor: pointer;
 }
 
+.ant-select-selector {
+  border: 1px solid #028910 !important;
+  border-radius: 15px !important;
+}
 @media (max-width: 1400px) {
   .card-product {
     margin: 0 3rem;

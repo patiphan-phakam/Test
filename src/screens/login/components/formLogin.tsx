@@ -11,25 +11,45 @@ import {
 import "../../../styles/login.css";
 import { TLogin } from "../../../types/loginTypes";
 import { useNavigate } from "react-router-dom";
+import { useEffect } from "react";
 
 interface prop {
   remenber: boolean;
   setRemember: (status: boolean) => void;
   handleLogin: (data: TLogin) => void;
+  remenberUser: string;
 }
 const { Link } = Typography;
 
-const FormLogin: React.FC<prop> = ({ setRemember, remenber, handleLogin }) => {
+const FormLogin: React.FC<prop> = ({
+  setRemember,
+  remenber,
+  handleLogin,
+  remenberUser,
+}) => {
   const [form] = Form.useForm();
   const navigate = useNavigate();
+
+  useEffect(() => {
+    form.setFieldsValue({
+      username: remenberUser,
+    });
+  }, [form, remenberUser]);
+
   const onFinish = () => {
     form.validateFields().then((values) => {
       handleLogin(values);
+      if (remenber) {
+        localStorage.setItem("username", values.username);
+      }
     });
   };
 
-  const handleRemember = (status: boolean) => {
-    localStorage.setItem("bsRemember", status.toString());
+  const handleRemember = (check: boolean) => {
+    setRemember(check);
+    if (!check) {
+      localStorage.removeItem("username");
+    }
   };
 
   return (
@@ -48,7 +68,11 @@ const FormLogin: React.FC<prop> = ({ setRemember, remenber, handleLogin }) => {
             name={`password`}
             rules={[{ required: true, message: "Please Enter Password" }]}
           >
-            <Input.Password placeholder="Password" style={{ width: "100%" }} />
+            <Input.Password
+              placeholder="Password"
+              style={{ width: "100%" }}
+              autoComplete="on"
+            />
           </Form.Item>
         </Col>
       </Row>
@@ -57,7 +81,6 @@ const FormLogin: React.FC<prop> = ({ setRemember, remenber, handleLogin }) => {
           className="green-checkbox"
           onChange={(e) => {
             handleRemember(e.target.checked);
-            setRemember(e.target.checked);
           }}
           checked={remenber}
           style={{ color: "green" }}

@@ -4,7 +4,7 @@ import { Avatar, Button, Dropdown, Input, Menu, MenuProps, Modal } from "antd";
 import { CloseOutlined, MenuOutlined, UserOutlined } from "@ant-design/icons";
 import logoImage from "../../images/logo120.png";
 import logoImageMb from "../../images/logo-mb.png";
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useAuth } from "../../auth/auth";
 import Link from "antd/es/typography/Link";
@@ -24,17 +24,9 @@ export const Navbar: React.FC<prop> = ({
   menuOpen,
   menuSelected,
 }) => {
-  const { user, signout } = useAuth();
+  const { accessToken, signout } = useAuth();
   const [isModalOpen, setIsModalOpen] = useState(false);
   const navigate = useNavigate();
-  const [userToken, setUserToken] = useState<string | undefined>();
-
-  useEffect(() => {
-    if (user) {
-      setUserToken(userToken);
-    }
-    setUserToken(undefined);
-  }, [user]);
 
   const onSearch = (value: string) => {
     return;
@@ -97,7 +89,7 @@ export const Navbar: React.FC<prop> = ({
             />
           </div>
           <div className="login">
-            {user ? (
+            {accessToken ? (
               <>
                 <Dropdown menu={{ items }} placement="bottomLeft" arrow>
                   <Avatar icon={<UserOutlined />} className="avatar" />
@@ -139,7 +131,7 @@ export const Navbar: React.FC<prop> = ({
         onCancel={handleCancel}
         footer={null}
       >
-        <p>{user?.token}</p>
+        <p>{accessToken}</p>
       </Modal>
     </>
   );

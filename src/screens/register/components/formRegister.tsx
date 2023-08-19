@@ -8,9 +8,13 @@ import {
   Checkbox,
   message,
   Typography,
+  Select,
 } from "antd";
 import { TUserRegister } from "../../../types/loginTypes";
 import { useNavigate } from "react-router-dom";
+import { useState } from "react";
+import { UserService } from "../../../service/user-service";
+import { axiosBackend } from "../../../config/axiosBackend";
 
 interface prop {
   remenber: boolean;
@@ -23,8 +27,11 @@ interface IRegister {
   name: string;
   phone: string;
   email: string;
+  userLevel: number;
   username: string;
   password: string;
+  confirmPassword: string;
+  userType: string;
 }
 const FormRegister: React.FC<prop> = ({
   setRemember,
@@ -33,17 +40,57 @@ const FormRegister: React.FC<prop> = ({
 }) => {
   const [form] = Form.useForm();
   const navigate = useNavigate();
+  const [inputValue, setInputValue] = useState<string>("");
+  const userService = UserService(axiosBackend);
+  const type = [
+    {
+      value: 1,
+      label: "store",
+    },
+    {
+      value: 2,
+      label: "user",
+    },
+  ];
+
+  const handleKeyPress = (e: any) => {
+    const charCode = e.which || e.keyCode;
+    // Allow only numeric digits (0-9) or the Backspace key
+    if (charCode !== 8 && (charCode < 48 || charCode > 57)) {
+      e.preventDefault();
+    }
+    if (inputValue.length >= 10) {
+      e.preventDefault();
+    }
+  };
+
   const onFinish = () => {
-    form.validateFields().then((values) => {
+    form.validateFields().then(async (values) => {
       if (values.password !== values.confirmPassword) {
         message.error("Password and confirm password does not match");
         return;
       }
+      delete values.confirmPassword;
       const data: IRegister = {
         ...values,
+        userLevel: values.userLevel.value,
+        userType: type.find((t) => values.userLevel.value === t.value)?.label,
       };
-      handleRegister(data);
+      const res = await userService.register(data);
+      if (res) {
+        navigate("/login");
+        return;
+      }
+      message.error("register failed please try again");
+      return;
     });
+  };
+
+  const handleInputChange = (e: any) => {
+    const newValue = e.target.value;
+    if (newValue.length <= 10) {
+      setInputValue(newValue);
+    }
   };
 
   return (
@@ -51,26 +98,44 @@ const FormRegister: React.FC<prop> = ({
       <Row gutter={{ xs: 8, sm: 16, md: 24, lg: 32 }}>
         <Col className="gutter-row" span={24}>
           <Form.Item
-            name="name"
-            rules={[{ required: true, message: "Please Enter Name" }]}
+            name="fullName"
+            rules={[{ required: true, message: "Please Enter Name Surname" }]}
           >
-            <Input placeholder="Name" style={{ width: "100%" }} />
+            <Input placeholder="Name Surname" style={{ width: "100%" }} />
           </Form.Item>
         </Col>
         <Col className="gutter-row" span={24}>
           <Form.Item
             name="phone"
-            rules={[{ required: true, message: "phone" }]}
+            rules={[{ required: true, message: "Please Enter Phone" }]}
           >
-            <Input placeholder="phone" style={{ width: "100%" }} />
+            <Input
+              placeholder="phone"
+              style={{ width: "100%" }}
+              onKeyPress={handleKeyPress}
+              onChange={handleInputChange}
+            />
           </Form.Item>
         </Col>
         <Col className="gutter-row" span={24}>
           <Form.Item
             name="email"
-            rules={[{ required: true, message: "email" }]}
+            rules={[{ required: true, message: "Please Enter Email" }]}
           >
             <Input placeholder="email" style={{ width: "100%" }} />
+          </Form.Item>
+        </Col>
+        <Col className="gutter-row" span={24}>
+          <Form.Item
+            name="userLevel"
+            rules={[{ required: true, message: "Please Enter Type" }]}
+          >
+            <Select
+              style={{ width: "100%" }}
+              labelInValue
+              placeholder={"type"}
+              options={type}
+            />
           </Form.Item>
         </Col>
         <Col className="gutter-row" span={24}>
@@ -87,7 +152,11 @@ const FormRegister: React.FC<prop> = ({
             name="password"
             rules={[{ required: true, message: "Please Enter Password" }]}
           >
-            <Input.Password placeholder="Password" style={{ width: "100%" }} />
+            <Input.Password
+              placeholder="Password"
+              style={{ width: "100%" }}
+              autoComplete="on"
+            />
           </Form.Item>
         </Col>
         <Col className="gutter-row" span={24}>
@@ -100,6 +169,7 @@ const FormRegister: React.FC<prop> = ({
             <Input.Password
               placeholder="Confirm Password"
               style={{ width: "100%" }}
+              autoComplete="on"
             />
           </Form.Item>
         </Col>

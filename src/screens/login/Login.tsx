@@ -12,22 +12,22 @@ import { useNavigate } from "react-router-dom";
 const LoginPage: React.FC<{}> = () => {
   const navigate = useNavigate();
   const { signin } = useAuth();
-  const userServuce = UserService(axiosBackend);
-  const [remenber, setRemember] = useState(false);
+  const userService = UserService(axiosBackend);
+  const [remenber, setRemember] = useState<boolean>(false);
+  const [remenberUser, setRememberUser] = useState<string>("");
 
   useEffect(() => {
-    const bsRemember = localStorage.getItem("bsRemember");
-    if (bsRemember) {
-      if (bsRemember === "true") {
-        setRemember(true);
-      }
+    const username = localStorage.getItem("username");
+    if (username) {
+      setRemember(true);
+      setRememberUser(username);
     }
   }, []);
 
   const handleLogin = async (user: TLogin) => {
-    const resUser = await userServuce.login(user);
-    if (resUser.token) {
-      signin(resUser);
+    const { token } = await userService.login(user);
+    if (token) {
+      signin(token);
       navigate("/home");
       return;
     }
@@ -51,6 +51,7 @@ const LoginPage: React.FC<{}> = () => {
                   remenber={remenber}
                   setRemember={setRemember}
                   handleLogin={handleLogin}
+                  remenberUser={remenberUser}
                 />
               </div>
             </div>

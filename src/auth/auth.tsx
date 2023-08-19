@@ -1,12 +1,9 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Navigate, useLocation } from "react-router-dom";
-type User = {
-  token: string;
-};
 
 type AuthContextType = {
-  user?: User;
-  signin: (user: User) => void;
+  accessToken?: string;
+  signin: (accessToken: string) => void;
   signout: (cb: VoidFunction) => void;
 };
 
@@ -20,15 +17,28 @@ export const useAuth = () => React.useContext(AuthContext);
 export const AuthProvider: React.FC<{ children: JSX.Element }> = ({
   children,
 }) => {
-  const [user, setUser] = useState<User | undefined>();
-
+  const [accessToken, setAccessToken] = useState<string | undefined>();
+  useEffect(() => {
+    const localToken = localStorage.getItem("accessToken");
+    if (localToken) {
+      setAccessToken(localToken);
+    }
+  }, []);
+  const setToken = (token: string) => {
+    localStorage.setItem("accessToken", token);
+    setAccessToken(token);
+  };
+  const removeToken = () => {
+    localStorage.removeItem("accessToken");
+    setAccessToken(undefined);
+  };
   return (
     <AuthContext.Provider
       value={{
-        user,
-        signin: setUser,
+        accessToken,
+        signin: setToken,
         signout: () => {
-          setUser(undefined);
+          removeToken();
         },
       }}
     >
@@ -43,7 +53,7 @@ export const RequireAuth: React.FC<{
   const auth = useAuth();
   const location = useLocation();
 
-  return auth.user ? (
+  return auth.accessToken ? (
     children
   ) : (
     <Navigate to={"/login"} state={{ from: location }} replace />
