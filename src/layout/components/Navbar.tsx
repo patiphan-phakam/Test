@@ -1,11 +1,13 @@
 import { Header } from "antd/es/layout/layout";
 import "./layout.css";
-import { Button, Input, Menu, MenuProps } from "antd";
-import { CloseOutlined, MenuOutlined } from "@ant-design/icons";
+import { Avatar, Button, Dropdown, Input, Menu, MenuProps, Modal } from "antd";
+import { CloseOutlined, MenuOutlined, UserOutlined } from "@ant-design/icons";
 import logoImage from "../../images/logo120.png";
 import logoImageMb from "../../images/logo-mb.png";
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { useAuth } from "../../auth/auth";
+import Link from "antd/es/typography/Link";
 
 const { Search } = Input;
 
@@ -22,12 +24,40 @@ export const Navbar: React.FC<prop> = ({
   menuOpen,
   menuSelected,
 }) => {
+  const { user, signout } = useAuth();
+  const [isModalOpen, setIsModalOpen] = useState(false);
   const navigate = useNavigate();
+  const [userToken, setUserToken] = useState<string | undefined>();
+
+  useEffect(() => {
+    if (user) {
+      setUserToken(userToken);
+    }
+    setUserToken(undefined);
+  }, [user]);
 
   const onSearch = (value: string) => {
-    console.log("🚀 ~ file: Navbar.tsx:28 ~ value:", value);
+    return;
   };
 
+  const items: MenuProps["items"] = [
+    {
+      key: "1",
+      label: <Link onClick={() => showProfile()}>profile</Link>,
+    },
+    {
+      key: "2",
+      label: <Link onClick={() => signout(() => {})}>Logout</Link>,
+    },
+  ];
+
+  const showProfile = () => {
+    setIsModalOpen(true);
+  };
+
+  const handleCancel = () => {
+    setIsModalOpen(false);
+  };
   return (
     <>
       <Header className="app-header">
@@ -67,20 +97,30 @@ export const Navbar: React.FC<prop> = ({
             />
           </div>
           <div className="login">
-            <Button
-              size="small"
-              className="white-button"
-              onClick={() => navigate("/login")}
-            >
-              LOGIN
-            </Button>
-            <Button
-              size="small"
-              className="green-button"
-              onClick={() => navigate("/register")}
-            >
-              SIGN UP
-            </Button>
+            {user ? (
+              <>
+                <Dropdown menu={{ items }} placement="bottomLeft" arrow>
+                  <Avatar icon={<UserOutlined />} className="avatar" />
+                </Dropdown>
+              </>
+            ) : (
+              <>
+                <Button
+                  size="small"
+                  className="white-button"
+                  onClick={() => navigate("/login")}
+                >
+                  LOGIN
+                </Button>
+                <Button
+                  size="small"
+                  className="green-button"
+                  onClick={() => navigate("/register")}
+                >
+                  SIGN UP
+                </Button>
+              </>
+            )}
           </div>
           <div className="login-mobile">
             <Button
@@ -93,6 +133,14 @@ export const Navbar: React.FC<prop> = ({
           </div>
         </div>
       </Header>
+      <Modal
+        title="Basic Modal"
+        open={isModalOpen}
+        onCancel={handleCancel}
+        footer={null}
+      >
+        <p>{user?.token}</p>
+      </Modal>
     </>
   );
 };

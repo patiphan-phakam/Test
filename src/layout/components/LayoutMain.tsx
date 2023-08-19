@@ -43,6 +43,7 @@ export const LayoutMain: React.FC<prop> = ({
   const toggleMenu = () => {
     setMenuOpen(!menuOpen);
   };
+
   return (
     <div>
       <Helmet>

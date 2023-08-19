@@ -1,27 +1,39 @@
-import { Row, Col, Image } from "antd";
+import { Row, Col, Image, message } from "antd";
 import "../../styles/login.css";
 import logo from "../../images/logo-mb.png";
 import { useEffect, useState } from "react";
 import FormLogin from "./components/formLogin";
 import { TLogin } from "../../types/loginTypes";
+import { useAuth } from "../../auth/auth";
+import { UserService } from "../../service/user-service";
+import { axiosBackend } from "../../config/axiosBackend";
+import { useNavigate } from "react-router-dom";
 
-interface prop {
-  handleLogin: (data: TLogin) => void;
-}
-
-const LoginPage: React.FC<prop> = ({ handleLogin }) => {
+const LoginPage: React.FC<{}> = () => {
+  const navigate = useNavigate();
+  const { signin } = useAuth();
+  const userServuce = UserService(axiosBackend);
   const [remenber, setRemember] = useState(false);
 
   useEffect(() => {
     const bsRemember = localStorage.getItem("bsRemember");
     if (bsRemember) {
       if (bsRemember === "true") {
-        console.log(bsRemember);
         setRemember(true);
       }
     }
   }, []);
 
+  const handleLogin = async (user: TLogin) => {
+    const resUser = await userServuce.login(user);
+    if (resUser.token) {
+      signin(resUser);
+      navigate("/home");
+      return;
+    }
+    message.error("login failed please try again");
+    return;
+  };
   return (
     <div className="login-page">
       <Row>

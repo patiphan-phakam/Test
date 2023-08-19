@@ -38,11 +38,9 @@ const FormLogin: React.FC<prop> = ({ setRemember, remenber, handleLogin }) => {
         <Col className="gutter-row" span={24}>
           <Form.Item
             name={`username`}
-            rules={[
-              { required: true, message: "Please Enter Username or Email" },
-            ]}
+            rules={[{ required: true, message: "Please Enter Username " }]}
           >
-            <Input placeholder="Email" style={{ width: "100%" }} />
+            <Input placeholder="username" style={{ width: "100%" }} />
           </Form.Item>
         </Col>
         <Col className="gutter-row" span={24}>

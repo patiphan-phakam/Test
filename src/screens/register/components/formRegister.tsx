@@ -19,6 +19,13 @@ interface prop {
 }
 const { Link } = Typography;
 
+interface IRegister {
+  name: string;
+  phone: string;
+  email: string;
+  username: string;
+  password: string;
+}
 const FormRegister: React.FC<prop> = ({
   setRemember,
   remenber,
@@ -32,10 +39,8 @@ const FormRegister: React.FC<prop> = ({
         message.error("Password and confirm password does not match");
         return;
       }
-      const data = {
-        name: values.name,
-        username: values.username,
-        password: values.password,
+      const data: IRegister = {
+        ...values,
       };
       handleRegister(data);
     });
@@ -54,10 +59,10 @@ const FormRegister: React.FC<prop> = ({
         </Col>
         <Col className="gutter-row" span={24}>
           <Form.Item
-            name="username"
-            rules={[{ required: true, message: "username" }]}
+            name="phone"
+            rules={[{ required: true, message: "phone" }]}
           >
-            <Input placeholder="username" style={{ width: "100%" }} />
+            <Input placeholder="phone" style={{ width: "100%" }} />
           </Form.Item>
         </Col>
         <Col className="gutter-row" span={24}>
@@ -68,6 +73,15 @@ const FormRegister: React.FC<prop> = ({
             <Input placeholder="email" style={{ width: "100%" }} />
           </Form.Item>
         </Col>
+        <Col className="gutter-row" span={24}>
+          <Form.Item
+            name="username"
+            rules={[{ required: true, message: "username" }]}
+          >
+            <Input placeholder="username" style={{ width: "100%" }} />
+          </Form.Item>
+        </Col>
+
         <Col className="gutter-row" span={24}>
           <Form.Item
             name="password"
