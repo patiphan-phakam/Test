@@ -28,7 +28,11 @@ const LoginPage: React.FC<{}> = () => {
     const { data } = await userService.login(user);
     if (data) {
       signin(data.token);
-      navigate("/home");
+      if (data.level === 1) {
+        navigate("/user");
+      } else {
+        navigate("/home");
+      }
       return;
     }
     message.error("login failed please try again");

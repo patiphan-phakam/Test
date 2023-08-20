@@ -45,10 +45,10 @@ const FormRegister: React.FC<prop> = ({
       value: 1,
       label: "store",
     },
-    {
-      value: 2,
-      label: "user",
-    },
+    // {
+    //   value: 2,
+    //   label: "user",
+    // },
   ];
 
   const handleKeyPress = (e: any) => {
