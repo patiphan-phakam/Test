@@ -347,3 +347,29 @@ a {
     font-size: 16px;
   }
 }
+
+.user-layout {
+  padding: 0 24px 24px;
+  margin: 2rem 0;
+}
+
+.user-menu {
+  width: 100%;
+}
+
+.user-menu-mobile {
+  display: none;
+}
+
+@media (max-width: 768px) {
+  .user-menu {
+    display: none;
+  }
+  .user-menu-mobile {
+    width: 100%;
+    display: flex;
+  }
+  .user-layout {
+    margin-top: 6rem;
+  }
+}

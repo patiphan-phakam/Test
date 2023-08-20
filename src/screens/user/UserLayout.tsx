@@ -12,7 +12,7 @@ import {
 import { Outlet, useNavigate } from "react-router-dom";
 import { MenuUser } from "./Menu";
 import logo from "../../images/logo120.png";
-import { UserOutlined } from "@ant-design/icons";
+import { MenuUnfoldOutlined, UserOutlined } from "@ant-design/icons";
 import Link from "antd/es/typography/Link";
 import { useAuth } from "../../auth/auth";
 
@@ -43,6 +43,19 @@ const UserLayout: React.FC = () => {
     },
   ];
 
+  const itemsMobile: MenuProps["items"] = [
+    {
+      key: "11",
+      label: <Link onClick={() => navigate("/user/store")}>ตั้งค่าร้าน</Link>,
+    },
+    {
+      key: "22",
+      label: (
+        <Link onClick={() => navigate("/user/product")}>ตั้งค่าสินค้า</Link>
+      ),
+    },
+  ];
+
   return (
     <Layout>
       <Header
@@ -52,7 +65,7 @@ const UserLayout: React.FC = () => {
           backgroundColor: "white",
         }}
       >
-        <Row style={{ width: "100%" }}>
+        <Row className="user-menu">
           <Col md={2}>
             <Image
               preview={false}
@@ -70,9 +83,33 @@ const UserLayout: React.FC = () => {
             </Dropdown>
           </Col>
         </Row>
+        <Row className="user-menu-mobile">
+          <Col span={4}>
+            <Dropdown
+              menu={{ items: itemsMobile }}
+              placement="bottomLeft"
+              arrow
+            >
+              <Avatar icon={<MenuUnfoldOutlined />} className="avatar" />
+            </Dropdown>
+          </Col>
+          <Col span={8}>
+            <Image
+              preview={false}
+              src={logo}
+              alt={"user-logo"}
+              style={{ width: "50%" }}
+            />
+          </Col>
+          <Col span={12} style={{ textAlign: "right" }}>
+            <Dropdown menu={{ items }} placement="bottomLeft" arrow>
+              <Avatar icon={<UserOutlined />} className="avatar" />
+            </Dropdown>
+          </Col>
+        </Row>
       </Header>
       <Layout>
-        <Layout style={{ padding: "0 24px 24px ", margin: "2rem 0" }}>
+        <Layout className="user-layout">
           <Content
             style={{
               padding: 24,

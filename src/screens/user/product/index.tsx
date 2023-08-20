@@ -4,6 +4,7 @@ import {
   Form,
   Input,
   Modal,
+  Popconfirm,
   Row,
   Space,
   Table,
@@ -55,6 +56,14 @@ export const Product: React.FC<{}> = () => {
   }, [accessToken, loading]);
   /* eslint-disable */
 
+  const handleDelete = async (productId: string) => {
+    const { data } = await productService.delete(productId);
+    if (data) {
+      message.success("delete product successfully");
+      setLoading(true);
+    }
+  };
+
   const columns = [
     {
       title: "No",
@@ -67,14 +76,14 @@ export const Product: React.FC<{}> = () => {
       title: "Name",
       dataIndex: "productName",
       key: "productName",
-      width: "80%",
+      width: "60%",
     },
     {
       title: "Action",
       dataIndex: "productId",
       key: "productId",
-      width: "20%",
-      render: (productId: string) => {
+      width: "25%",
+      render: (productId: string, row: any) => {
         return (
           <>
             <Space>
@@ -86,7 +95,16 @@ export const Product: React.FC<{}> = () => {
               >
                 แก้ไข
               </Link>
-              /<Link className="text-red">ลบ</Link>
+              /
+              <Popconfirm
+                title="ยืนยันการลบสินค้า"
+                description={row.productName}
+                okText="ยืนยัน"
+                cancelText="ยกเลิก"
+                onConfirm={() => handleDelete(productId)}
+              >
+                <Link className="text-red">ลบ</Link>
+              </Popconfirm>
             </Space>
           </>
         );
@@ -179,7 +197,7 @@ export const Product: React.FC<{}> = () => {
         </Button>
       </Row>
       <Row>
-        <Col md={24}>
+        <Col span={24}>
           <Table
             key={"id"}
             scroll={{ x: true }}

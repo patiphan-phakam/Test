@@ -38,5 +38,11 @@ export const ProductService = (axiosInstance: AxiosInstance) => {
         .then((response: any) => response)
         .catch((error: any) => error);
     },
+    delete: async (productId: string) => {
+      return await axiosInstance
+        .delete(`/product/${productId}`)
+        .then((response: any) => response)
+        .catch((error: any) => error);
+    },
   };
 };
