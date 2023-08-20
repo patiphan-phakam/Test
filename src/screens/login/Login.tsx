@@ -25,9 +25,9 @@ const LoginPage: React.FC<{}> = () => {
   }, []);
 
   const handleLogin = async (user: TLogin) => {
-    const { token } = await userService.login(user);
-    if (token) {
-      signin(token);
+    const { data } = await userService.login(user);
+    if (data) {
+      signin(data.token);
       navigate("/home");
       return;
     }

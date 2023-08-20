@@ -13,8 +13,6 @@ import {
 import { TUserRegister } from "../../../types/user";
 import { useNavigate } from "react-router-dom";
 import { useState } from "react";
-import { UserService } from "../../../service/user-service";
-import { axiosBackend } from "../../../config/axiosBackend";
 
 interface prop {
   remenber: boolean;
@@ -41,7 +39,7 @@ const FormRegister: React.FC<prop> = ({
   const [form] = Form.useForm();
   const navigate = useNavigate();
   const [inputValue, setInputValue] = useState<string>("");
-  const userService = UserService(axiosBackend);
+
   const type = [
     {
       value: 1,
@@ -76,13 +74,7 @@ const FormRegister: React.FC<prop> = ({
         userLevel: values.userLevel.value,
         userType: type.find((t) => values.userLevel.value === t.value)?.label,
       };
-      const res = await userService.register(data);
-      if (res) {
-        navigate("/login");
-        return;
-      }
-      message.error("register failed please try again");
-      return;
+      handleRegister(data);
     });
   };
 

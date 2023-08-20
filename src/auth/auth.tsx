@@ -1,3 +1,4 @@
+import axios, { AxiosInstance } from "axios";
 import React, { useEffect, useState } from "react";
 import { Navigate, useLocation } from "react-router-dom";
 
@@ -5,11 +6,20 @@ type AuthContextType = {
   accessToken?: string;
   signin: (accessToken: string) => void;
   signout: (cb: VoidFunction) => void;
+  authInstance: AxiosInstance;
 };
+
+const authInstance = axios.create({
+  baseURL: process.env.urlBacked || "http://localhost:3002/api",
+  headers: {
+    "Content-Type": "application/json",
+  },
+});
 
 const AuthContext = React.createContext<AuthContextType>({
   signin: () => {},
   signout: () => {},
+  authInstance: authInstance,
 });
 
 export const useAuth = () => React.useContext(AuthContext);
@@ -32,6 +42,11 @@ export const AuthProvider: React.FC<{ children: JSX.Element }> = ({
     localStorage.removeItem("accessToken");
     setAccessToken(undefined);
   };
+
+  if (accessToken) {
+    authInstance.defaults.headers["Authorization"] = `Bearer ${accessToken}`;
+  }
+
   return (
     <AuthContext.Provider
       value={{
@@ -40,6 +55,7 @@ export const AuthProvider: React.FC<{ children: JSX.Element }> = ({
         signout: () => {
           removeToken();
         },
+        authInstance,
       }}
     >
       {children}

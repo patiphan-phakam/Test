@@ -4,10 +4,14 @@ import logo from "../../images/logo-mb.png";
 import { useEffect, useState } from "react";
 import FormRegister from "./components/formRegister";
 import { TUserRegister } from "../../types/user";
-import LogoutServicce from "./services/logout-service";
+import { axiosBackend } from "../../config/axiosBackend";
+import { UserService } from "../../service/user-service";
+import { useNavigate } from "react-router-dom";
 
 const RegisterPage: React.FC<{}> = () => {
   const [remenber, setRemember] = useState(false);
+  const userService = UserService(axiosBackend);
+  const navigate = useNavigate();
 
   useEffect(() => {
     const bsRemember = localStorage.getItem("bsRemember");
@@ -18,13 +22,14 @@ const RegisterPage: React.FC<{}> = () => {
     }
   }, []);
 
-  const handleRegister = (data: TUserRegister) => {
-    const register = LogoutServicce.createUser(data);
-    if (!register) {
-      message.error("Register failed.");
+  const handleRegister = async (dataCreate: TUserRegister) => {
+    const { data } = await userService.register(dataCreate);
+    if (data) {
+      navigate("/login");
       return;
     }
-    message.success("Register successfully.");
+    message.error("register failed please try again");
+    return;
   };
 
   return (
