@@ -3,7 +3,7 @@ import "../../styles/login.css";
 import logo from "../../images/logo-mb.png";
 import { useEffect, useState } from "react";
 import FormLogin from "./components/formLogin";
-import { TLogin } from "../../types/loginTypes";
+import { TLogin } from "../../types/user";
 import { useAuth } from "../../auth/auth";
 import { UserService } from "../../service/user-service";
 import { axiosBackend } from "../../config/axiosBackend";

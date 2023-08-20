@@ -1,5 +1,5 @@
 import { AxiosInstance } from "axios";
-import { TLogin } from "../types/loginTypes";
+import { TLogin } from "../types/user";
 
 export const UserService = (axiosInstance: AxiosInstance) => {
   return {

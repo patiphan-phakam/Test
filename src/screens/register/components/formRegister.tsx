@@ -10,7 +10,7 @@ import {
   Typography,
   Select,
 } from "antd";
-import { TUserRegister } from "../../../types/loginTypes";
+import { TUserRegister } from "../../../types/user";
 import { useNavigate } from "react-router-dom";
 import { useState } from "react";
 import { UserService } from "../../../service/user-service";

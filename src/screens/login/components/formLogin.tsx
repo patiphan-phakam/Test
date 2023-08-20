@@ -9,7 +9,7 @@ import {
   Typography,
 } from "antd";
 import "../../../styles/login.css";
-import { TLogin } from "../../../types/loginTypes";
+import { TLogin } from "../../../types/user";
 import { useNavigate } from "react-router-dom";
 import { useEffect } from "react";
 

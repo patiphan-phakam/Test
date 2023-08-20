@@ -1,4 +1,4 @@
-import { TUserRegister } from "../../../types/loginTypes";
+import { TUserRegister } from "../../../types/user";
 
 const LogoutServicce = {
   createUser: (data: TUserRegister) => {

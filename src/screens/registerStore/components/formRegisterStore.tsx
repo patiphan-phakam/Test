@@ -9,7 +9,7 @@ import {
   message,
   Typography,
 } from "antd";
-import { TUserRegister } from "../../../types/loginTypes";
+import { TUserRegister } from "../../../types/user";
 import { useNavigate } from "react-router-dom";
 
 interface prop {

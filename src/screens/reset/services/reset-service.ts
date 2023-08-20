@@ -1,4 +1,4 @@
-import { TLogin } from "../../../types/loginTypes";
+import { TLogin } from "../../../types/user";
 
 const ResetSerivce = {
   reset: ({ username }: TLogin) => {

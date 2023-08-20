@@ -3,7 +3,7 @@ import "../../styles/login.css";
 import logo from "../../images/logo-mb.png";
 import { useEffect, useState } from "react";
 import FormRegister from "./components/formRegister";
-import { TUserRegister } from "../../types/loginTypes";
+import { TUserRegister } from "../../types/user";
 import LogoutServicce from "./services/logout-service";
 
 const RegisterPage: React.FC<{}> = () => {
