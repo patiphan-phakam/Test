@@ -1,22 +1,59 @@
-import { Button, Col, Row, Space, Table } from "antd";
+import {
+  Button,
+  Col,
+  Form,
+  Input,
+  Modal,
+  Row,
+  Space,
+  Table,
+  Upload,
+  UploadFile,
+  UploadProps,
+  message,
+} from "antd";
 import Link from "antd/es/typography/Link";
-import React from "react";
+import React, { useEffect, useState } from "react";
+import { useAuth } from "../../../auth/auth";
+
+import { ProductService } from "../../../service/product-service";
+import { PlusOutlined } from "@ant-design/icons";
+import { RcFile } from "antd/es/upload";
+import { EditProduct } from "./components/editProduct";
 
 export const Product: React.FC<{}> = () => {
-  const dataSource = [
-    {
-      key: "1",
-      name: "Mike",
-      age: 32,
-      address: "10 Downing Street",
-    },
-    {
-      key: "2",
-      name: "John",
-      age: 42,
-      address: "10 Downing Street",
-    },
-  ];
+  const [form] = Form.useForm();
+  const { accessToken, authInstance } = useAuth();
+  const productService = ProductService(authInstance);
+  const [dataSource, setDataSource] = useState<any>([]);
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [fileList, setFileList] = useState<UploadFile[]>([]);
+  const [previewOpen, setPreviewOpen] = useState(false);
+  const [previewImage, setPreviewImage] = useState("");
+  const [previewTitle, setPreviewTitle] = useState("");
+  const [loading, setLoading] = useState<boolean>(true);
+  const [editModal, setEditModal] = useState<boolean>(false);
+  const [productId, setProductId] = useState<string>();
+
+  /* eslint-disable */
+  const fetchUserProfile = async () => {
+    try {
+      const { data } = await productService.getByUser();
+      if (data) {
+        setDataSource(
+          data.map((data: any, index: number) => ({ ...data, key: index + 1 }))
+        );
+      }
+    } catch (error) {
+      console.error(error);
+    }
+    setLoading(false);
+  };
+
+  useEffect(() => {
+    fetchUserProfile();
+  }, [accessToken, loading]);
+  /* eslint-disable */
 
   const columns = [
     {
@@ -28,20 +65,28 @@ export const Product: React.FC<{}> = () => {
     },
     {
       title: "Name",
-      dataIndex: "name",
-      key: "name",
+      dataIndex: "productName",
+      key: "productName",
       width: "80%",
     },
     {
       title: "Action",
-      dataIndex: "action",
-      key: "action",
+      dataIndex: "productId",
+      key: "productId",
       width: "20%",
-      render: (text: string, row: any, index: number) => {
+      render: (productId: string) => {
         return (
           <>
             <Space>
-              <Link>แก้ไข</Link>/<Link className="text-red">ลบ</Link>
+              <Link
+                onClick={() => {
+                  setProductId(productId);
+                  setEditModal(true);
+                }}
+              >
+                แก้ไข
+              </Link>
+              /<Link className="text-red">ลบ</Link>
             </Space>
           </>
         );
@@ -49,20 +94,188 @@ export const Product: React.FC<{}> = () => {
     },
   ];
 
+  const showModal = () => {
+    setIsModalOpen(true);
+  };
+
+  const handleCancelAction = () => {
+    setIsModalOpen(false);
+  };
+
+  const onFinish = () => {
+    form.validateFields().then(async (values) => {
+      const filesBase64 = [];
+
+      for (const file of fileList) {
+        const base64 = await getBase64(file.originFileObj as RcFile);
+        filesBase64.push(base64);
+      }
+
+      const dataCreate = {
+        ...values,
+        imageBase64: filesBase64,
+      };
+
+      const { data } = await productService.createProduct(dataCreate);
+      if (data) {
+        message.success("create product successfully");
+        setLoading(true);
+        setIsModalOpen(false);
+      }
+    });
+  };
+
+  const handleChange: UploadProps["onChange"] = ({ fileList: newFileList }) =>
+    setFileList(newFileList);
+
+  const uploadButton = (
+    <div>
+      <PlusOutlined />
+      <div style={{ marginTop: 8 }}>Upload</div>
+    </div>
+  );
+
+  const handleCancel = () => setPreviewOpen(false);
+
+  const getBase64 = (file: RcFile): Promise<string> =>
+    new Promise((resolve, reject) => {
+      const reader = new FileReader();
+      reader.readAsDataURL(file);
+      reader.onload = () => resolve(reader.result as string);
+      reader.onerror = (error) => reject(error);
+    });
+
+  const handlePreview = async (file: UploadFile) => {
+    if (!file.url && !file.preview) {
+      file.preview = await getBase64(file.originFileObj as RcFile);
+    }
+
+    setPreviewImage(file.url || (file.preview as string));
+    setPreviewOpen(true);
+    setPreviewTitle(
+      file.name || file.url!.substring(file.url!.lastIndexOf("/") + 1)
+    );
+  };
+
+  const onEdit = async (dataUpdate: any) => {
+    if (productId) {
+      const { data } = await productService.updateProduct(
+        productId,
+        dataUpdate
+      );
+      if (data) {
+        message.success("update product successfully");
+        setLoading(true);
+        setEditModal(false);
+      }
+    }
+  };
+
   return (
     <>
       <Row justify={"end"}>
-        <Button className="green-button">เพิ่ม</Button>
+        <Button className="green-button" onClick={showModal}>
+          เพิ่ม
+        </Button>
       </Row>
       <Row>
         <Col md={24}>
           <Table
+            key={"id"}
             scroll={{ x: true }}
             dataSource={dataSource}
             columns={columns}
           />
         </Col>
       </Row>
+      <Modal
+        title="Add Product"
+        open={isModalOpen}
+        onCancel={handleCancelAction}
+        footer={null}
+      >
+        <Form form={form} onFinish={onFinish} layout={"vertical"}>
+          <Row gutter={{ xs: 8, sm: 16, md: 24, lg: 32 }}>
+            <Col className="gutter-row" span={24}>
+              <Form.Item
+                name="productName"
+                label="Product Name"
+                rules={[
+                  { required: true, message: "Please enter product name" },
+                ]}
+              >
+                <Input placeholder="Product Name" />
+              </Form.Item>
+            </Col>
+            <Col className="gutter-row" span={24}>
+              <Form.Item
+                name="productDetail"
+                label="Product Detail"
+                rules={[
+                  { required: true, message: "Please enter product detail" },
+                ]}
+              >
+                <Input.TextArea placeholder="Product Detail" />
+              </Form.Item>
+            </Col>
+            <Col className="gutter-row" span={24}>
+              <Form.Item
+                name="productPrice"
+                label="Product Price"
+                rules={[
+                  { required: true, message: "Please enter product price" },
+                ]}
+              >
+                <Input type="number" placeholder="Product Price" />
+              </Form.Item>
+            </Col>
+            <Col className="gutter-row" span={24}>
+              <Upload
+                action={"http://localhost:3002/api/product/upload"}
+                listType="picture-card"
+                fileList={fileList}
+                onChange={handleChange}
+                onPreview={handlePreview}
+                accept=".png,.jpeg,.jpg"
+              >
+                {fileList.length >= 5 ? null : uploadButton}
+              </Upload>
+              <Modal
+                open={previewOpen}
+                title={previewTitle}
+                footer={null}
+                onCancel={handleCancel}
+              >
+                <img
+                  alt="example"
+                  style={{ width: "100%" }}
+                  src={previewImage}
+                />
+              </Modal>
+            </Col>
+          </Row>
+          <Row justify={"center"}>
+            <Button
+              type="primary"
+              style={{
+                width: "20%",
+                backgroundColor: "green",
+                marginTop: "1rem",
+              }}
+              htmlType="submit"
+            >
+              Add
+            </Button>
+          </Row>
+        </Form>
+      </Modal>
+
+      <EditProduct
+        isOpen={editModal}
+        setOpen={setEditModal}
+        productId={productId}
+        onSave={onEdit}
+      />
     </>
   );
 };

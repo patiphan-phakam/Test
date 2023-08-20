@@ -10,7 +10,6 @@ import LoginPage from "../screens/login/Login";
 import { LayoutMain } from "./components/LayoutMain";
 import { MenuItem } from "../App";
 import RegisterPage from "../screens/register/Register";
-import RegisterStorePage from "../screens/registerStore/RegisterStore";
 import ResetPage from "../screens/reset/Reset";
 import UserLayout from "../screens/user/UserLayout";
 import { Store } from "../screens/user/store";
@@ -67,7 +66,6 @@ export const MainLayout: React.FC<Prop> = ({ menuItems }) => {
           })}
           <Route path="/login" element={<LoginPage />} />
           <Route path="/register" element={<RegisterPage />} />
-          <Route path="/register/store" element={<RegisterStorePage />} />
           <Route path="/reset" element={<ResetPage />} />
           <Route path="/user" element={<UserLayout />}>
             <Route index element={<Store />} />

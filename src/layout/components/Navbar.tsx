@@ -36,13 +36,17 @@ export const Navbar: React.FC<prop> = ({
     return;
   };
 
-  const items: MenuProps["items"] = [
+  const items = [
     {
-      key: "1",
+      key: 1,
+      label: <Link onClick={() => navigate("/user")}>store</Link>,
+    },
+    {
+      key: 2,
       label: <Link onClick={() => showProfile()}>profile</Link>,
     },
     {
-      key: "2",
+      key: 3,
       label: <Link onClick={() => signout(() => {})}>Logout</Link>,
     },
   ];
@@ -75,6 +79,12 @@ export const Navbar: React.FC<prop> = ({
     }
   }, [accessToken]);
   /* eslint-disable */
+
+  // const MenuUser: MenuProps["items"] =
+  //   items.map((menu: any) => ({
+  //     key: menu.key,
+  //     label: menu.label,
+  //   })) as any
 
   return (
     <>

@@ -9,11 +9,12 @@ import {
   Dropdown,
   MenuProps,
 } from "antd";
-import { Outlet } from "react-router-dom";
+import { Outlet, useNavigate } from "react-router-dom";
 import { MenuUser } from "./Menu";
 import logo from "../../images/logo120.png";
 import { UserOutlined } from "@ant-design/icons";
 import Link from "antd/es/typography/Link";
+import { useAuth } from "../../auth/auth";
 
 const { Header, Content } = Layout;
 
@@ -22,12 +23,26 @@ const UserLayout: React.FC = () => {
     token: { colorBgContainer },
   } = theme.useToken();
 
+  const navigate = useNavigate();
+
+  const { signout } = useAuth();
+
   const items: MenuProps["items"] = [
     {
       key: "1",
-      label: <Link onClick={() => console.log("logout")}>Logout</Link>,
+      label: (
+        <Link
+          onClick={() => {
+            signout(() => {});
+            navigate("/login");
+          }}
+        >
+          Logout
+        </Link>
+      ),
     },
   ];
+
   return (
     <Layout>
       <Header

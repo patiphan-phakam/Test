@@ -1,5 +1,5 @@
 import { AxiosInstance } from "axios";
-import { TLogin } from "../types/user";
+import { IUserData, TLogin } from "../types/user";
 
 export const UserService = (axiosInstance: AxiosInstance) => {
   return {
@@ -18,6 +18,12 @@ export const UserService = (axiosInstance: AxiosInstance) => {
     profile: async () => {
       return await axiosInstance
         .get(`user/profile`)
+        .then((response: any) => response)
+        .catch((error: any) => error);
+    },
+    update: async (userId: string, data: IUserData) => {
+      return await axiosInstance
+        .put(`user/${userId}`, data)
         .then((response: any) => response)
         .catch((error: any) => error);
     },
