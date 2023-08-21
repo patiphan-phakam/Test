@@ -1,0 +1,69 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{include "dpdpa-csmconsole.fullname" . }}
+  labels:
+    {{- include "dpdpa-csmconsole.labels" . | nindent 4 }}
+spec:
+{{- if not .Values.autoscaling.enabled }}
+  replicas: {{.Values.replicaCount }}
+{{- end }}
+  selector:
+    matchLabels:
+      {{- include "dpdpa-csmconsole.selectorLabels" . | nindent 6 }}
+  template:
+    metadata:
+      annotations:
+        rollme: {{randAlphaNum 5 | quote }}
+    {{- with .Values.podAnnotations }}
+        {{- toYaml . | nindent 8 }}
+    {{- end }}
+      labels:
+        {{- include "dpdpa-csmconsole.selectorLabels" . | nindent 8 }}
+    spec:
+      {{- with .Values.imagePullSecrets }}
+      imagePullSecrets:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      serviceAccountName: {{include "dpdpa-csmconsole.serviceAccountName" . }}
+      securityContext:
+        {{- toYaml .Values.podSecurityContext | nindent 8 }}
+      terminationGracePeriodSeconds: {{default 60 .Values.terminationGracePeriodSeconds }}
+      containers:
+        - name: {{.Chart.Name }}
+          securityContext:
+            {{- toYaml .Values.securityContext | nindent 12 }}
+          image: "{{.Values.image.repository }}:{{.Values.image.tag | default .Chart.AppVersion }}"
+          imagePullPolicy: {{.Values.image.pullPolicy }}
+          env:
+          {{- with .Values.containersEnv }}
+            {{- toYaml . | nindent 12 }}
+          {{- end }}
+          envFrom:
+          {{- with .Values.containersEnvFrom }}
+            {{- toYaml . | nindent 12 }}
+          {{- end }}
+          ports:
+            - name: http
+              containerPort: {{.Values.service.port }}
+              protocol: TCP
+          startupProbe:
+            {{- toYaml .Values.containersProbes.startupProbe| nindent 12 }}
+          livenessProbe:
+            {{- toYaml .Values.containersProbes.livenessProbe| nindent 12 }}
+          readinessProbe:
+            {{- toYaml .Values.containersProbes.readinessProbe| nindent 12 }}
+          resources:
+            {{- toYaml .Values.resources | nindent 12 }}
+      {{- with .Values.nodeSelector }}
+      nodeSelector:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      {{- with .Values.affinity }}
+      affinity:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      {{- with .Values.tolerations }}
+      tolerations:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
