@@ -1,7 +1,5 @@
-import { PlusOutlined } from "@ant-design/icons";
-import { Modal, Row, Col, Input, Button, Form, UploadProps } from "antd";
-import { RcFile } from "antd/es/upload";
-import React, { useEffect, useState } from "react";
+import { Modal, Row, Col, Input, Button, Form } from "antd";
+import React, { useEffect } from "react";
 import { ProductService } from "../../../../service/product-service";
 import { axiosBackend } from "../../../../config/axiosBackend";
 
@@ -19,7 +17,7 @@ export const EditProduct: React.FC<IEditProps> = ({
   onSave,
 }) => {
   const [form] = Form.useForm();
-  const [fileList, setFileList] = useState<any>([]);
+  // const [fileList, setFileList] = useState<any>([]);
   // const [previewOpen, setPreviewOpen] = useState(false);
   // const [previewImage, setPreviewImage] = useState("");
   // const [previewTitle, setPreviewTitle] = useState("");
@@ -48,8 +46,8 @@ export const EditProduct: React.FC<IEditProps> = ({
 
   /* eslint-disable */
 
-  const handleChange: UploadProps["onChange"] = ({ fileList: newFileList }) =>
-    setFileList(newFileList);
+  // const handleChange: UploadProps["onChange"] = ({ fileList: newFileList }) =>
+  //   setFileList(newFileList);
 
   // const uploadButton = (
   //   <div>

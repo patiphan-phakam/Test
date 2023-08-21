@@ -205,7 +205,7 @@ export const Store: React.FC<{}> = () => {
 
           <ImgCrop rotationSlider>
             <Upload
-              action="http://localhost:3002/api/product/upload"
+              action="http://buy-sri.com/service/api/product/upload"
               listType="picture-card"
               fileList={fileList}
               onChange={onChange}

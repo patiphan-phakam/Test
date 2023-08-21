@@ -36,18 +36,21 @@ export const Navbar: React.FC<prop> = ({
     return;
   };
 
-  const items = [
+  const menus = [
     {
       key: 1,
       label: <Link onClick={() => navigate("/user")}>store</Link>,
+      level: [1],
     },
     {
       key: 2,
       label: <Link onClick={() => showProfile()}>profile</Link>,
+      level: [2],
     },
     {
       key: 3,
       label: <Link onClick={() => signout(() => {})}>Logout</Link>,
+      level: [1, 2],
     },
   ];
 
@@ -67,6 +70,7 @@ export const Navbar: React.FC<prop> = ({
         setUserProfile(data);
         return;
       }
+      signout(() => {});
       setUserProfile(undefined);
     } catch (error) {
       console.error(error);
@@ -127,7 +131,19 @@ export const Navbar: React.FC<prop> = ({
           <div className="login">
             {accessToken ? (
               <>
-                <Dropdown menu={{ items }} placement="bottomLeft" arrow>
+                <Dropdown
+                  menu={{
+                    items: userProfile
+                      ? menus.filter((menu) =>
+                          menu.level.includes(userProfile?.userLevel)
+                            ? menu
+                            : []
+                        )
+                      : menus,
+                  }}
+                  placement="bottomLeft"
+                  arrow
+                >
                   <Avatar icon={<UserOutlined />} className="avatar" />
                 </Dropdown>
               </>

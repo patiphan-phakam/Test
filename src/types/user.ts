@@ -14,7 +14,7 @@ export interface IUserData {
   userId: string;
   username: string;
   password?: string;
-  userLevel?: number;
+  userLevel: number;
   userType?: string;
   fullName: string;
   address?: string;

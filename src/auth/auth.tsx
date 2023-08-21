@@ -10,7 +10,7 @@ type AuthContextType = {
 };
 
 const authInstance = axios.create({
-  baseURL: process.env.urlBacked || "http://localhost:3002/api",
+  baseURL: process.env.urlBacked || "http://buy-sri.com/service/api",
   headers: {
     "Content-Type": "application/json",
   },
