@@ -107,10 +107,13 @@ export const Store: React.FC<{}> = () => {
   const handleCancel = () => setPreviewOpen(false);
 
   return (
-    <Row>
-      <Col md={12}>
-        <Form form={form} onFinish={onFinish}>
-          <Row gutter={{ xs: 8, sm: 16, md: 24, lg: 32 }}>
+    <Form form={form} onFinish={onFinish}>
+      <Row>
+        <Col md={12}>
+          <Row
+            gutter={{ xs: 8, sm: 16, md: 24, lg: 32 }}
+            style={{ marginTop: "5rem" }}
+          >
             <Col className="gutter-row" span={24}>
               <Form.Item
                 name="fullName"
@@ -186,10 +189,45 @@ export const Store: React.FC<{}> = () => {
               </Form.Item>
             </Col>
           </Row>
+        </Col>
+        <Col md={12} style={{ marginTop: "5rem", paddingLeft: "2rem" }}>
+          <div style={{ margin: "0 1rem" }}>
+            {userProfile?.storeImage && (
+              <Image
+                src={userProfile?.storeImage}
+                height={"auto"}
+                width={"30%"}
+              />
+            )}
+
+            <ImgCrop rotationSlider>
+              <Upload
+                action="http://buy-sri.com/service/api/product/upload"
+                listType="picture-card"
+                fileList={fileList}
+                onChange={onChange}
+                onPreview={handlePreview}
+              >
+                {fileList.length < 1 && "+ Upload"}
+              </Upload>
+            </ImgCrop>
+            <Modal
+              open={previewOpen}
+              title={previewTitle}
+              footer={null}
+              onCancel={handleCancel}
+            >
+              <img alt="example" style={{ width: "100%" }} src={previewImage} />
+            </Modal>
+          </div>
+        </Col>
+      </Row>
+      <Row justify={"center"}>
+        <Col span={4}>
           <Button
             type="primary"
             style={{
-              width: "100%",
+              width: "50%",
               backgroundColor: "green",
               marginTop: "1rem",
             }}
@@ -197,33 +235,8 @@ export const Store: React.FC<{}> = () => {
           >
             Save
           </Button>
-        </Form>
-      </Col>
-      <Col md={12}>
-        <div style={{ margin: "0 1rem" }}>
-          {userProfile?.storeImage && <Image src={userProfile?.storeImage} />}
-
-          <ImgCrop rotationSlider>
-            <Upload
-              action="http://buy-sri.com/service/api/product/upload"
-              listType="picture-card"
-              fileList={fileList}
-              onChange={onChange}
-              onPreview={handlePreview}
-            >
-              {fileList.length < 1 && "+ Upload"}
-            </Upload>
-          </ImgCrop>
-          <Modal
-            open={previewOpen}
-            title={previewTitle}
-            footer={null}
-            onCancel={handleCancel}
-          >
-            <img alt="example" style={{ width: "100%" }} src={previewImage} />
-          </Modal>
-        </div>
-      </Col>
-    </Row>
+        </Col>
+      </Row>
+    </Form>
   );
 };
