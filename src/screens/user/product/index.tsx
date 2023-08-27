@@ -21,6 +21,7 @@ import { ProductService } from "../../../service/product-service";
 import { PlusOutlined } from "@ant-design/icons";
 import { RcFile } from "antd/es/upload";
 import { EditProduct } from "./components/editProduct";
+import { config } from "../../../config";
 
 export const Product: React.FC<{}> = () => {
   const [form] = Form.useForm();
@@ -249,7 +250,7 @@ export const Product: React.FC<{}> = () => {
             </Col>
             <Col className="gutter-row" span={24}>
               <Upload
-                action={"http://buy-sri.com/service/api/product/upload"}
+                action={`${config.backendUrl}/product/upload`}
                 listType="picture-card"
                 fileList={fileList}
                 onChange={handleChange}

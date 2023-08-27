@@ -17,6 +17,7 @@ import { IUserData } from "../../../types/user";
 import { UserService } from "../../../service/user-service";
 import ImgCrop from "antd-img-crop";
 import { RcFile } from "antd/es/upload";
+import { config } from "../../../config";
 // import { useNavigate } from "react-router-dom";
 
 export const Store: React.FC<{}> = () => {
@@ -202,7 +203,7 @@ export const Store: React.FC<{}> = () => {
 
             <ImgCrop rotationSlider>
               <Upload
-                action="http://buy-sri.com/service/api/product/upload"
+                action={`${config.backendUrl}/product/upload`}
                 listType="picture-card"
                 fileList={fileList}
                 onChange={onChange}

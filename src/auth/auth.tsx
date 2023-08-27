@@ -1,6 +1,7 @@
 import axios, { AxiosInstance } from "axios";
 import React, { useEffect, useState } from "react";
 import { Navigate, useLocation } from "react-router-dom";
+import { config } from "../config";
 
 type AuthContextType = {
   accessToken?: string;
@@ -10,7 +11,7 @@ type AuthContextType = {
 };
 
 const authInstance = axios.create({
-  baseURL: process.env.urlBacked || "http://buy-sri.com/service/api",
+  baseURL: config.backendUrl,
   headers: {
     "Content-Type": "application/json",
   },
