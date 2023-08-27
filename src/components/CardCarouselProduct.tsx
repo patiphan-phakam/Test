@@ -21,7 +21,7 @@ export interface ICardDataProduct {
 }
 
 export interface IImage {
-  id: number;
+  id: number | string;
   image: string;
 }
 

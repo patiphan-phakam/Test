@@ -33,7 +33,7 @@ export const Recommend: React.FC<{}> = () => {
         <Row>
           <h2 style={{ color: "#028910", marginLeft: "5rem" }}>แนะนำ</h2>
         </Row>
-        <CardCarousel dataList={productList} baseUrl="/baisri" />
+        <CardCarousel dataList={productList} baseUrl="/baisri/product" />
       </div>
     </>
   );

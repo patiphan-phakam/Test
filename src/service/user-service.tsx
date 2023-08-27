@@ -21,6 +21,16 @@ export const UserService = (axiosInstance: AxiosInstance) => {
         .then((response: any) => response)
         .catch((error: any) => error);
     },
+    findById: async (userId: string) => {
+      console.log(
+        "🚀 ~ file: user-service.tsx:25 ~ findById: ~ userId:",
+        userId
+      );
+      return await axiosInstance
+        .get(`user/${userId}`)
+        .then((response: any) => response)
+        .catch((error: any) => error);
+    },
     update: async (userId: string, data: IUserData) => {
       return await axiosInstance
         .put(`user/${userId}`, data)

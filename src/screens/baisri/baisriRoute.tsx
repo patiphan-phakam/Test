@@ -14,10 +14,7 @@ export const BaisriRoute: React.FC<Props> = ({ baseUrl }) => {
       <Routes>
         <Route path="/" element={<Baisri baseUrl={baseUrl} />} />
         <Route path={`:storeId`} element={<BaisriStore baseUrl={baseUrl} />} />
-        <Route
-          path={`/product/:productId`}
-          element={<Product baseUrl={baseUrl} />}
-        />
+        <Route path={`/product/:productId`} element={<Product />} />
       </Routes>
     </>
   );
