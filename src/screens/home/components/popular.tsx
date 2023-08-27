@@ -1,16 +1,31 @@
 import { Row } from "antd";
 import "react-multi-carousel/lib/styles.css";
 import CardCarousel, { ICardData } from "../../../components/CardCarousel";
+import { ProductService } from "../../../service/product-service";
+import { axiosBackend } from "../../../config/axiosBackend";
+import { useEffect, useState } from "react";
+import { IProductData } from "../../../types/product";
 
 export const Popular: React.FC<{}> = () => {
-  const dataList: ICardData[] = [
-    { id: 1, title: "Card 1", description: "Description 1" },
-    { id: 2, title: "Card 2", description: "Description 2" },
-    { id: 3, title: "Card 3", description: "Description 3" },
-    { id: 4, title: "Card 4", description: "Description 4" },
-    { id: 5, title: "Card 5", description: "Description 5" },
-    { id: 6, title: "Card 6", description: "Description 6" },
-  ];
+  const [productList, setProductList] = useState<ICardData[]>([]);
+  useEffect(() => {
+    const productService = ProductService(axiosBackend);
+    const getProduct = async () => {
+      const res = await productService.getAll();
+      if (res.data) {
+        const setData = res.data
+          .sort((a: { id: number }, b: { id: number }) => a.id - b.id)
+          .map((product: IProductData) => ({
+            id: product.productId,
+            title: product.productName,
+            description: product.productDetail,
+            image: product.productImages[0].productImageSource,
+          }));
+        setProductList(setData);
+      }
+    };
+    getProduct();
+  }, []);
 
   return (
     <>
@@ -18,7 +33,7 @@ export const Popular: React.FC<{}> = () => {
         <Row>
           <h2 style={{ color: "#028910", marginLeft: "5rem" }}>ยอดนิยม</h2>
         </Row>
-        <CardCarousel dataList={dataList} />
+        <CardCarousel dataList={productList} baseUrl="/baisri" />
       </div>
     </>
   );

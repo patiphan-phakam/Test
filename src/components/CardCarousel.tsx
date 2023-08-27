@@ -3,13 +3,13 @@ import { Card, Image } from "antd";
 import Carousel from "react-multi-carousel";
 import "react-multi-carousel/lib/styles.css";
 import Meta from "antd/es/card/Meta";
-import popurlar1 from "../images/popular-1.png";
 import { useNavigate } from "react-router-dom";
 
 export interface ICardData {
   id: string | number;
   title: string;
   description?: string;
+  image?: string;
 }
 
 interface CardCarouselProps {
@@ -55,8 +55,9 @@ const CardCarousel: React.FC<CardCarouselProps> = ({ dataList, baseUrl }) => {
                 <Image
                   preview={false}
                   alt="example"
-                  src={popurlar1}
+                  src={item.image}
                   width={"100%"}
+                  height={"200px"}
                 />
               }
               onClick={() => navigate(`${baseUrl}/${item.id}`)}
