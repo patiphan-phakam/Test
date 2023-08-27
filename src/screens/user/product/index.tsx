@@ -6,6 +6,7 @@ import {
   Modal,
   Popconfirm,
   Row,
+  Select,
   Space,
   Table,
   Upload,
@@ -64,6 +65,17 @@ export const Product: React.FC<{}> = () => {
       setLoading(true);
     }
   };
+
+  const productType = [
+    {
+      value: "1",
+      label: "บายศรี",
+    },
+    {
+      value: "2",
+      label: "พราหมณ์",
+    },
+  ];
 
   const columns = [
     {
@@ -133,6 +145,7 @@ export const Product: React.FC<{}> = () => {
       const dataCreate = {
         ...values,
         imageBase64: filesBase64,
+        productType: values.productType.value,
       };
 
       const { data } = await productService.createProduct(dataCreate);
@@ -235,6 +248,22 @@ export const Product: React.FC<{}> = () => {
                 ]}
               >
                 <Input.TextArea placeholder="Product Detail" />
+              </Form.Item>
+            </Col>
+            <Col className="gutter-row" span={24}>
+              <Form.Item
+                name="productType"
+                label="Product Type"
+                rules={[
+                  { required: true, message: "Please enter product type" },
+                ]}
+              >
+                <Select
+                  style={{ width: "100%" }}
+                  labelInValue
+                  placeholder={"Product Type"}
+                  options={productType}
+                />
               </Form.Item>
             </Col>
             <Col className="gutter-row" span={24}>
