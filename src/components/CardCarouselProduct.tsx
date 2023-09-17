@@ -2,31 +2,11 @@ import React from "react";
 import { Card, Col, Rate, Row, Image } from "antd";
 import Carousel from "react-multi-carousel";
 import "react-multi-carousel/lib/styles.css";
-import popurlar1 from "../images/popular-1.png";
 import { useNavigate } from "react-router-dom";
-
-export interface ICardDataProduct {
-  id: string | number;
-  userId: string;
-  start: number;
-  dateTime: Date;
-  store: string;
-  product: string;
-  province: string;
-  type: string;
-  price: number;
-  sold: number;
-  description: string;
-  preview?: IImage[];
-}
-
-export interface IImage {
-  id: number | string;
-  image: string;
-}
+import { IProductData } from "../types/product";
 
 interface CardCarouselProps {
-  dataList: ICardDataProduct[];
+  dataList: IProductData[];
   baseUrl?: string;
 }
 
@@ -61,21 +41,39 @@ const CardCarouselProduct: React.FC<CardCarouselProps> = ({
             <Card
               className="card-product"
               key={item.id}
-              cover={<Image preview={false} alt="example" src={popurlar1} />}
-              onClick={() => navigate(`${baseUrl}/product/${item.id}`)}
+              cover={
+                <Image
+                  preview={false}
+                  alt={`product ${item.id}`}
+                  height={200}
+                  style={{
+                    objectFit: "cover",
+                    width: "100%",
+                    display: "flex",
+                    justifyContent: "center",
+                    alignItems: "center",
+                  }}
+                  src={item.productImages[0]?.productImageSource}
+                />
+              }
+              onClick={() => navigate(`${baseUrl}/product/${item.productId}`)}
             >
               <Row>
-                <p className="card-name-custom">{item.product}</p>
+                <p className="card-name-custom">{item.productName}</p>
               </Row>
               <Row>
                 <Col md={6}>
-                  <p className="card-price-custom">{`฿${item.price}`}</p>
+                  <p className="card-price-custom">{`฿${item.productPrice}`}</p>
                 </Col>
                 <Col md={18} style={{ textAlign: "right" }}>
                   <Rate
                     disabled
                     allowHalf
-                    defaultValue={item.start}
+                    defaultValue={
+                      Number(item.productAvgStar) === 0
+                        ? 5
+                        : item.productAvgStar
+                    }
                     className="card-rate-custom"
                   />
                 </Col>

@@ -1,6 +1,6 @@
 import { Row } from "antd";
 import "react-multi-carousel/lib/styles.css";
-import CarouselCardSkeleton from "../../../components/cardCarouselProduct-skeleton";
+import CarouselCardSkeleton from "../../../components/CardProductSkeleton";
 
 interface Prop {
   title: string;

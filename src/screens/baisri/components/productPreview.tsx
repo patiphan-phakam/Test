@@ -1,9 +1,9 @@
 import React, { useState } from "react";
-import { IImage } from "../../../components/CardCarouselProduct";
 import { LeftOutlined, RightOutlined } from "@ant-design/icons";
+import { IProductDataImage } from "../../../types/product";
 
 interface Props {
-  images: IImage[];
+  images: IProductDataImage[];
 }
 
 export const ProductPreview: React.FC<Props> = ({ images }) => {
@@ -23,17 +23,17 @@ export const ProductPreview: React.FC<Props> = ({ images }) => {
           <>
             <div className="child fade-in">
               <div
-                className={`icon-prev ${indexImage === 0 ? "disabled" : ""}`}
+                className={`icon-action ${indexImage === 0 ? "disabled" : ""}`}
                 onClick={() => onPrev()}
               >
                 <LeftOutlined />
               </div>
               <img
-                src={images[indexImage].image}
+                src={images[indexImage].productImageSource}
                 alt={`product-${images[indexImage].id}`}
               />
               <div
-                className={`icon-next ${
+                className={`icon-action ${
                   indexImage === images.length - 1 ? "disabled" : ""
                 }`}
                 onClick={() => onNext()}

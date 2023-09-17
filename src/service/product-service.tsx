@@ -26,6 +26,12 @@ export const ProductService = (axiosInstance: AxiosInstance) => {
         .then((response: any) => response)
         .catch((error: any) => error);
     },
+    getByStoreId: async (storeId: string) => {
+      return await axiosInstance
+        .get(`/product/user/${storeId}`)
+        .then((response: any) => response)
+        .catch((error: any) => error);
+    },
     createProduct: async (data: any) => {
       return await axiosInstance
         .post(`/product`, data)

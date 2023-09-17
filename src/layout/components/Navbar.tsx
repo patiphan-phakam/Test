@@ -10,6 +10,7 @@ import { useAuth } from "../../auth/auth";
 import Link from "antd/es/typography/Link";
 import { UserService } from "../../service/user-service";
 import { IUserData } from "../../types/user";
+import { axiosBackend } from "../../config/axiosBackend";
 
 const { Search } = Input;
 
@@ -26,10 +27,10 @@ export const Navbar: React.FC<prop> = ({
   menuOpen,
   menuSelected,
 }) => {
-  const { accessToken, signout, authInstance } = useAuth();
+  const { accessToken, signout } = useAuth();
   const [isModalOpen, setIsModalOpen] = useState(false);
   const navigate = useNavigate();
-  const userService = UserService(authInstance);
+
   const [userProfile, setUserProfile] = useState<IUserData | undefined>();
 
   const onSearch = (value: string) => {
@@ -63,11 +64,13 @@ export const Navbar: React.FC<prop> = ({
   };
 
   /* eslint-disable */
-  const fetchUserProfile = async () => {
+  const fetchUserProfile = async (token: string) => {
     try {
-      const { data } = await userService.profile();
-      if (data) {
-        setUserProfile(data);
+      axiosBackend.defaults.headers["Authorization"] = `Bearer ${token}`;
+      const userService = UserService(axiosBackend);
+      const res = await userService.profile();
+      if (res && res.data) {
+        setUserProfile(res.data);
         return;
       }
       signout(() => {});
@@ -78,18 +81,12 @@ export const Navbar: React.FC<prop> = ({
   };
 
   useEffect(() => {
-    if (accessToken) {
-      fetchUserProfile();
+    const token = localStorage.getItem("accessToken");
+    if (token) {
+      fetchUserProfile(token);
     }
-  }, [accessToken]);
+  }, []);
   /* eslint-disable */
-
-  // const MenuUser: MenuProps["items"] =
-  //   items.map((menu: any) => ({
-  //     key: menu.key,
-  //     label: menu.label,
-  //   })) as any
-
   return (
     <>
       <Header className="app-header">
@@ -137,7 +134,7 @@ export const Navbar: React.FC<prop> = ({
                       ? menus.filter((menu) =>
                           menu.level.includes(userProfile?.userLevel)
                             ? menu
-                            : []
+                            : null
                         )
                       : menus,
                   }}

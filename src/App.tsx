@@ -5,8 +5,8 @@ import { Home } from "./screens/home/home";
 import "typeface-roboto";
 import "./app.css";
 import { BaisriRoute } from "./screens/baisri/baisriRoute";
-import { BrahmanRoute } from "./screens/brahman/brahmanRoute";
-import { VotiveRoute } from "./screens/votive/votiveRoute";
+// import { BrahmanRoute } from "./screens/brahman/brahmanRoute";
+// import { VotiveRoute } from "./screens/votive/votiveRoute";
 import { News } from "./screens/news/news";
 import { About } from "./screens/about/about";
 export interface MenuItem {

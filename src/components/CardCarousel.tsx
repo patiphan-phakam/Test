@@ -52,7 +52,6 @@ const CardCarousel: React.FC<CardCarouselProps> = ({ dataList, baseUrl }) => {
                   preview={false}
                   alt="example"
                   src={item.image}
-                  // width={100}
                   height={200}
                   style={{
                     objectFit: "cover",

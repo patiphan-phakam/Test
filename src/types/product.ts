@@ -12,14 +12,16 @@ export interface IProductData {
   userId: string;
   updateDate?: string;
   createDate?: string;
+  province?: string;
+  store?: string;
 }
 
 export interface IProductDataImage {
-  id: number;
-  productId: string;
-  productImageId: string;
-  productImageLevel: number;
+  id?: number;
+  productId?: string;
+  productImageId?: string;
+  productImageLevel?: number;
   productImageSource: string;
-  createDate: string;
-  updateDate: string;
+  createDate?: string;
+  updateDate?: string;
 }

@@ -91,22 +91,21 @@
   width: auto;
 }
 
-.icon-prev {
+.icon-action {
+  height: 30px;
+  width: 30px;
   margin-right: 2rem;
-  cursor: pointer;
-}
-
-.icon-prev:hover {
-  color: green;
-}
-
-.icon-next {
   margin-left: 2rem;
   cursor: pointer;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
-.icon-next:hover {
+.icon-action:hover {
   color: green;
+  background-color: #cbfdd0;
+  border-radius: 50%;
 }
 
 .disabled {

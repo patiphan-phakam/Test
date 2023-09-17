@@ -35,7 +35,7 @@ export const UserService = (axiosInstance: AxiosInstance) => {
     },
     getStore: async () => {
       return await axiosInstance
-        .get(`user/store`)
+        .get(`user/store/1`)
         .then((response: any) => response)
         .catch((error: any) => error);
     },

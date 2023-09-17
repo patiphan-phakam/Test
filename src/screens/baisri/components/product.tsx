@@ -7,15 +7,17 @@ import CardCarouselReview, {
 } from "../../../components/CardCarouselReview";
 import { ProductService } from "../../../service/product-service";
 import { axiosBackend } from "../../../config/axiosBackend";
-import { IProductData, IProductDataImage } from "../../../types/product";
+import { IProductData } from "../../../types/product";
 import { UserService } from "../../../service/user-service";
 import { IStoreData } from "../../../types/store";
+import { useAuth } from "../../../auth/auth";
 
 export const Product: React.FC = () => {
   const { productId } = useParams();
   // const [loading, setLoading] = useState<boolean>(true);
   const [product, setProduct] = useState<IProductData | undefined>();
   const [store, setStore] = useState<IStoreData>();
+
   useEffect(() => {
     const productService = ProductService(axiosBackend);
     const userService = UserService(axiosBackend);
@@ -32,7 +34,6 @@ export const Product: React.FC = () => {
         }
       }
     };
-
     getProduct();
   }, [productId]);
 
@@ -89,6 +90,13 @@ export const Product: React.FC = () => {
     },
   ];
 
+  // useEffect(() => {
+  //   const accessToken = localStorage.getItem("accessToken");
+  //   if(accessToken){
+
+  //   }
+  // },[])
+
   return (
     <>
       <div
@@ -97,14 +105,7 @@ export const Product: React.FC = () => {
       >
         {product && (
           <>
-            <ProductPreview
-              images={
-                product.productImages.map((image: IProductDataImage) => ({
-                  id: image.productImageId,
-                  image: image.productImageSource,
-                })) ?? []
-              }
-            />
+            <ProductPreview images={product.productImages ?? []} />
             <Row>
               <Col span={24} style={{ marginTop: "0.5rem" }}>
                 <p className="card-name-custom">{product.productName}</p>

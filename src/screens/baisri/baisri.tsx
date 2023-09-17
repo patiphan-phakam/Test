@@ -3,7 +3,7 @@ import React, { useEffect, useState } from "react";
 import CardCarousel from "../../components/CardCarousel";
 import { UserService } from "../../service/user-service";
 import { axiosBackend } from "../../config/axiosBackend";
-import CarouselCardSkeleton from "../../components/cardCarouselProduct-skeleton";
+import CarouselCardSkeleton from "../../components/CardProductSkeleton";
 
 interface Props {
   baseUrl: string;
@@ -17,14 +17,15 @@ export const Baisri: React.FC<Props> = ({ baseUrl }) => {
     const getStore = async () => {
       const res = await userService.getStore();
       if (res.data) {
-        const setData = res.data.map((product: any) => ({
-          key: product.id,
-          id: product.productId,
-          title: product.productName,
-          description: product.productDetail,
-          image: product.productImages[0].productImageSource,
+        const setData = res.data.map((store: any, index: number) => ({
+          key: store.id,
+          id: store.userId,
+          title: store.fullName,
+          description: store.province,
+          image: store.storeImage,
         }));
         setStore(setData);
+        setLoading(false);
       }
     };
     getStore();

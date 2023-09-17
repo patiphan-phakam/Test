@@ -1,4 +1,4 @@
-import { Card, Col, Rate, Row, Skeleton } from "antd";
+import { Card, Col, Row, Skeleton } from "antd";
 import Carousel from "react-multi-carousel";
 
 const CarouselCardSkeleton = () => {

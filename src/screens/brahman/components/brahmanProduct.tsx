@@ -99,8 +99,13 @@ export const BrahmanProduct: React.FC = () => {
     productType: 2,
     productTypeShow: 1,
     productImages: [
-      "https://images.unsplash.com/photo-1613759375165-1cd532c35738?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1364&q=80",
-      "https://images.unsplash.com/photo-1614386442789-233126aaf509?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1335&q=80",
+      {
+        id: 27,
+        productImageId: "205e9889-496b-41d8-a390-ba2fcd0a180f",
+        productImageLevel: 1,
+        productImageSource:
+          "https://images.unsplash.com/photo-1613759375165-1cd532c35738?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1364&q=80",
+      },
     ],
     userId: "user123",
     updateDate: "2023-08-31",
@@ -115,14 +120,7 @@ export const BrahmanProduct: React.FC = () => {
       >
         {product && (
           <>
-            <ProductPreview
-              images={
-                product.productImages.map((image: any, index: number) => ({
-                  id: index,
-                  image: image,
-                })) ?? []
-              }
-            />
+            <ProductPreview images={product.productImages ?? []} />
             <Row>
               <Col span={24} style={{ marginTop: "0.5rem" }}>
                 <p className="card-name-custom">{product.productName}</p>
