@@ -62,5 +62,11 @@ export const ProductService = (axiosInstance: AxiosInstance) => {
         .then((response: any) => response)
         .catch((error: any) => error);
     },
+    orderProduct: async (data: any) => {
+      return await axiosInstance
+        .post(`/booking`, data)
+        .then((response: any) => response)
+        .catch((error: any) => error);
+    },
   };
 };

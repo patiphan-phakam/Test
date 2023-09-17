@@ -1,6 +1,17 @@
 import { Header } from "antd/es/layout/layout";
 import "./layout.css";
-import { Avatar, Button, Dropdown, Input, Menu, MenuProps, Modal } from "antd";
+import {
+  Avatar,
+  Button,
+  Col,
+  Dropdown,
+  Input,
+  Menu,
+  MenuProps,
+  Modal,
+  Row,
+  Table,
+} from "antd";
 import { CloseOutlined, MenuOutlined, UserOutlined } from "@ant-design/icons";
 import logoImage from "../../images/logo120.png";
 import logoImageMb from "../../images/logo-mb.png";
@@ -29,6 +40,7 @@ export const Navbar: React.FC<prop> = ({
 }) => {
   const { accessToken, signout } = useAuth();
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [isModalOpenHistory, setIsModalOpenHistory] = useState(false);
   const navigate = useNavigate();
 
   const [userProfile, setUserProfile] = useState<IUserData | undefined>();
@@ -48,8 +60,13 @@ export const Navbar: React.FC<prop> = ({
       label: <Link onClick={() => showProfile()}>profile</Link>,
       level: [2],
     },
+    // {
+    //   key: 3,
+    //   label: <Link onClick={() => showHistory()}>history</Link>,
+    //   level: [2],
+    // },
     {
-      key: 3,
+      key: 4,
       label: <Link onClick={() => signout(() => {})}>Logout</Link>,
       level: [1, 2],
     },
@@ -61,6 +78,14 @@ export const Navbar: React.FC<prop> = ({
 
   const handleCancel = () => {
     setIsModalOpen(false);
+  };
+
+  const showHistory = () => {
+    setIsModalOpenHistory(true);
+  };
+
+  const handleCancelHistory = () => {
+    setIsModalOpenHistory(false);
   };
 
   /* eslint-disable */
@@ -87,6 +112,35 @@ export const Navbar: React.FC<prop> = ({
     }
   }, []);
   /* eslint-disable */
+
+  const columns = [
+    {
+      title: "No",
+      dataIndex: "no",
+      key: "no",
+      render: (text: string, row: any, index: number) => index + 1,
+      width: "5%",
+    },
+    {
+      title: "สินค้า",
+      dataIndex: "productName",
+      key: "productName",
+      width: "60%",
+    },
+    {
+      title: "วันที่สั่งซื้อ",
+      dataIndex: "date",
+      key: "date",
+      width: "60%",
+    },
+    {
+      title: "สถานะ",
+      dataIndex: "status",
+      key: "status",
+      width: "60%",
+    },
+  ];
+
   return (
     <>
       <Header className="app-header">
@@ -180,7 +234,23 @@ export const Navbar: React.FC<prop> = ({
         onCancel={handleCancel}
         footer={null}
       >
-        <p>{userProfile?.fullName}</p>
+        <Row
+          style={{ backgroundColor: "#f0f0f0", borderRadius: "15px" }}
+          justify={"center"}
+        >
+          <Col span={24} style={{ paddingLeft: "1rem" }}>
+            <p>ชื่อ : {userProfile?.fullName}</p>
+            <p>เบอร์โทร : {userProfile?.phone}</p>
+          </Col>
+        </Row>
+      </Modal>
+      <Modal
+        title="History"
+        open={isModalOpenHistory}
+        onCancel={handleCancelHistory}
+        footer={null}
+      >
+        <Table columns={columns} />
       </Modal>
     </>
   );
