@@ -6,6 +6,7 @@ import Meta from "antd/es/card/Meta";
 import { useNavigate } from "react-router-dom";
 
 export interface ICardData {
+  key: number;
   id: string | number;
   title: string;
   description?: string;
@@ -41,12 +42,7 @@ const CardCarousel: React.FC<CardCarouselProps> = ({ dataList, baseUrl }) => {
   return (
     <>
       <div style={{ margin: "0 5rem" }}>
-        <Carousel
-          ssr
-          partialVisbile
-          itemClass="image-item"
-          responsive={responsive}
-        >
+        <Carousel ssr itemClass="image-item" responsive={responsive}>
           {dataList.slice(0, 5).map((item) => (
             <Card
               className="card-product"
@@ -56,8 +52,15 @@ const CardCarousel: React.FC<CardCarouselProps> = ({ dataList, baseUrl }) => {
                   preview={false}
                   alt="example"
                   src={item.image}
-                  width={"100%"}
-                  height={"200px"}
+                  // width={100}
+                  height={200}
+                  style={{
+                    objectFit: "cover",
+                    width: "100%",
+                    display: "flex",
+                    justifyContent: "center",
+                    alignItems: "center",
+                  }}
                 />
               }
               onClick={() => navigate(`${baseUrl}/${item.id}`)}

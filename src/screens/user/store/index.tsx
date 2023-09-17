@@ -228,7 +228,7 @@ export const Store: React.FC<{}> = () => {
           <Button
             type="primary"
             style={{
-              width: "50%",
+              width: "100%",
               backgroundColor: "green",
               marginTop: "1rem",
             }}

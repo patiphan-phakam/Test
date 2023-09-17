@@ -1,13 +1,13 @@
-import { Row } from "antd";
+import { Col, Row } from "antd";
 import React from "react";
-import CardCarousel from "../../components/CardCarousel";
+import CardList, { ICardData } from "./components/cardList";
 
 interface Props {
   baseUrl: string;
 }
 
-export const Baisri: React.FC<Props> = ({ baseUrl }) => {
-  const dataList = [
+export const Brahman: React.FC<Props> = ({ baseUrl }) => {
+  const dataList: ICardData[] = [
     {
       key: 1,
       id: 1,
@@ -50,17 +50,20 @@ export const Baisri: React.FC<Props> = ({ baseUrl }) => {
     <>
       <div className="container-content" style={{ marginBottom: "2rem" }}>
         <Row>
-          <h2
-            style={{
-              color: "#028910",
-              marginLeft: "5rem",
-              wordWrap: "break-word",
-            }}
-          >
-            ร้านค้าทั้งหมด
-          </h2>
+          <Col md={24}>
+            <div style={{ margin: "0 5rem" }}>
+              <h2
+                style={{
+                  color: "#028910",
+                  wordWrap: "break-word",
+                }}
+              >
+                หมอพราหมณ์ติ่งลี่
+              </h2>
+            </div>
+          </Col>
+          <CardList dataList={dataList} baseUrl={baseUrl} />
         </Row>
-        <CardCarousel dataList={dataList} baseUrl={baseUrl} />
       </div>
     </>
   );

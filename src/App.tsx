@@ -5,6 +5,10 @@ import { Home } from "./screens/home/home";
 import "typeface-roboto";
 import "./app.css";
 import { BaisriRoute } from "./screens/baisri/baisriRoute";
+import { BrahmanRoute } from "./screens/brahman/brahmanRoute";
+import { VotiveRoute } from "./screens/votive/votiveRoute";
+import { News } from "./screens/news/news";
+import { About } from "./screens/about/about";
 export interface MenuItem {
   label: string;
   icon: React.ReactElement;
@@ -41,6 +45,54 @@ const App = () => {
       name: "baisri",
       showInMenu: true,
       component: <BaisriRoute baseUrl="/baisri" />,
+    },
+    {
+      label: "หมอพราหมณ์",
+      icon: <DashboardOutlined />,
+      path: "/brahman/*",
+      name: "brahman",
+      showInMenu: true,
+      component: <BrahmanRoute baseUrl="/brahman" />,
+    },
+    {
+      label: "หมอพราหมณ์",
+      icon: <DashboardOutlined />,
+      path: "/brahman",
+      name: "brahman",
+      showInMenu: true,
+      component: <BrahmanRoute baseUrl="/brahman" />,
+    },
+    {
+      label: "บน/แก้บน",
+      icon: <DashboardOutlined />,
+      path: "/votive/*",
+      name: "votive",
+      showInMenu: true,
+      component: <VotiveRoute baseUrl="/votive" />,
+    },
+    {
+      label: "บน/แก้บน",
+      icon: <DashboardOutlined />,
+      path: "/votive",
+      name: "votive",
+      showInMenu: true,
+      component: <VotiveRoute baseUrl="/votive" />,
+    },
+    {
+      label: "ข่าวสารความรู้",
+      icon: <DashboardOutlined />,
+      path: "/news",
+      name: "news",
+      showInMenu: true,
+      component: <News />,
+    },
+    {
+      label: "เกี่ยวกับเรา",
+      icon: <DashboardOutlined />,
+      path: "/about",
+      name: "about",
+      showInMenu: true,
+      component: <About />,
     },
   ];
   return <MainLayout menuItems={menuItems} />;

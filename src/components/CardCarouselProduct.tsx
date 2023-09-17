@@ -56,24 +56,12 @@ const CardCarouselProduct: React.FC<CardCarouselProps> = ({
   return (
     <>
       <div style={{ margin: "1rem 5rem" }}>
-        <Carousel
-          ssr
-          partialVisbile
-          itemClass="image-item"
-          responsive={responsive}
-        >
+        <Carousel ssr itemClass="image-item" responsive={responsive}>
           {dataList.slice(0, 5).map((item) => (
             <Card
               className="card-product"
               key={item.id}
-              cover={
-                <Image
-                  preview={false}
-                  alt="example"
-                  src={popurlar1}
-                  width={"100%"}
-                />
-              }
+              cover={<Image preview={false} alt="example" src={popurlar1} />}
               onClick={() => navigate(`${baseUrl}/product/${item.id}`)}
             >
               <Row>

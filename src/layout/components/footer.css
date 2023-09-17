@@ -33,7 +33,7 @@
 }
 
 .menu-list {
-  color: white;
+  color: white !important;
 }
 
 .menu-list:hover {
