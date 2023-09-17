@@ -1,50 +1,34 @@
 import { Row } from "antd";
-import React from "react";
+import React, { useEffect, useState } from "react";
 import CardCarousel from "../../components/CardCarousel";
+import { UserService } from "../../service/user-service";
+import { axiosBackend } from "../../config/axiosBackend";
+import CarouselCardSkeleton from "../../components/cardCarouselProduct-skeleton";
 
 interface Props {
   baseUrl: string;
 }
 
 export const Baisri: React.FC<Props> = ({ baseUrl }) => {
-  const dataList = [
-    {
-      key: 1,
-      id: 1,
-      title: "ร้านน้องบิ๊กใบตองร้านน้องบิ๊กใบตอง 1",
-      description: "ร้านน้องบิ๊กใบตอง 1",
-    },
-    {
-      key: 2,
-      id: 2,
-      title: "ร้านน้องบิ๊กใบตอง 2",
-      description: "ร้านน้องบิ๊กใบตอง 2",
-    },
-    {
-      key: 3,
-      id: 3,
-      title: "ร้านน้องบิ๊กใบตอง 3",
-      description: "ร้านน้องบิ๊กใบตอง 3",
-    },
-    {
-      key: 4,
-      id: 4,
-      title: "ร้านน้องบิ๊กใบตอง 4",
-      description: "ร้านน้องบิ๊กใบตอง 4",
-    },
-    {
-      key: 5,
-      id: 5,
-      title: "ร้านน้องบิ๊กใบตอง 5",
-      description: "ร้านน้องบิ๊กใบตอง 5",
-    },
-    {
-      key: 6,
-      id: 6,
-      title: "ร้านน้องบิ๊กใบตอง 6",
-      description: "ร้านน้องบิ๊กใบตอง 6",
-    },
-  ];
+  const [loading, setLoading] = useState<boolean>(true);
+  const [store, setStore] = useState<any>([]);
+  useEffect(() => {
+    const userService = UserService(axiosBackend);
+    const getStore = async () => {
+      const res = await userService.getStore();
+      if (res.data) {
+        const setData = res.data.map((product: any) => ({
+          key: product.id,
+          id: product.productId,
+          title: product.productName,
+          description: product.productDetail,
+          image: product.productImages[0].productImageSource,
+        }));
+        setStore(setData);
+      }
+    };
+    getStore();
+  }, []);
 
   return (
     <>
@@ -60,7 +44,11 @@ export const Baisri: React.FC<Props> = ({ baseUrl }) => {
             ร้านค้าทั้งหมด
           </h2>
         </Row>
-        <CardCarousel dataList={dataList} baseUrl={baseUrl} />
+        {loading ? (
+          <CarouselCardSkeleton />
+        ) : (
+          <CardCarousel dataList={store} baseUrl={baseUrl} />
+        )}
       </div>
     </>
   );

@@ -17,8 +17,11 @@ import { ICardData } from "../../components/CardCarousel";
 import { axiosBackend } from "../../config/axiosBackend";
 import { ProductService } from "../../service/product-service";
 import { IProductData } from "../../types/product";
+import { ProductSkeleton } from "./components/productSkeleton";
 
 export const Home: React.FC<{}> = () => {
+  const [loadingPopular, setLoadingPopular] = useState<boolean>(true);
+  const [loadingRecommand, setLoadingRecommend] = useState<boolean>(true);
   const [productPopular, setProductPopular] = useState<ICardData[]>([]);
   const [productRecommand, setProductRecommend] = useState<ICardData[]>([]);
   useEffect(() => {
@@ -34,6 +37,7 @@ export const Home: React.FC<{}> = () => {
           image: product.productImages[0].productImageSource,
         }));
         setProductPopular(setData);
+        setLoadingPopular(false);
       }
     };
     getProductPopurlar();
@@ -49,6 +53,7 @@ export const Home: React.FC<{}> = () => {
           image: product.productImages[0].productImageSource,
         }));
         setProductRecommend(setData);
+        setLoadingRecommend(false);
       }
     };
     getProductRecommend();
@@ -224,8 +229,17 @@ export const Home: React.FC<{}> = () => {
           </Row>
         </Col>
       </Row>
-      <Popular productList={productPopular} />
-      <Recommend productList={productRecommand} />
+      {loadingPopular ? (
+        <ProductSkeleton title="ยอดนิยม" />
+      ) : (
+        <Popular productList={productPopular} />
+      )}
+      {loadingRecommand ? (
+        <ProductSkeleton title="แนะนำ" />
+      ) : (
+        <Recommend productList={productRecommand} />
+      )}
+
       <Review />
     </div>
   );
