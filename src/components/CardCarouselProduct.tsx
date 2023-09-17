@@ -57,7 +57,7 @@ const CardCarouselProduct: React.FC<CardCarouselProps> = ({
     <>
       <div style={{ margin: "1rem 5rem" }}>
         <Carousel ssr itemClass="image-item" responsive={responsive}>
-          {dataList.slice(0, 5).map((item) => (
+          {dataList.map((item) => (
             <Card
               className="card-product"
               key={item.id}

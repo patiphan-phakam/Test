@@ -18,7 +18,7 @@ import { useAuth } from "../../auth/auth";
 
 const { Header, Content } = Layout;
 
-const UserLayout: React.FC = () => {
+const AdminLayout: React.FC = () => {
   const {
     token: { colorBgContainer },
   } = theme.useToken();
@@ -46,12 +46,8 @@ const UserLayout: React.FC = () => {
   const itemsMobile: MenuProps["items"] = [
     {
       key: "11",
-      label: <Link onClick={() => navigate("/user/store")}>ตั้งค่าร้าน</Link>,
-    },
-    {
-      key: "22",
       label: (
-        <Link onClick={() => navigate("/user/product")}>ตั้งค่าสินค้า</Link>
+        <Link onClick={() => navigate("/user/store")}>ตั้งค่าข่าวสาร</Link>
       ),
     },
   ];
@@ -132,4 +128,4 @@ const UserLayout: React.FC = () => {
   );
 };
 
-export default UserLayout;
+export default AdminLayout;

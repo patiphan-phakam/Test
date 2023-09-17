@@ -19,11 +19,12 @@ import { ProductService } from "../../service/product-service";
 import { IProductData } from "../../types/product";
 
 export const Home: React.FC<{}> = () => {
-  const [productList, setProductList] = useState<ICardData[]>([]);
+  const [productPopular, setProductPopular] = useState<ICardData[]>([]);
+  const [productRecommand, setProductRecommend] = useState<ICardData[]>([]);
   useEffect(() => {
     const productService = ProductService(axiosBackend);
-    const getProduct = async () => {
-      const res = await productService.getAll();
+    const getProductPopurlar = async () => {
+      const res = await productService.getPopular();
       if (res.data) {
         const setData = res.data.map((product: IProductData) => ({
           key: product.id,
@@ -32,10 +33,25 @@ export const Home: React.FC<{}> = () => {
           description: product.productDetail,
           image: product.productImages[0].productImageSource,
         }));
-        setProductList(setData);
+        setProductPopular(setData);
       }
     };
-    getProduct();
+    getProductPopurlar();
+
+    const getProductRecommend = async () => {
+      const res = await productService.getRecommend();
+      if (res.data) {
+        const setData = res.data.map((product: IProductData) => ({
+          key: product.id,
+          id: product.productId,
+          title: product.productName,
+          description: product.productDetail,
+          image: product.productImages[0].productImageSource,
+        }));
+        setProductRecommend(setData);
+      }
+    };
+    getProductRecommend();
   }, []);
   return (
     <div className="container-content">
@@ -208,8 +224,8 @@ export const Home: React.FC<{}> = () => {
           </Row>
         </Col>
       </Row>
-      <Popular productList={productList} />
-      <Recommend productList={productList} />
+      <Popular productList={productPopular} />
+      <Recommend productList={productRecommand} />
       <Review />
     </div>
   );

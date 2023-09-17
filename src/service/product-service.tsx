@@ -8,6 +8,18 @@ export const ProductService = (axiosInstance: AxiosInstance) => {
         .then((response: any) => response)
         .catch((error: any) => error);
     },
+    getPopular: async () => {
+      return await axiosInstance
+        .get(`/product/popular`)
+        .then((response: any) => response)
+        .catch((error: any) => error);
+    },
+    getRecommend: async () => {
+      return await axiosInstance
+        .get(`/product/recommend`)
+        .then((response: any) => response)
+        .catch((error: any) => error);
+    },
     getByUser: async () => {
       return await axiosInstance
         .get(`/product/user`)
