@@ -10,7 +10,6 @@ import {
   MenuProps,
   Modal,
   Row,
-  Table,
 } from "antd";
 import { CloseOutlined, MenuOutlined, UserOutlined } from "@ant-design/icons";
 import logoImage from "../../images/logo120.png";
@@ -40,7 +39,6 @@ export const Navbar: React.FC<prop> = ({
 }) => {
   const { accessToken, signout } = useAuth();
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const [isModalOpenHistory, setIsModalOpenHistory] = useState(false);
   const navigate = useNavigate();
 
   const [userProfile, setUserProfile] = useState<IUserData | undefined>();
@@ -60,11 +58,11 @@ export const Navbar: React.FC<prop> = ({
       label: <Link onClick={() => showProfile()}>profile</Link>,
       level: [2],
     },
-    // {
-    //   key: 3,
-    //   label: <Link onClick={() => showHistory()}>history</Link>,
-    //   level: [2],
-    // },
+    {
+      key: 3,
+      label: <Link onClick={() => navigate("/history")}>history</Link>,
+      level: [2],
+    },
     {
       key: 4,
       label: <Link onClick={() => signout(() => {})}>Logout</Link>,
@@ -78,14 +76,6 @@ export const Navbar: React.FC<prop> = ({
 
   const handleCancel = () => {
     setIsModalOpen(false);
-  };
-
-  const showHistory = () => {
-    setIsModalOpenHistory(true);
-  };
-
-  const handleCancelHistory = () => {
-    setIsModalOpenHistory(false);
   };
 
   /* eslint-disable */
@@ -112,34 +102,6 @@ export const Navbar: React.FC<prop> = ({
     }
   }, []);
   /* eslint-disable */
-
-  const columns = [
-    {
-      title: "No",
-      dataIndex: "no",
-      key: "no",
-      render: (text: string, row: any, index: number) => index + 1,
-      width: "5%",
-    },
-    {
-      title: "สินค้า",
-      dataIndex: "productName",
-      key: "productName",
-      width: "60%",
-    },
-    {
-      title: "วันที่สั่งซื้อ",
-      dataIndex: "date",
-      key: "date",
-      width: "60%",
-    },
-    {
-      title: "สถานะ",
-      dataIndex: "status",
-      key: "status",
-      width: "60%",
-    },
-  ];
 
   return (
     <>
@@ -243,14 +205,6 @@ export const Navbar: React.FC<prop> = ({
             <p>เบอร์โทร : {userProfile?.phone}</p>
           </Col>
         </Row>
-      </Modal>
-      <Modal
-        title="History"
-        open={isModalOpenHistory}
-        onCancel={handleCancelHistory}
-        footer={null}
-      >
-        <Table columns={columns} />
       </Modal>
     </>
   );

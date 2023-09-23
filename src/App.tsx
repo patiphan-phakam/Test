@@ -5,8 +5,7 @@ import { Home } from "./screens/home/home";
 import "typeface-roboto";
 import "./app.css";
 import { BaisriRoute } from "./screens/baisri/baisriRoute";
-// import { BrahmanRoute } from "./screens/brahman/brahmanRoute";
-// import { VotiveRoute } from "./screens/votive/votiveRoute";
+import { History } from "./screens/history";
 import { News } from "./screens/news/news";
 import { About } from "./screens/about/about";
 export interface MenuItem {
@@ -15,7 +14,7 @@ export interface MenuItem {
   path: string;
   name: string;
   exact?: boolean;
-  showInMenu?: boolean;
+  showInMenu: boolean;
   subMenu?: MenuItem[];
   component: ReactElement;
 }
@@ -93,6 +92,14 @@ const App = () => {
       name: "about",
       showInMenu: true,
       component: <About />,
+    },
+    {
+      label: "ประวัติการสั่งซื้อ",
+      icon: <DashboardOutlined />,
+      path: "/history",
+      name: "history",
+      showInMenu: false,
+      component: <History />,
     },
   ];
   return <MainLayout menuItems={menuItems} />;
