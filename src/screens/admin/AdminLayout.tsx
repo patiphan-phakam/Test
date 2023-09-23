@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import {
   Col,
   Layout,
@@ -15,17 +15,22 @@ import logo from "../../images/logo120.png";
 import { MenuUnfoldOutlined, UserOutlined } from "@ant-design/icons";
 import Link from "antd/es/typography/Link";
 import { useAuth } from "../../auth/auth";
+import { axiosBackend } from "../../config/axiosBackend";
+import { UserService } from "../../service/user-service";
+import { IUserData } from "../../types/user";
 
 const { Header, Content } = Layout;
 
 const AdminLayout: React.FC = () => {
+  const [userProfile, setUserProfile] = useState<IUserData | undefined>();
+
   const {
     token: { colorBgContainer },
   } = theme.useToken();
 
   const navigate = useNavigate();
 
-  const { accessToken, signout } = useAuth();
+  const { signout } = useAuth();
 
   const items: MenuProps["items"] = [
     {
@@ -52,11 +57,33 @@ const AdminLayout: React.FC = () => {
     },
   ];
 
+  const fetchUserProfile = async (token: string) => {
+    try {
+      axiosBackend.defaults.headers["Authorization"] = `Bearer ${token}`;
+      const userService = UserService(axiosBackend);
+      const res = await userService.profile();
+      if (res && res.data && res.data.userLevel === 2) {
+        setUserProfile(res.data);
+      } else {
+        signout(() => {});
+        setUserProfile(undefined);
+        navigate("/login");
+      }
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
   useEffect(() => {
-    if (!accessToken) {
+    const accessToken = localStorage.getItem("accessToken");
+    if (accessToken) {
+      fetchUserProfile(accessToken);
+    } else {
+      signout(() => {});
+      setUserProfile(undefined);
       navigate("/login");
     }
-  }, [accessToken, navigate]);
+  }, [navigate]);
 
   return (
     <Layout>

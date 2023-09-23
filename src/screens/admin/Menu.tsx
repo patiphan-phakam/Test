@@ -1,11 +1,11 @@
 import { Menu } from "antd";
-import { MenuItemsUser } from "./config/menu";
+import { MenuItemsAdmin } from "./config/menu";
 import { useLocation, useNavigate } from "react-router-dom";
 
 export const MenuUser = () => {
   const { pathname } = useLocation();
   const navigate = useNavigate();
-  const items = MenuItemsUser.map((menuItem) => {
+  const items = MenuItemsAdmin.map((menuItem) => {
     return {
       key: menuItem.key,
       icon: menuItem.icon,
@@ -18,8 +18,8 @@ export const MenuUser = () => {
   return (
     <Menu
       mode="horizontal"
-      selectedKeys={ks.slice(-1)[0] === "user" ? ["store"] : ks.slice(-1)}
-      defaultOpenKeys={ks.length > 1 ? ks.slice(0, 1) : ["store"]}
+      selectedKeys={ks.slice(-1)[0] === "admin" ? ["news"] : ks.slice(-1)}
+      defaultOpenKeys={ks.length > 1 ? ks.slice(0, 1) : ["news"]}
       style={{ height: "100%", borderRight: 0 }}
       items={items}
     />

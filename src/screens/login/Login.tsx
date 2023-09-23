@@ -37,6 +37,7 @@ const LoginPage: React.FC<{}> = () => {
     }
     message.error("login failed please try again");
   };
+
   return (
     <div className="login-page">
       <Row>

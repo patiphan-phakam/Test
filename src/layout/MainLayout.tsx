@@ -14,7 +14,10 @@ import ResetPage from "../screens/reset/Reset";
 import UserLayout from "../screens/user/UserLayout";
 import { Store } from "../screens/user/store";
 import { MenuItemsUser } from "../screens/user/config/menu";
+import { MenuItemsAdmin } from "../screens/admin/config/menu";
 import { AuthProvider } from "../auth/auth";
+import AdminLayout from "../screens/admin/AdminLayout";
+import { News } from "../screens/admin/news";
 
 interface Prop {
   menuItems: MenuItem[];
@@ -81,7 +84,18 @@ export const MainLayout: React.FC<Prop> = ({ menuItems }) => {
               </Route>
             ))}
           </Route>
-
+          <Route path="/admin" element={<AdminLayout />}>
+            <Route index element={<News />} />
+            {MenuItemsAdmin.map((menuItem) => (
+              <Route
+                key={menuItem.key}
+                path={menuItem.path}
+                element={<Outlet />}
+              >
+                {menuItem.component}
+              </Route>
+            ))}
+          </Route>
           <Route path="*" element={<Error />} />
         </Routes>
       </BrowserRouter>
