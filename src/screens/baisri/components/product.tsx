@@ -25,6 +25,7 @@ export const Product: React.FC = () => {
   const productService = ProductService(axiosBackend);
   const userService = UserService(axiosBackend);
 
+  /* eslint-disable */
   useEffect(() => {
     const getProduct = async () => {
       if (productId) {

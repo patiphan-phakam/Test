@@ -12,7 +12,6 @@ import {
   message,
 } from "antd";
 import React, { useEffect, useState } from "react";
-import { ProductService } from "../../../../service/product-service";
 import { axiosBackend } from "../../../../config/axiosBackend";
 // import { CKEditor } from "@ckeditor/ckeditor5-react";
 // import ClassicEditor from "@ckeditor/ckeditor5-build-classic";
@@ -51,14 +50,13 @@ export const NewsForm: React.FC<IEditProps> = ({
     </div>
   );
 
+  /* eslint-disable */
   useEffect(() => {
     console.log(configModal);
     form.setFieldsValue({
       ...configModal,
     });
   }, [configModal]);
-
-  /* eslint-disable */
 
   const getBase64 = (file: RcFile): Promise<string> =>
     new Promise((resolve, reject) => {
@@ -108,11 +106,6 @@ export const NewsForm: React.FC<IEditProps> = ({
           content: values.content,
           image: filesBase64[0] || configModal.image,
         };
-        console.log(
-          `🚀 ~ file: newsForn.tsx:111 ~ form.validateFields ~ dataUpdate:`,
-          dataUpdate
-        );
-
         const { data } = await newsService.update(
           configModal.newsId,
           dataUpdate

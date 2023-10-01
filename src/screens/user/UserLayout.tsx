@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import {
   Col,
   Layout,
@@ -17,7 +17,6 @@ import Link from "antd/es/typography/Link";
 import { useAuth } from "../../auth/auth";
 import { axiosBackend } from "../../config/axiosBackend";
 import { UserService } from "../../service/user-service";
-import { IUserData } from "../../types/user";
 
 const { Header, Content } = Layout;
 
@@ -27,7 +26,6 @@ const UserLayout: React.FC = () => {
   } = theme.useToken();
 
   const navigate = useNavigate();
-  const [userProfile, setUserProfile] = useState<IUserData | undefined>();
 
   const { signout } = useAuth();
 
@@ -60,16 +58,15 @@ const UserLayout: React.FC = () => {
     },
   ];
 
+  /* eslint-disable */
+
   const fetchUserProfile = async (token: string) => {
     try {
       axiosBackend.defaults.headers["Authorization"] = `Bearer ${token}`;
       const userService = UserService(axiosBackend);
       const res = await userService.profile();
-      if (res && res.data && res.data.userLevel === 1) {
-        setUserProfile(res.data);
-      } else {
+      if (res && res.data && res.data.userLevel !== 1) {
         signout(() => {});
-        setUserProfile(undefined);
         navigate("/login");
       }
     } catch (error) {
@@ -83,7 +80,6 @@ const UserLayout: React.FC = () => {
       fetchUserProfile(accessToken);
     } else {
       signout(() => {});
-      setUserProfile(undefined);
       navigate("/login");
     }
   }, [navigate]);
