@@ -56,7 +56,7 @@ export const Navbar: React.FC<prop> = ({
     {
       key: 2,
       label: <Link onClick={() => showProfile()}>profile</Link>,
-      level: [2],
+      level: [0, 1, 2],
     },
     {
       key: 3,
@@ -66,7 +66,7 @@ export const Navbar: React.FC<prop> = ({
     {
       key: 4,
       label: <Link onClick={() => signout(() => {})}>Logout</Link>,
-      level: [1, 2],
+      level: [0, 1, 2],
     },
   ];
 
