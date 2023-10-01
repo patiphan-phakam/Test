@@ -28,7 +28,9 @@ const LoginPage: React.FC<{}> = () => {
     const { data } = await userService.login(user);
     if (data) {
       signin(data.token);
-      if (data.level === 1) {
+      if (data.level === 0) {
+        navigate("/admin");
+      } else if (data.level === 1) {
         navigate("/user");
       } else {
         navigate("/home");

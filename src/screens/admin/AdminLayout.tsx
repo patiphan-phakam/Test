@@ -62,7 +62,7 @@ const AdminLayout: React.FC = () => {
       axiosBackend.defaults.headers["Authorization"] = `Bearer ${token}`;
       const userService = UserService(axiosBackend);
       const res = await userService.profile();
-      if (res && res.data && res.data.userLevel === 2) {
+      if (res && res.data && res.data.userLevel === 0) {
         setUserProfile(res.data);
       } else {
         signout(() => {});
@@ -83,7 +83,7 @@ const AdminLayout: React.FC = () => {
       setUserProfile(undefined);
       navigate("/login");
     }
-  }, [navigate]);
+  }, []);
 
   return (
     <Layout>
