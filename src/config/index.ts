@@ -1,4 +1,3 @@
 export const config = {
-  //   urlBackEnd: process.env.urlBacked || "http://localhost:3002/api",
-  backendUrl: "http://localhost:3002/api",
+  backendUrl: process.env.urlBacked ?? "http://buy-sri.com/service/api",
 };
