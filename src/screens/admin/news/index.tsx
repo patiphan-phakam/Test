@@ -18,7 +18,7 @@ export const News: React.FC<{}> = () => {
   const [newsId, setNewsId] = useState<string | undefined>();
   const [userProfile, setUserProfile] = useState<IUserData | undefined>();
   const [configModal, setConfigModal] = useState<any>({
-    title: "Add News",
+    titleModal: "Add News",
     update: false,
   });
 

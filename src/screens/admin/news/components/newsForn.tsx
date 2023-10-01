@@ -146,7 +146,7 @@ export const NewsForm: React.FC<IEditProps> = ({
           ) : (
             <></>
           )}
-          <ImgCrop rotationSlider>
+          <ImgCrop showGrid rotationSlider aspectSlider showReset>
             <Upload
               action={`${config.backendUrl}/product/upload`}
               listType="picture-card"
