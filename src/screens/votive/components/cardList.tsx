@@ -4,16 +4,8 @@ import "react-multi-carousel/lib/styles.css";
 import Meta from "antd/es/card/Meta";
 import { useNavigate } from "react-router-dom";
 
-export interface ICardData {
-  key: number;
-  id: string | number;
-  title: string;
-  description?: string;
-  image?: string;
-}
-
 interface CardCarouselProps {
-  dataList: ICardData[];
+  dataList: any;
   baseUrl?: string;
 }
 
@@ -24,34 +16,40 @@ const CardList: React.FC<CardCarouselProps> = ({ dataList, baseUrl }) => {
     <>
       <div style={{ margin: "0 3rem" }}>
         <Row>
-          {dataList.map((item, index: number) => (
+          {dataList.map((item: any, index: number) => (
             <Col md={8} key={index} style={{ marginTop: "1em" }}>
               <Card
                 className="card-product"
                 key={item.title}
-                cover={<Image preview={false} alt="example" src={item.image} />}
-                onClick={() => navigate(`${baseUrl}/${item.id}`)}
+                cover={
+                  <Image
+                    preview={false}
+                    alt="example"
+                    src={item.productImages[0].productImageSource}
+                  />
+                }
+                onClick={() => navigate(`${baseUrl}/${item.productId}`)}
               >
                 <Meta title={item.title} />
                 <Row>
                   <Col md={6}>
-                    <p className="card-price-custom">{`฿2500`}</p>
+                    <p className="card-price-custom">{`฿${item.productPrice}`}</p>
                   </Col>
                   <Col md={18} style={{ textAlign: "right" }}>
                     <Rate
                       disabled
                       allowHalf
-                      defaultValue={5}
+                      defaultValue={item.productAvgStar}
                       className="card-rate-custom"
                     />
                   </Col>
                 </Row>
                 <Row>
                   <Col md={12}>
-                    <p className="card-description-custom">{`${item.description}`}</p>
+                    <p className="card-description-custom">{`${item.fullName}`}</p>
                   </Col>
                   <Col md={12} style={{ textAlign: "right" }}>
-                    <p className="card-description-custom">{`จังหวัดกาฬสินธุ์`}</p>
+                    <p className="card-description-custom">{item.province}</p>
                   </Col>
                 </Row>
               </Card>

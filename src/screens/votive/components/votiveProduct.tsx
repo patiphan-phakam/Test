@@ -1,39 +1,40 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 // import { useParams } from "react-router-dom";
 import { Row, Col, Rate, Button } from "antd";
 import CardCarouselReview, {
   ICardDataReview,
 } from "../../../components/CardCarouselReview";
-// import { ProductService } from "../../../service/product-service";
-// import { axiosBackend } from "../../../config/axiosBackend";
-// import { IProductData, IProductDataImage } from "../../../types/product";
-// import { UserService } from "../../../service/user-service";
-// import { IStoreData } from "../../../types/store";
+import { ProductService } from "../../../service/product-service";
+import { axiosBackend } from "../../../config/axiosBackend";
+import { IProductData, IProductDataImage } from "../../../types/product";
+import { UserService } from "../../../service/user-service";
+import { IStoreData } from "../../../types/store";
 import { ProductPreview } from "../../baisri/components/productPreview";
+import { useParams } from "react-router-dom";
 
 export const VotiveProduct: React.FC = () => {
-  // const { brahmanId } = useParams();
-  // const [product, setProduct] = useState<IProductData | undefined>();
-  // const [store, setStore] = useState<IStoreData>();
-  // useEffect(() => {
-  //   const productService = ProductService(axiosBackend);
-  //   const userService = UserService(axiosBackend);
+  const { brahmanId } = useParams();
+  const [product, setProduct] = useState<IProductData | undefined>();
+  const [store, setStore] = useState<IStoreData>();
+  useEffect(() => {
+    const productService = ProductService(axiosBackend);
+    const userService = UserService(axiosBackend);
 
-  //   const getProduct = async () => {
-  //     if (brahmanId) {
-  //       const resProduct = await productService.findById(brahmanId);
-  //       if (resProduct.data) {
-  //         setProduct(resProduct.data);
-  //         const resStore = await userService.findById(resProduct.data.userId);
-  //         if (resStore.data) {
-  //           setStore(resStore.data);
-  //         }
-  //       }
-  //     }
-  //   };
+    const getProduct = async () => {
+      if (brahmanId) {
+        const resProduct = await productService.findById(brahmanId);
+        if (resProduct.data) {
+          setProduct(resProduct.data);
+          const resStore = await userService.findById(resProduct.data.userId);
+          if (resStore.data) {
+            setStore(resStore.data);
+          }
+        }
+      }
+    };
 
-  //   getProduct();
-  // }, [brahmanId]);
+    getProduct();
+  }, [brahmanId]);
 
   const dataList: ICardDataReview[] = [
     {
@@ -88,30 +89,6 @@ export const VotiveProduct: React.FC = () => {
     },
   ];
 
-  const product = {
-    id: 1,
-    productAvgStar: 4.5,
-    productDetail: "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
-    productId: "ABC123",
-    productName: "Example Product",
-    productPrice: 59.99,
-    productSold: 150,
-    productType: 2,
-    productTypeShow: 1,
-    productImages: [
-      {
-        id: 27,
-        productImageId: "205e9889-496b-41d8-a390-ba2fcd0a180f",
-        productImageLevel: 1,
-        productImageSource:
-          "https://images.unsplash.com/photo-1613759375165-1cd532c35738?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1364&q=80",
-      },
-    ],
-    userId: "user123",
-    updateDate: "2023-08-31",
-    createDate: "2023-08-01",
-  };
-
   return (
     <>
       <div
@@ -129,7 +106,7 @@ export const VotiveProduct: React.FC = () => {
                 <Rate
                   disabled
                   allowHalf
-                  defaultValue={5}
+                  defaultValue={product.productAvgStar}
                   className="card-rate-custom"
                 />
                 <p
@@ -153,7 +130,7 @@ export const VotiveProduct: React.FC = () => {
                 <p className="text-detail-custom">{product.productDetail}</p>
               </Col>
 
-              {/* {store && (
+              {store && (
                 <>
                   <Col span={24} style={{ marginTop: "1em" }}>
                     <p className="text-description-custom">{store.storeName}</p>
@@ -171,7 +148,7 @@ export const VotiveProduct: React.FC = () => {
                     </p>
                   </Col>
                 </>
-              )} */}
+              )}
             </Row>
             <Row>
               <Button className="green-button">ซื้อ</Button>
