@@ -225,6 +225,7 @@ export const Product: React.FC<{}> = () => {
             scroll={{ x: true }}
             dataSource={dataSource}
             columns={columns}
+            loading={loading}
           />
         </Col>
       </Row>

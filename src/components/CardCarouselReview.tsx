@@ -6,14 +6,16 @@ import UserOutlined from "@ant-design/icons/lib/icons/UserOutlined";
 import dayjs from "dayjs";
 
 export interface ICardDataReview {
-  id: string | number;
-  userId: string;
-  name: string;
-  star: number;
-  dateTime: Date;
+  bookingId: string;
+  commentId: string;
+  createDate: string;
+  id: number;
+  message: string;
+  productId: string;
+  productName: string;
   store: string;
-  product: string;
-  review: string;
+  updateDate: string;
+  userId: string;
 }
 
 interface CardCarouselProps {
@@ -55,21 +57,21 @@ const CardCarouselReview: React.FC<CardCarouselProps> = ({
                 </Col>
                 <Col span={20}>
                   <div style={{ flex: 1, marginLeft: "12px" }}>
-                    <div style={{ fontWeight: "bold" }}>{review.name}</div>
+                    <div style={{ fontWeight: "bold" }}>{review.store}</div>
                     <div
                       style={{
                         display: "flex",
                         fontSize: "10px",
                       }}
                     >
-                      {dayjs(review.dateTime).format("YYYY-MM-DD HH:mm:ss")} |{" "}
-                      {review.store}
+                      {dayjs(review.createDate).format("YYYY-MM-DD HH:mm:ss")} |{" "}
+                      {review.productName}
                     </div>
                     <div style={{ padding: "0 0 0 8px" }}>
                       <Rate
                         disabled
                         allowHalf
-                        defaultValue={review.star}
+                        defaultValue={5}
                         style={{ fontSize: "8px" }}
                       />
                     </div>
@@ -77,7 +79,7 @@ const CardCarouselReview: React.FC<CardCarouselProps> = ({
                 </Col>
               </Row>
               <Row>
-                <div>{review.review}</div>
+                <div>{review.message}</div>
               </Row>
             </Card>
           ))}
