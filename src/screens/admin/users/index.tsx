@@ -9,6 +9,7 @@ import {
   Input,
   Button,
   Select,
+  message,
 } from "antd";
 import React, { useEffect, useState } from "react";
 import { IUserData } from "../../../types/user";
@@ -24,6 +25,7 @@ export const Users: React.FC<{}> = () => {
   const [userId, setUserId] = useState<string | undefined>();
   const [userProfile, setUserProfile] = useState<IUserData | undefined>();
   const [configModal, setConfigModal] = useState<any>({});
+  const userService = UserService(axiosBackend);
 
   const fetchData = async () => {
     const userService = UserService(axiosBackend);
@@ -108,7 +110,7 @@ export const Users: React.FC<{}> = () => {
             >
               <Link className="text-red">ลบ</Link>
             </Popconfirm>
-            /
+            {/* /
             <Popconfirm
               title="ยืนยันการรีเซ็ต"
               description={row.productName}
@@ -117,7 +119,7 @@ export const Users: React.FC<{}> = () => {
               // onConfirm={() => handleDelete(newId)}
             >
               <Link className="text-blue">รีเซ็ตรหัสผ่าน</Link>
-            </Popconfirm>
+            </Popconfirm> */}
           </Space>
         </>
       ),
@@ -126,10 +128,27 @@ export const Users: React.FC<{}> = () => {
 
   const onFinish = () => {
     form.validateFields().then(async (values) => {
-      console.log(
-        `🚀 ~ file: index.tsx:108 ~ form.validateFields ~ values:`,
-        values
-      );
+      // if (!values.setpassword) {
+      //   message.success("กร");
+      // }
+      let userType;
+      if ((values.userType = "user")) {
+        userType = 2;
+      } else {
+        userType = 1;
+      }
+      const data = {
+        password: values.setpassword,
+        userLevel: userType,
+      };
+      const userId = userProfile?.userId;
+      const res = await userService.update(userId, data);
+      if (res) {
+        message.success("แก้ไขข้อมูลเรียบร้อย");
+        return;
+      }
+      message.error("เกิดข้อผิดพลาดกรุณาลองใหม่อีกครั้ง");
+      return;
     });
   };
 
@@ -167,10 +186,31 @@ export const Users: React.FC<{}> = () => {
         footer={null}
       >
         <Form form={form} onFinish={onFinish} layout={"vertical"}>
-          <Row gutter={{ xs: 8, sm: 16, md: 24, lg: 32 }}>
+          {/* <Row gutter={{ xs: 8, sm: 16, md: 24, lg: 32 }}>
             <Col className="gutter-row" span={24}>
               <Form.Item name="username" label="Username">
                 <Input placeholder="Title" readOnly />
+              </Form.Item>
+            </Col>
+            <Col className="gutter-row" span={24}>
+              <Form.Item
+                name="userType"
+                label="User Type"
+                rules={[{ required: true, message: "Please enter User Type" }]}
+              >
+                <Select
+                  style={{ width: "100%" }}
+                  labelInValue
+                  placeholder={"type"}
+                  options={type}
+                />
+              </Form.Item>
+            </Col>
+          </Row> */}
+          <Row gutter={{ xs: 8, sm: 16, md: 24, lg: 32 }}>
+            <Col className="gutter-row" span={24}>
+              <Form.Item name="setpassword" label="New Password">
+                <Input placeholder="Password" />
               </Form.Item>
             </Col>
             <Col className="gutter-row" span={24}>

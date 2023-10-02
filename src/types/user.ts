@@ -11,7 +11,7 @@ export interface TUserRegister {
 
 export interface IUserData {
   id: number;
-  userId: string;
+  userId?: string;
   username: string;
   password?: string;
   userLevel: number;
