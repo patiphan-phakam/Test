@@ -1,4 +1,4 @@
-import { Col, Row, Image, Button } from "antd";
+import { Col, Row, Image } from "antd";
 import React, { useEffect, useState } from "react";
 import homePicture1 from "../../images/bg.jpg";
 import homeCirCle1 from "../../images/home-circle-1.png";

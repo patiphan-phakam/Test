@@ -17,6 +17,7 @@ import { UserService } from "../../service/user-service";
 import { IUserData } from "../../types/user";
 import { useAuth } from "../../auth/auth";
 import { CommentService } from "../../service/comment.service";
+import { useNavigate } from "react-router-dom";
 
 export const History: React.FC<{}> = () => {
   const [form] = Form.useForm();
@@ -26,8 +27,8 @@ export const History: React.FC<{}> = () => {
   // const [bookId, setBookId] = useState<string>("");
   // const [value, setValue] = useState(0);
   const [userProfile, setUserProfile] = useState<IUserData | undefined>();
-
   const [dataSource, setDataSource] = useState<any>([]);
+  const navigate = useNavigate();
 
   /* eslint-disable */
   const fetchUserProfile = async (token: string) => {
@@ -62,6 +63,9 @@ export const History: React.FC<{}> = () => {
     const token = localStorage.getItem("accessToken");
     if (token) {
       fetchUserProfile(token);
+    } else {
+      signout(() => {});
+      navigate("/login");
     }
   }, []);
 
