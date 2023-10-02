@@ -33,7 +33,7 @@ export const UserService = (axiosInstance: AxiosInstance) => {
         .then((response: any) => response)
         .catch((error: any) => error);
     },
-    update: async (userId: string, data: IUserData) => {
+    update: async (userId: string | undefined, data: any) => {
       return await axiosInstance
         .put(`user/${userId}`, data)
         .then((response: any) => response)
