@@ -47,9 +47,23 @@ const AdminLayout: React.FC = () => {
 
   const itemsMobile: MenuProps["items"] = [
     {
-      key: "11",
+      key: "1",
       label: (
-        <Link onClick={() => navigate("/user/store")}>ตั้งค่าข่าวสาร</Link>
+        <Link onClick={() => navigate("/admin/news")}>ตั้งค่าข่าวสาร</Link>
+      ),
+    },
+    {
+      key: "2",
+      label: (
+        <Link onClick={() => navigate("/admin/product-history")}>
+          จัดการคำสั่งซื้อ
+        </Link>
+      ),
+    },
+    {
+      key: "3",
+      label: (
+        <Link onClick={() => navigate("/admin/users")}>จัดการผู้ใช้งาน</Link>
       ),
     },
   ];

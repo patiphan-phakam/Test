@@ -223,6 +223,10 @@ a {
   color: red !important;
 }
 
+.text-blue {
+  color: blue !important;
+}
+
 .ant-pagination .ant-pagination-item-active {
   border-color: #028910 !important;
 }
