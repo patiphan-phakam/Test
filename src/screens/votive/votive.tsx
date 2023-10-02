@@ -3,7 +3,6 @@ import React, { useEffect, useState } from "react";
 import CardList from "./components/cardList";
 import { axiosBackend } from "../../config/axiosBackend";
 import { ProductService } from "../../service/product-service";
-import { IProductData } from "../../types/product";
 import { ProductSkeleton } from "../home/components/productSkeleton";
 
 interface Props {

@@ -6,7 +6,7 @@ import CardCarouselReview, {
 } from "../../../components/CardCarouselReview";
 import { ProductService } from "../../../service/product-service";
 import { axiosBackend } from "../../../config/axiosBackend";
-import { IProductData, IProductDataImage } from "../../../types/product";
+import { IProductData } from "../../../types/product";
 import { UserService } from "../../../service/user-service";
 import { IStoreData } from "../../../types/store";
 import { ProductPreview } from "../../baisri/components/productPreview";

@@ -1,6 +1,5 @@
 import React from "react";
 import { Card, Col, Image, Rate, Row } from "antd";
-import Carousel from "react-multi-carousel";
 import "react-multi-carousel/lib/styles.css";
 import Meta from "antd/es/card/Meta";
 import { useNavigate } from "react-router-dom";

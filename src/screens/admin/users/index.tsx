@@ -16,15 +16,15 @@ import Link from "antd/es/typography/Link";
 import { axiosBackend } from "../../../config/axiosBackend";
 import { UserService } from "../../../service/user-service";
 export const Users: React.FC<{}> = () => {
+  /* eslint-disable */
   const [form] = Form.useForm();
   const [dataSource, setDataSource] = useState<any>([]);
   const [loading, setLoading] = useState<boolean>(true);
   const [isModal, setIsModal] = useState<boolean>(false);
-  const [newsId, setUserId] = useState<string | undefined>();
+  const [userId, setUserId] = useState<string | undefined>();
   const [userProfile, setUserProfile] = useState<IUserData | undefined>();
   const [configModal, setConfigModal] = useState<any>({});
 
-  /* eslint-disable */
   const fetchData = async () => {
     const userService = UserService(axiosBackend);
     try {
