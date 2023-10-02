@@ -73,7 +73,11 @@ export const Product: React.FC<{}> = () => {
     },
     {
       value: "2",
-      label: "พราหมณ์",
+      label: "หมอพราหมณ์",
+    },
+    {
+      value: "3",
+      label: "บน/แก้บน",
     },
   ];
 
@@ -126,10 +130,14 @@ export const Product: React.FC<{}> = () => {
   ];
 
   const showModal = () => {
+    form.resetFields();
+    setFileList([]);
     setIsModalOpen(true);
   };
 
   const handleCancelAction = () => {
+    form.resetFields();
+    setFileList([]);
     setIsModalOpen(false);
   };
 

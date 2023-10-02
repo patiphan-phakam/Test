@@ -52,7 +52,6 @@ export const NewsForm: React.FC<IEditProps> = ({
 
   /* eslint-disable */
   useEffect(() => {
-    console.log(configModal);
     form.setFieldsValue({
       ...configModal,
     });

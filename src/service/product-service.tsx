@@ -14,6 +14,18 @@ export const ProductService = (axiosInstance: AxiosInstance) => {
         .then((response: any) => response)
         .catch((error: any) => error);
     },
+    getByType: async (typeId: string) => {
+      return await axiosInstance
+        .get(`/product/type/${typeId}`)
+        .then((response: any) => response)
+        .catch((error: any) => error);
+    },
+    getByBrahman: async () => {
+      return await axiosInstance
+        .get(`/product/brahman`)
+        .then((response: any) => response)
+        .catch((error: any) => error);
+    },
     getRecommend: async () => {
       return await axiosInstance
         .get(`/product/recommend`)

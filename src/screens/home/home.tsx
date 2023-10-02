@@ -29,6 +29,10 @@ export const Home: React.FC<{}> = () => {
     const getProductPopurlar = async () => {
       const res = await productService.getPopular();
       if (res.data) {
+        console.log(
+          `🚀 ~ file: home.tsx:32 ~ getProductPopurlar ~ res.data:`,
+          res.data
+        );
         const setData = res.data.map((product: IProductData) => ({
           key: product.id,
           id: product.productId,

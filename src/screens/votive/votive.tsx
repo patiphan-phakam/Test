@@ -1,32 +1,36 @@
 import { Col, Row } from "antd";
-import React from "react";
+import React, { useEffect, useState } from "react";
 import CardList, { ICardData } from "./components/cardList";
+import { axiosBackend } from "../../config/axiosBackend";
+import { ProductService } from "../../service/product-service";
+import { IProductData } from "../../types/product";
 
 interface Props {
   baseUrl: string;
 }
 
 export const Votive: React.FC<Props> = ({ baseUrl }) => {
-  const dataList: ICardData[] = [
-    {
-      key: 1,
-      id: 1,
-      title: "บริการบนบานศาลกล่าวปู่เวสสุวรรณ",
-      description: "คุณมด",
-    },
-    {
-      key: 2,
-      id: 2,
-      title: "บริการบนบานศาลกล่าว",
-      description: "คุณก๊อต",
-    },
-    {
-      key: 3,
-      id: 3,
-      title: "บริการบนบานศาลกล่าว",
-      description: "ร้านวิสาหกิจชุมชนบ้านโนนเมือง",
-    },
-  ];
+  const [loading, setLoading] = useState<boolean>(true);
+  const [product, setProduct] = useState<ICardData[]>([]);
+  useEffect(() => {
+    const productService = ProductService(axiosBackend);
+    const getProductPopurlar = async () => {
+      const res = await productService.getByType("3");
+      if (res.data) {
+        const setData = res.data.map((product: IProductData) => ({
+          key: product.id,
+          id: product.productId,
+          title: product.productName,
+          description: product.productDetail,
+          productPrice: product.productPrice,
+          image: product.productImages[0].productImageSource,
+        }));
+        setProduct(setData);
+        setLoading(false);
+      }
+    };
+    getProductPopurlar();
+  }, []);
 
   return (
     <>
@@ -44,7 +48,7 @@ export const Votive: React.FC<Props> = ({ baseUrl }) => {
               </h2>
             </div>
           </Col>
-          <CardList dataList={dataList} baseUrl={baseUrl} />
+          <CardList dataList={product} baseUrl={baseUrl} />
         </Row>
       </div>
     </>

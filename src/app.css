@@ -146,6 +146,7 @@
   .ant-card-body {
     padding: 10px;
   }
+  width: 300px;
 }
 
 .card-product:hover {
@@ -197,7 +198,7 @@
 }
 
 .card-rate-custom {
-  font-size: 18px;
+  font-size: 14px;
 }
 
 .ant-menu-item {
