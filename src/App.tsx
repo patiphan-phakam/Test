@@ -8,6 +8,8 @@ import { BaisriRoute } from "./screens/baisri/baisriRoute";
 import { History } from "./screens/history";
 import { News } from "./screens/news/news";
 import { About } from "./screens/about/about";
+import { BrahmanRoute } from "./screens/brahman/brahmanRoute";
+import { VotiveRoute } from "./screens/votive/votiveRoute";
 export interface MenuItem {
   label: string;
   icon: React.ReactElement;
@@ -45,38 +47,38 @@ const App = () => {
       showInMenu: true,
       component: <BaisriRoute baseUrl="/baisri" />,
     },
-    // {
-    //   label: "หมอพราหมณ์",
-    //   icon: <DashboardOutlined />,
-    //   path: "/brahman/*",
-    //   name: "brahman",
-    //   showInMenu: true,
-    //   component: <BrahmanRoute baseUrl="/brahman" />,
-    // },
-    // {
-    //   label: "หมอพราหมณ์",
-    //   icon: <DashboardOutlined />,
-    //   path: "/brahman",
-    //   name: "brahman",
-    //   showInMenu: true,
-    //   component: <BrahmanRoute baseUrl="/brahman" />,
-    // },
-    // {
-    //   label: "บน/แก้บน",
-    //   icon: <DashboardOutlined />,
-    //   path: "/votive/*",
-    //   name: "votive",
-    //   showInMenu: true,
-    //   component: <VotiveRoute baseUrl="/votive" />,
-    // },
-    // {
-    //   label: "บน/แก้บน",
-    //   icon: <DashboardOutlined />,
-    //   path: "/votive",
-    //   name: "votive",
-    //   showInMenu: true,
-    //   component: <VotiveRoute baseUrl="/votive" />,
-    // },
+    {
+      label: "หมอพราหมณ์",
+      icon: <DashboardOutlined />,
+      path: "/brahman/*",
+      name: "brahman",
+      showInMenu: true,
+      component: <BrahmanRoute baseUrl="/brahman" />,
+    },
+    {
+      label: "หมอพราหมณ์",
+      icon: <DashboardOutlined />,
+      path: "/brahman",
+      name: "brahman",
+      showInMenu: true,
+      component: <BrahmanRoute baseUrl="/brahman" />,
+    },
+    {
+      label: "บน/แก้บน",
+      icon: <DashboardOutlined />,
+      path: "/votive/*",
+      name: "votive",
+      showInMenu: true,
+      component: <VotiveRoute baseUrl="/votive" />,
+    },
+    {
+      label: "บน/แก้บน",
+      icon: <DashboardOutlined />,
+      path: "/votive",
+      name: "votive",
+      showInMenu: true,
+      component: <VotiveRoute baseUrl="/votive" />,
+    },
     {
       label: "ข่าวสารความรู้",
       icon: <DashboardOutlined />,

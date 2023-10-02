@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import {
   Col,
   Layout,
@@ -17,13 +17,10 @@ import Link from "antd/es/typography/Link";
 import { useAuth } from "../../auth/auth";
 import { axiosBackend } from "../../config/axiosBackend";
 import { UserService } from "../../service/user-service";
-import { IUserData } from "../../types/user";
 
 const { Header, Content } = Layout;
 
 const AdminLayout: React.FC = () => {
-  const [userProfile, setUserProfile] = useState<IUserData | undefined>();
-
   const {
     token: { colorBgContainer },
   } = theme.useToken();
@@ -50,23 +47,34 @@ const AdminLayout: React.FC = () => {
 
   const itemsMobile: MenuProps["items"] = [
     {
-      key: "11",
+      key: "1",
       label: (
-        <Link onClick={() => navigate("/user/store")}>ตั้งค่าข่าวสาร</Link>
+        <Link onClick={() => navigate("/admin/news")}>ตั้งค่าข่าวสาร</Link>
+      ),
+    },
+    {
+      key: "2",
+      label: (
+        <Link onClick={() => navigate("/admin/product-history")}>
+          จัดการคำสั่งซื้อ
+        </Link>
+      ),
+    },
+    {
+      key: "3",
+      label: (
+        <Link onClick={() => navigate("/admin/users")}>จัดการผู้ใช้งาน</Link>
       ),
     },
   ];
-
+  /* eslint-disable */
   const fetchUserProfile = async (token: string) => {
     try {
       axiosBackend.defaults.headers["Authorization"] = `Bearer ${token}`;
       const userService = UserService(axiosBackend);
       const res = await userService.profile();
-      if (res && res.data && res.data.userLevel === 2) {
-        setUserProfile(res.data);
-      } else {
+      if (res && res.data && res.data.userLevel !== 0) {
         signout(() => {});
-        setUserProfile(undefined);
         navigate("/login");
       }
     } catch (error) {
@@ -80,10 +88,9 @@ const AdminLayout: React.FC = () => {
       fetchUserProfile(accessToken);
     } else {
       signout(() => {});
-      setUserProfile(undefined);
       navigate("/login");
     }
-  }, [navigate]);
+  }, []);
 
   return (
     <Layout>

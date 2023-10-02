@@ -1,39 +1,68 @@
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
-import { Row, Col, Rate, Button } from "antd";
+import { Row, Col, Rate, Button, Modal, message } from "antd";
 import CardCarouselReview, {
   ICardDataReview,
 } from "../../../components/CardCarouselReview";
 import { ProductService } from "../../../service/product-service";
 import { axiosBackend } from "../../../config/axiosBackend";
-import { IProductData, IProductDataImage } from "../../../types/product";
+import { IProductData } from "../../../types/product";
 import { UserService } from "../../../service/user-service";
 import { IStoreData } from "../../../types/store";
 import { ProductPreview } from "../../baisri/components/productPreview";
+import { IUserData } from "../../../types/user";
+import { useAuth } from "../../../auth/auth";
 
 export const BrahmanProduct: React.FC = () => {
-  // const { brahmanId } = useParams();
-  // const [product, setProduct] = useState<IProductData | undefined>();
-  // const [store, setStore] = useState<IStoreData>();
-  // useEffect(() => {
-  //   const productService = ProductService(axiosBackend);
-  //   const userService = UserService(axiosBackend);
+  const { brahmanId } = useParams();
+  const { signout } = useAuth();
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [product, setProduct] = useState<IProductData | undefined>();
+  const [userProfile, setUserProfile] = useState<IUserData | undefined>();
+  const [store, setStore] = useState<IStoreData>();
+  const productService = ProductService(axiosBackend);
+  const userService = UserService(axiosBackend);
 
-  //   const getProduct = async () => {
-  //     if (brahmanId) {
-  //       const resProduct = await productService.findById(brahmanId);
-  //       if (resProduct.data) {
-  //         setProduct(resProduct.data);
-  //         const resStore = await userService.findById(resProduct.data.userId);
-  //         if (resStore.data) {
-  //           setStore(resStore.data);
-  //         }
-  //       }
-  //     }
-  //   };
+  /* eslint-disable */
+  useEffect(() => {
+    const getProduct = async () => {
+      if (brahmanId) {
+        const resProduct = await productService.findById(brahmanId);
+        if (resProduct.data) {
+          setProduct(resProduct.data);
+          const resStore = await userService.findById(resProduct.data.userId);
+          if (resStore.data) {
+            setStore(resStore.data);
+          }
+        }
+      }
+    };
 
-  //   getProduct();
-  // }, [brahmanId]);
+    getProduct();
+  }, [brahmanId]);
+
+  const fetchUserProfile = async (token: string) => {
+    try {
+      axiosBackend.defaults.headers["Authorization"] = `Bearer ${token}`;
+      const userService = UserService(axiosBackend);
+      const res = await userService.profile();
+      if (res && res.data) {
+        setUserProfile(res.data);
+        return;
+      }
+      signout(() => {});
+      setUserProfile(undefined);
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
+  useEffect(() => {
+    const token = localStorage.getItem("accessToken");
+    if (token) {
+      fetchUserProfile(token);
+    }
+  }, []);
 
   const dataList: ICardDataReview[] = [
     {
@@ -88,28 +117,38 @@ export const BrahmanProduct: React.FC = () => {
     },
   ];
 
-  const product = {
-    id: 1,
-    productAvgStar: 4.5,
-    productDetail: "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
-    productId: "ABC123",
-    productName: "Example Product",
-    productPrice: 59.99,
-    productSold: 150,
-    productType: 2,
-    productTypeShow: 1,
-    productImages: [
-      {
-        id: 27,
-        productImageId: "205e9889-496b-41d8-a390-ba2fcd0a180f",
-        productImageLevel: 1,
-        productImageSource:
-          "https://images.unsplash.com/photo-1613759375165-1cd532c35738?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1364&q=80",
+  const handleShow = () => {
+    setIsModalOpen(true);
+  };
+
+  const handleCancel = () => {
+    setIsModalOpen(false);
+  };
+
+  const submitBuy = async () => {
+    const data = {
+      userId: userProfile?.userId,
+      productPrice: product?.productPrice,
+      status: "new",
+      productId: product?.productId,
+      lineData: {
+        storePhone: store?.phone,
+        storeName: store?.fullName,
+        proName: product?.productName,
+        proPrice: product?.productPrice,
+        cusName: userProfile?.fullName,
+        cusPhone: userProfile?.phone,
       },
-    ],
-    userId: "user123",
-    updateDate: "2023-08-31",
-    createDate: "2023-08-01",
+    };
+    const res = await productService.orderProduct(data);
+    if (res) {
+      message.success("คำสั่งซื้อของคุณดำเนินการเรียบร้อยแล้ว");
+      setIsModalOpen(false);
+      return;
+    }
+    message.error("เกิดข้อผิดพลาดกรุณาลองใหม่อีกครั้ง");
+    setIsModalOpen(false);
+    return;
   };
 
   return (
@@ -153,7 +192,7 @@ export const BrahmanProduct: React.FC = () => {
                 <p className="text-detail-custom">{product.productDetail}</p>
               </Col>
 
-              {/* {store && (
+              {store && (
                 <>
                   <Col span={24} style={{ marginTop: "1em" }}>
                     <p className="text-description-custom">{store.storeName}</p>
@@ -171,10 +210,14 @@ export const BrahmanProduct: React.FC = () => {
                     </p>
                   </Col>
                 </>
-              )} */}
+              )}
             </Row>
             <Row>
-              <Button className="green-button">ซื้อ</Button>
+              {userProfile?.userLevel === 2 && (
+                <Button className="green-button" onClick={handleShow}>
+                  ซื้อ
+                </Button>
+              )}
             </Row>
             <Row style={{ display: "flex" }}>
               <h2 style={{ color: "#028910" }}>รีวิวจากลูกค้า</h2>
@@ -193,6 +236,39 @@ export const BrahmanProduct: React.FC = () => {
       <div style={{ marginBottom: "5rem" }}>
         <CardCarouselReview dataList={dataList} />
       </div>
+      <Modal
+        title="ยืนยันคำสั่งซื้อ"
+        open={isModalOpen}
+        onCancel={handleCancel}
+        footer={null}
+      >
+        <Row
+          style={{ backgroundColor: "#f0f0f0", borderRadius: "15px" }}
+          justify={"center"}
+        >
+          <Col span={20} style={{ paddingLeft: "5px" }}>
+            <p>{product?.productName}</p>
+          </Col>
+          <Col span={4}>
+            <p>{product?.productPrice}฿</p>
+          </Col>
+        </Row>
+        <Row justify={"center"}>
+          <Col span={4}>
+            <Button
+              type="primary"
+              style={{
+                width: "100%",
+                backgroundColor: "green",
+                marginTop: "1rem",
+              }}
+              onClick={submitBuy}
+            >
+              ยืนยัน
+            </Button>
+          </Col>
+        </Row>
+      </Modal>
     </>
   );
 };

@@ -75,7 +75,7 @@ const FormRegister: React.FC<prop> = ({
         userType: type.find((t) => values.userLevel.value === t.value)?.label,
       };
       handleRegister(data);
-      message.error("Register successfully");
+      message.success("Register successfully");
     });
   };
 
