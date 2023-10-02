@@ -11,7 +11,7 @@ import { Popular } from "./components/popular";
 import { Recommend } from "./components/recommend";
 import { Carousel } from "react-responsive-carousel";
 import "react-responsive-carousel/lib/styles/carousel.min.css";
-import { ArrowRightOutlined } from "@ant-design/icons";
+// import { ArrowRightOutlined } from "@ant-design/icons";
 import { Review } from "./components/review";
 import { ICardData } from "../../components/CardCarousel";
 import { axiosBackend } from "../../config/axiosBackend";
@@ -191,9 +191,9 @@ export const Home: React.FC<{}> = () => {
                 ทีมงานของเราคือกลุ่มคนที่คอยช่วยเหลือและพัฒนาองค์ความรู้ด้านบายศรีและพิธีกรรมให้กับชุมชนและผู้ที่สนใจเรียนรู้อนุรักษ์วัฒนธรรมพิธีกรรมท้องถิ่นไทย
                 สืบสานต่อยอดจากรุ่นสู่รุ่น
               </p>
-              <Button className="green-button">
+              {/* <Button className="green-button">
                 Read more <ArrowRightOutlined />
-              </Button>
+              </Button> */}
             </Col>
             <Col md={8}>
               <img src={homeLearn} alt="homePicture1" width={"80%"} />
@@ -208,9 +208,9 @@ export const Home: React.FC<{}> = () => {
               <p>
                 เราคือกลุ่มกิจการเพื่อสังคมที่พร้อมพัฒนาท้องถิ่นทางด้านอาชีพและวัฒนธรรมให้กับสังคม
               </p>
-              <Button className="green-button">
+              {/* <Button className="green-button">
                 Read more <ArrowRightOutlined />
-              </Button>
+              </Button> */}
             </Col>
           </Row>
           <Row>
@@ -219,9 +219,9 @@ export const Home: React.FC<{}> = () => {
               <p>
                 หลายคนต้องการที่พึ่งทางจิตใจในหลายสถานการณ์ที่คนต้องการที่พึ่งและมองหาทางออกสิ่งศักดิ์สิทธิ์เป็นอีกหนึ่งหนทางที่ช่วยฟื้นฟูเยียวยาจิตใจและเป็นที่ยึดเหนี่ยวจิตใจได้
               </p>
-              <Button className="green-button">
+              {/* <Button className="green-button">
                 Read more <ArrowRightOutlined />
-              </Button>
+              </Button> */}
             </Col>
             <Col md={8}>
               <img src={homeSocial} alt="homePicture1" width={"80%"} />

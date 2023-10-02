@@ -12,7 +12,7 @@ export const VotiveRoute: React.FC<Props> = ({ baseUrl }) => {
     <>
       <Routes>
         <Route path="/" element={<Votive baseUrl={baseUrl} />} />
-        <Route path={`:brahmanId`} element={<VotiveProduct />} />
+        <Route path={`:votiveId`} element={<VotiveProduct />} />
       </Routes>
     </>
   );

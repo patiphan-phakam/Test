@@ -203,6 +203,7 @@ export const Navbar: React.FC<prop> = ({
           <Col span={24} style={{ paddingLeft: "1rem" }}>
             <p>ชื่อ : {userProfile?.fullName}</p>
             <p>เบอร์โทร : {userProfile?.phone}</p>
+            <p>อีเมล : {userProfile?.email}</p>
           </Col>
         </Row>
       </Modal>

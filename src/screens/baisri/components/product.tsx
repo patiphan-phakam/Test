@@ -12,6 +12,7 @@ import { UserService } from "../../../service/user-service";
 import { IStoreData } from "../../../types/store";
 import { useAuth } from "../../../auth/auth";
 import { IUserData } from "../../../types/user";
+import { CommentService } from "../../../service/comment.service";
 
 export const Product: React.FC = () => {
   const { productId } = useParams();
@@ -42,58 +43,21 @@ export const Product: React.FC = () => {
     getProduct();
   }, [productId]);
 
-  const dataList: ICardDataReview[] = [
-    {
-      id: 1,
-      userId: "user123",
-      name: "จอห์น โด",
-      star: 4,
-      dateTime: new Date("2023-08-16T10:30:00"),
-      store: "ร้าน A",
-      product: "ผลิตภัณฑ์ X",
-      review: "ประสบการณ์ที่ดี! จะกลับมาอีกแน่นอน",
-    },
-    {
-      id: 2,
-      userId: "user456",
-      name: "เจน สมิธ",
-      star: 5,
-      dateTime: new Date("2023-08-17T14:00:00"),
-      store: "ร้าน B",
-      product: "ผลิตภัณฑ์ Y",
-      review: "บริการเยี่ยมยอดและคุณภาพสินค้าดีเยี่ยม",
-    },
-    {
-      id: 3,
-      userId: "user789",
-      name: "อลิส จอห์นสัน",
-      star: 3,
-      dateTime: new Date("2023-08-18T09:15:00"),
-      store: "ร้าน C",
-      product: "ผลิตภัณฑ์ Z",
-      review: "มีประสบการณ์การช้อปปิ้งที่เพลิดเพลิน",
-    },
-    {
-      id: 4,
-      userId: "user101",
-      name: "บ็อบ วิลเลียมส์",
-      star: 4,
-      dateTime: new Date("2023-08-19T11:45:00"),
-      store: "ร้าน D",
-      product: "ผลิตภัณฑ์ W",
-      review: "ประทับใจกับสินค้าหลากหลายที่มีให้เลือก",
-    },
-    {
-      id: 5,
-      userId: "user202",
-      name: "อีวา มาร์ติเนซ",
-      star: 5,
-      dateTime: new Date("2023-08-20T16:30:00"),
-      store: "ร้าน E",
-      product: "ผลิตภัณฑ์ V",
-      review: "พนักงานเป็นมิตรและเป็นประโยชน์ ชอบสินค้า!",
-    },
-  ];
+  const [dataList, setDataList] = useState<any>([]);
+  useEffect(() => {
+    const commentService = CommentService(axiosBackend);
+    const getComment = async () => {
+      const res = await commentService.findAll();
+      if (res.data) {
+        setDataList(
+          res.data.filter(
+            (comment: ICardDataReview) => comment.productId === productId
+          )
+        );
+      }
+    };
+    getComment();
+  }, []);
 
   /* eslint-disable */
   const fetchUserProfile = async (token: string) => {
