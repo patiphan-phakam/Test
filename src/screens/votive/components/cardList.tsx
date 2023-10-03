@@ -1,5 +1,5 @@
 import React from "react";
-import { Card, Col, Image, Rate, Row } from "antd";
+import { Card, Col, Rate, Row } from "antd";
 import "react-multi-carousel/lib/styles.css";
 import Meta from "antd/es/card/Meta";
 import { useNavigate } from "react-router-dom";
@@ -22,11 +22,22 @@ const CardList: React.FC<CardCarouselProps> = ({ dataList, baseUrl }) => {
                 className="card-product"
                 key={item.title}
                 cover={
-                  <Image
-                    preview={false}
-                    alt="example"
-                    src={item.productImages[0]?.productImageSource}
-                  />
+                  <div
+                    style={{
+                      overflow: "hidden",
+                      height: "250px",
+                    }}
+                  >
+                    <img
+                      alt="example"
+                      src={item.productImages[0]?.productImageSource}
+                      style={{
+                        width: "100%",
+                        height: "100%",
+                        objectFit: "cover",
+                      }}
+                    />
+                  </div>
                 }
                 onClick={() => navigate(`${baseUrl}/${item.productId}`)}
               >
