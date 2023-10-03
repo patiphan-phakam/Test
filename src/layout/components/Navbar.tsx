@@ -65,7 +65,16 @@ export const Navbar: React.FC<prop> = ({
     },
     {
       key: 4,
-      label: <Link onClick={() => signout(() => {})}>Logout</Link>,
+      label: (
+        <Link
+          onClick={() => {
+            signout(() => {});
+            navigate("/login");
+          }}
+        >
+          Logout
+        </Link>
+      ),
       level: [0, 1, 2],
     },
   ];

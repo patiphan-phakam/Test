@@ -116,24 +116,27 @@ export const History: React.FC<{}> = () => {
       // render: (status: string) => <>{statusTextTh(status)}</>,
     },
     {
-      title: "Action",
+      title: "",
       dataIndex: "productId",
       key: "productId",
       render: (productId: string, row: any, index: number) => (
         <>
-          <Space>
-            <Link
-              onClick={() => {
-                // setBookId(productId);
-                form.setFieldsValue({
-                  ...row,
-                });
-                setIsModal(true);
-              }}
-            >
-              แสดงความคิดเห็น
-            </Link>
-          </Space>
+          {row.status === "complete" ? (
+            <Space>
+              <Link
+                onClick={() => {
+                  form.setFieldsValue({
+                    ...row,
+                  });
+                  setIsModal(true);
+                }}
+              >
+                แสดงความคิดเห็น
+              </Link>
+            </Space>
+          ) : (
+            <></>
+          )}
         </>
       ),
     },

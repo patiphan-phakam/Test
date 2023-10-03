@@ -98,6 +98,9 @@ const FormLogin: React.FC<prop> = ({
         </Button>
       </Row>
       <Space style={{ marginTop: "1rem" }}>
+        <Link className="link-action" onClick={() => navigate("/home")}>
+          home
+        </Link>
         <Link className="link-action" onClick={() => navigate("/register")}>
           create account
         </Link>

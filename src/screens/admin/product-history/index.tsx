@@ -8,6 +8,7 @@ import {
   Select,
   Space,
   Table,
+  Typography,
   message,
 } from "antd";
 import Link from "antd/es/typography/Link";
@@ -16,8 +17,6 @@ import { useNavigate } from "react-router-dom";
 import { useAuth } from "../../../auth/auth";
 import { axiosBackend } from "../../../config/axiosBackend";
 import { BookingSerice } from "../../../service/booking.service";
-import { CommentService } from "../../../service/comment.service";
-import { UserService } from "../../../service/user-service";
 import { IUserData } from "../../../types/user";
 
 export const ProductHistory: React.FC<{}> = () => {
@@ -25,9 +24,11 @@ export const ProductHistory: React.FC<{}> = () => {
   const { signout } = useAuth();
   const [loading, setLoading] = useState<boolean>(true);
   const [isModal, setIsModal] = useState<boolean>(false);
+  const [isModalDetail, setIsModalDetail] = useState<boolean>(false);
   const [statusNow, setStatusNow] = useState<string>("");
   const [userProfile, setUserProfile] = useState<IUserData | undefined>();
   const [dataSource, setDataSource] = useState<any>([]);
+  const [detail, setDetail] = useState<any>([]);
   const navigate = useNavigate();
 
   /* eslint-disable */
@@ -99,9 +100,19 @@ export const ProductHistory: React.FC<{}> = () => {
           <Space>
             <Link
               onClick={() => {
+                setDetail(row);
+                setIsModalDetail(true);
+              }}
+            >
+              รายละเอียด
+            </Link>
+            /
+            <Link
+              onClick={() => {
                 setStatusNow(row.status);
                 form.setFieldsValue({
                   ...row,
+                  status: { value: row.status, label: row.status },
                 });
                 setIsModal(true);
               }}
@@ -148,6 +159,7 @@ export const ProductHistory: React.FC<{}> = () => {
         title={`แก้ไขสถานะ`}
         open={isModal}
         onCancel={() => {
+          setDetail({});
           setIsModal(false);
           form.resetFields();
         }}
@@ -193,6 +205,57 @@ export const ProductHistory: React.FC<{}> = () => {
             </Button>
           </Row>
         </Form>
+      </Modal>
+      <Modal
+        title="รายละเอียด"
+        open={isModalDetail}
+        onCancel={() => setIsModalDetail(!isModalDetail)}
+        footer={null}
+      >
+        <Row
+          style={{ backgroundColor: "#f0f0f0", borderRadius: "15px" }}
+          justify={"center"}
+        >
+          <Col span={24}>
+            <div
+              style={{
+                overflow: "hidden",
+                height: "300px",
+                margin: "1.5em",
+                borderRadius: "10px",
+              }}
+            >
+              <img
+                alt={detail?.product?.productName}
+                src={
+                  detail?.product?.productImages[0]
+                    ? detail?.product?.productImages[0].productImageSource
+                    : null
+                }
+                style={{
+                  width: "100%",
+                  height: "100%",
+                  objectFit: "cover",
+                }}
+              />
+            </div>
+          </Col>
+          <Col span={24} style={{ paddingLeft: "1rem", marginTop: "1em" }}>
+            <Typography style={{ fontWeight: "bold" }}>ข้อมูลลูกค้า</Typography>
+          </Col>
+          <Col span={24} style={{ paddingLeft: "1rem" }}>
+            <p>ชื่อลูกค้า : {detail?.user?.fullName}</p>
+            <p>เบอร์โทร : {detail?.user?.phone}</p>
+            <p>อีเมล : {detail?.user?.email}</p>
+          </Col>
+          <Col span={24} style={{ paddingLeft: "1rem" }}>
+            <Typography style={{ fontWeight: "bold" }}>ข้อมูลสินค้า</Typography>
+          </Col>
+          <Col span={24} style={{ paddingLeft: "1rem" }}>
+            <p>ชื่อสินค้า : {detail?.product?.productName}</p>
+            <p>ร้านค้า : {detail?.store?.fullName}</p>
+          </Col>
+        </Row>
       </Modal>
     </>
   );
