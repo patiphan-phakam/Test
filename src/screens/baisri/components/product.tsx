@@ -13,6 +13,7 @@ import { IStoreData } from "../../../types/store";
 import { useAuth } from "../../../auth/auth";
 import { IUserData } from "../../../types/user";
 import { CommentService } from "../../../service/comment.service";
+import baisri from "../../../images/home-learn.png";
 
 export const Product: React.FC = () => {
   const { productId } = useParams();
@@ -125,7 +126,7 @@ export const Product: React.FC = () => {
       >
         {product && (
           <>
-            <ProductPreview images={product.productImages ?? []} />
+            <ProductPreview images={product.productImages ?? [baisri]} />
             <Row>
               <Col span={24} style={{ marginTop: "0.5rem" }}>
                 <p className="card-name-custom">{product.productName}</p>

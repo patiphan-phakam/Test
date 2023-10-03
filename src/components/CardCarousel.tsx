@@ -4,6 +4,7 @@ import Carousel from "react-multi-carousel";
 import "react-multi-carousel/lib/styles.css";
 import Meta from "antd/es/card/Meta";
 import { useNavigate } from "react-router-dom";
+import baisri from "../images/home-learn.png";
 
 export interface ICardData {
   key: number;
@@ -51,7 +52,7 @@ const CardCarousel: React.FC<CardCarouselProps> = ({ dataList, baseUrl }) => {
                 <Image
                   preview={false}
                   alt="example"
-                  src={item.image}
+                  src={item.image ? item.image : baisri}
                   height={200}
                   style={{
                     objectFit: "cover",

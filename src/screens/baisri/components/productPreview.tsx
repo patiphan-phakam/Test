@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { LeftOutlined, RightOutlined } from "@ant-design/icons";
 import { IProductDataImage } from "../../../types/product";
-
+import baisri from "../../../images/home-learn.png";
 interface Props {
   images: IProductDataImage[];
 }
@@ -29,7 +29,11 @@ export const ProductPreview: React.FC<Props> = ({ images }) => {
                 <LeftOutlined />
               </div>
               <img
-                src={images[indexImage].productImageSource}
+                src={
+                  images[indexImage].productImageSource
+                    ? images[indexImage].productImageSource
+                    : baisri
+                }
                 alt={`product-${images[indexImage].id}`}
               />
               <div

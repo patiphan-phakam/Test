@@ -11,7 +11,6 @@ import { Popular } from "./components/popular";
 import { Recommend } from "./components/recommend";
 import { Carousel } from "react-responsive-carousel";
 import "react-responsive-carousel/lib/styles/carousel.min.css";
-// import { ArrowRightOutlined } from "@ant-design/icons";
 import { Review } from "./components/review";
 import { ICardData } from "../../components/CardCarousel";
 import { axiosBackend } from "../../config/axiosBackend";
@@ -34,7 +33,7 @@ export const Home: React.FC<{}> = () => {
           id: product.productId,
           title: product.productName,
           description: product.productDetail,
-          image: product.productImages[0].productImageSource,
+          image: product.productImages[0]?.productImageSource,
         }));
         setProductPopular(setData);
         setLoadingPopular(false);
@@ -50,7 +49,7 @@ export const Home: React.FC<{}> = () => {
           id: product.productId,
           title: product.productName,
           description: product.productDetail,
-          image: product.productImages[0].productImageSource,
+          image: product.productImages[0]?.productImageSource,
         }));
         setProductRecommend(setData);
         setLoadingRecommend(false);

@@ -25,7 +25,7 @@ const CardList: React.FC<CardCarouselProps> = ({ dataList, baseUrl }) => {
                   <Image
                     preview={false}
                     alt="example"
-                    src={item.productImages[0].productImageSource}
+                    src={item.productImages[0]?.productImageSource}
                   />
                 }
                 onClick={() => navigate(`${baseUrl}/${item.productId}`)}

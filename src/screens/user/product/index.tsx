@@ -150,6 +150,11 @@ export const Product: React.FC<{}> = () => {
         filesBase64.push(base64);
       }
 
+      if (fileList.length === 0) {
+        message.error("กรุณาเพิ่มรูปภาพอย่างน้อย 1 รูป");
+        return;
+      }
+
       const dataCreate = {
         ...values,
         imageBase64: filesBase64,
