@@ -1,5 +1,5 @@
 import React from "react";
-import { Card, Image } from "antd";
+import { Card } from "antd";
 import Carousel from "react-multi-carousel";
 import "react-multi-carousel/lib/styles.css";
 import Meta from "antd/es/card/Meta";

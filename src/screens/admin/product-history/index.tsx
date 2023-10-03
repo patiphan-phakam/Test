@@ -13,15 +13,17 @@ import {
 } from "antd";
 import Link from "antd/es/typography/Link";
 import React, { useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
-import { useAuth } from "../../../auth/auth";
+// import { useNavigate } from "react-router-dom";
+// import { useAuth } from "../../../auth/auth";
 import { axiosBackend } from "../../../config/axiosBackend";
 import { BookingSerice } from "../../../service/booking.service";
 import { IUserData } from "../../../types/user";
+import { formatDateDefault } from "../../../utils/date-helper";
 
 export const ProductHistory: React.FC<{}> = () => {
+  /* eslint-disable */
   const [form] = Form.useForm();
-  const { signout } = useAuth();
+  // const { signout } = useAuth();
   const [loading, setLoading] = useState<boolean>(true);
   const [isModal, setIsModal] = useState<boolean>(false);
   const [isModalDetail, setIsModalDetail] = useState<boolean>(false);
@@ -29,9 +31,8 @@ export const ProductHistory: React.FC<{}> = () => {
   const [userProfile, setUserProfile] = useState<IUserData | undefined>();
   const [dataSource, setDataSource] = useState<any>([]);
   const [detail, setDetail] = useState<any>([]);
-  const navigate = useNavigate();
+  // const navigate = useNavigate();
 
-  /* eslint-disable */
   const getData = async () => {
     const bookingService = BookingSerice(axiosBackend);
     const res = await bookingService.findAll();
@@ -85,6 +86,7 @@ export const ProductHistory: React.FC<{}> = () => {
       title: "วันที่สั่งซื้อ",
       dataIndex: "createDate",
       key: "createDate",
+      render: formatDateDefault,
     },
     {
       title: "สถานะ",

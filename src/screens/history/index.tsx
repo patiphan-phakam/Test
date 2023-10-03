@@ -18,6 +18,7 @@ import { IUserData } from "../../types/user";
 import { useAuth } from "../../auth/auth";
 import { CommentService } from "../../service/comment.service";
 import { useNavigate } from "react-router-dom";
+import { formatDateDefault } from "../../utils/date-helper";
 
 export const History: React.FC<{}> = () => {
   const [form] = Form.useForm();
@@ -103,6 +104,7 @@ export const History: React.FC<{}> = () => {
       title: "วันที่สั่งซื้อ",
       dataIndex: "createDate",
       key: "createDate",
+      render: formatDateDefault,
     },
     {
       title: "สินค้า",
@@ -113,7 +115,6 @@ export const History: React.FC<{}> = () => {
       title: "สถานะ",
       dataIndex: "status",
       key: "status",
-      // render: (status: string) => <>{statusTextTh(status)}</>,
     },
     {
       title: "",
@@ -122,18 +123,22 @@ export const History: React.FC<{}> = () => {
       render: (productId: string, row: any, index: number) => (
         <>
           {row.status === "complete" ? (
-            <Space>
-              <Link
-                onClick={() => {
-                  form.setFieldsValue({
-                    ...row,
-                  });
-                  setIsModal(true);
-                }}
-              >
-                แสดงความคิดเห็น
-              </Link>
-            </Space>
+            row.Comments.lenght === 0 ? (
+              <Space>
+                <Link
+                  onClick={() => {
+                    form.setFieldsValue({
+                      ...row,
+                    });
+                    setIsModal(true);
+                  }}
+                >
+                  แสดงความคิดเห็น
+                </Link>
+              </Space>
+            ) : (
+              <Space>ขอบคุณสำหรับความคิดเห็น</Space>
+            )
           ) : (
             <></>
           )}
