@@ -1,8 +1,5 @@
-import { Col, Row, Button } from "antd";
+import { Col, Row, Button, Modal } from "antd";
 import React, { useEffect, useState } from "react";
-import homeLearn from "../../images/home-learn.png";
-import homeBelive from "../../images/home-belive.png";
-import homeSocial from "../../images/home-social.png";
 import { ArrowRightOutlined } from "@ant-design/icons";
 import { axiosBackend } from "../../config/axiosBackend";
 import { NewsService } from "../../service/news-service";
@@ -12,6 +9,8 @@ import { config } from "../../config";
 export const News: React.FC<{}> = () => {
   const [loading, setLoading] = useState<boolean>(true);
   const [dataSource, setDataSource] = useState<INewsItem[]>([]);
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [detail, setDetail] = useState<any>({});
   const newsService = NewsService(axiosBackend);
 
   /* eslint-disable */
@@ -30,6 +29,16 @@ export const News: React.FC<{}> = () => {
   useEffect(() => {
     fetchData();
   }, [loading]);
+
+  const showDetail = (data: any) => {
+    setDetail(data);
+    setIsModalOpen(true);
+  };
+
+  const handleCancel = () => {
+    setDetail({});
+    setIsModalOpen(false);
+  };
 
   return (
     <>
@@ -59,7 +68,10 @@ export const News: React.FC<{}> = () => {
                 <Col md={12} style={{ padding: "0 2em" }}>
                   <h3 style={{ color: "#028910" }}>{dataSource[0].title}</h3>
                   <p>{dataSource[0].content}</p>
-                  <Button className="green-button">
+                  <Button
+                    className="green-button"
+                    onClick={() => showDetail(dataSource[0])}
+                  >
                     Read more <ArrowRightOutlined />
                   </Button>
                 </Col>
@@ -80,7 +92,10 @@ export const News: React.FC<{}> = () => {
                       <Col md={16} style={{ padding: "0 2em" }}>
                         <h3 style={{ color: "#028910" }}>{data.title}</h3>
                         <p>{data.content}</p>
-                        <Button className="green-button">
+                        <Button
+                          className="green-button"
+                          onClick={() => showDetail(data)}
+                        >
                           Read more <ArrowRightOutlined />
                         </Button>
                       </Col>
@@ -93,6 +108,41 @@ export const News: React.FC<{}> = () => {
             <></>
           )}
         </Row>
+        <Modal open={isModalOpen} onCancel={handleCancel} footer={null}>
+          <Row justify={"center"}>
+            {detail && (
+              <>
+                <Col
+                  span={24}
+                  style={{
+                    overflow: "hidden",
+                    height: "300px",
+                    margin: "1.5em",
+                    borderRadius: "10px",
+                  }}
+                >
+                  <img
+                    alt={detail.image}
+                    src={`${config.backendUrl}/image/${detail.image}`}
+                    style={{
+                      width: "100%",
+                      height: "100%",
+                      objectFit: "cover",
+                    }}
+                  />
+                </Col>
+                <Col span={24}>
+                  <h3 style={{ color: "#028910", margin: "0" }}>
+                    {detail.title}
+                  </h3>
+                </Col>
+                <Col span={24}>
+                  <p>{detail.content}</p>
+                </Col>
+              </>
+            )}
+          </Row>
+        </Modal>
       </div>
     </>
   );
