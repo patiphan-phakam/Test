@@ -128,26 +128,22 @@ export const Users: React.FC<{}> = () => {
 
   const onFinish = () => {
     form.validateFields().then(async (values) => {
-      // if (!values.setpassword) {
-      //   message.success("กร");
-      // }
-      let userType;
-      if ((values.userType = "user")) {
-        userType = 2;
-      } else {
-        userType = 1;
-      }
       const data = {
         password: values.setpassword,
-        userLevel: userType,
+        userLevel: values.userType.value,
       };
-      const userId = userProfile?.userId;
-      const res = await userService.update(userId, data);
+      const res = await userService.update(values.userId, data);
       if (res) {
         message.success("แก้ไขข้อมูลเรียบร้อย");
+        setIsModal(false);
+        form.resetFields();
+        setLoading(true);
         return;
       }
       message.error("เกิดข้อผิดพลาดกรุณาลองใหม่อีกครั้ง");
+      setIsModal(false);
+      form.resetFields();
+      setLoading(true);
       return;
     });
   };
@@ -211,6 +207,11 @@ export const Users: React.FC<{}> = () => {
             <Col className="gutter-row" span={24}>
               <Form.Item name="setpassword" label="New Password">
                 <Input placeholder="Password" />
+              </Form.Item>
+            </Col>
+            <Col className="gutter-row" span={24}>
+              <Form.Item name="userId" label="userId" hidden>
+                <Input />
               </Form.Item>
             </Col>
             <Col className="gutter-row" span={24}>
