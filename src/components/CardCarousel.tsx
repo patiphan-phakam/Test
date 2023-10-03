@@ -49,8 +49,7 @@ const CardCarousel: React.FC<CardCarouselProps> = ({ dataList, baseUrl }) => {
               className="card-product"
               key={item.title}
               cover={
-                <Image
-                  preview={false}
+                <img
                   alt="example"
                   src={item.image ? item.image : baisri}
                   height={200}
