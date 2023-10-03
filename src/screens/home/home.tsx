@@ -1,6 +1,8 @@
 import { Col, Row, Image } from "antd";
 import React, { useEffect, useState } from "react";
-import homePicture1 from "../../images/bg.jpg";
+import homePicture1 from "../../images/home-page-01.jpg";
+import homePicture2 from "../../images/home-page-02.jpg";
+import homePicture3 from "../../images/bg.jpg";
 import homeCirCle1 from "../../images/home-circle-1.png";
 import homeCirCle2 from "../../images/home-circle-2.png";
 import homeCirCle3 from "../../images/home-circle-3.png";
@@ -67,27 +69,30 @@ export const Home: React.FC<{}> = () => {
         stopOnHover
       >
         <div>
-          <Image
-            preview={false}
+          <img
             src={homePicture1}
             alt="Image 1"
             width={"100%"}
+            height={"100%"}
+            style={{ objectFit: "cover" }}
           />
         </div>
         <div>
-          <Image
-            preview={false}
-            src={homePicture1}
+          <img
+            src={homePicture2}
             alt="Image 2"
             width={"100%"}
+            height={"100%"}
+            style={{ objectFit: "cover" }}
           />
         </div>
         <div>
-          <Image
-            preview={false}
-            src={homePicture1}
+          <img
+            src={homePicture3}
             alt="Image 3"
             width={"100%"}
+            height={"100%"}
+            style={{ objectFit: "cover" }}
           />
         </div>
       </Carousel>
