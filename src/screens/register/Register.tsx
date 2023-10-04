@@ -26,6 +26,7 @@ const RegisterPage: React.FC<{}> = () => {
     const { data } = await userService.register(dataCreate);
     if (data) {
       navigate("/login");
+      message.success("Register successfully");
       return;
     }
     message.error("register failed please try again");
