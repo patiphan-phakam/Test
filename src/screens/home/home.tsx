@@ -20,6 +20,7 @@ import { config } from "../../config";
 import { NewsService } from "../../service/news-service";
 import { INewsItem } from "../../types/news";
 import { ArrowRightOutlined } from "@ant-design/icons";
+import { Content } from "antd/es/layout/layout";
 
 const isEven = (number: number): boolean => {
   return number % 2 === 0;
@@ -101,7 +102,15 @@ export const Home: React.FC<{}> = () => {
 
   return (
     <>
-      <div className="container-content">
+      <Content
+        style={{
+          paddingLeft: "5em",
+          paddingRight: "5em",
+          margin: 0,
+          minHeight: 280,
+        }}
+      >
+        {/* <div className="container-content"> */}
         <Carousel
           autoPlay
           showThumbs={false}
@@ -227,7 +236,11 @@ export const Home: React.FC<{}> = () => {
             </Col>
           </Row>
         </div>
-        <Row className="container">
+        {/* <div className="container">
+         
+        </div> */}
+
+        <Row>
           <Col span={24}>
             <Row>
               {dataSource?.length > 0 ? (
@@ -246,21 +259,31 @@ export const Home: React.FC<{}> = () => {
                               Read more <ArrowRightOutlined />
                             </Button>
                           </Col>
-                          <Col md={8}>
+                          <Col md={8} style={{ width: "100%" }}>
                             <img
                               src={`${config.backendUrl}/image/${item.image}`}
                               alt="homePicture1"
-                              width={"80%"}
+                              style={{
+                                width: "100%",
+                                height: "auto",
+                                objectFit: "cover",
+                                borderRadius: "5px",
+                              }}
                             />
                           </Col>
                         </>
                       ) : (
                         <>
-                          <Col md={8}>
+                          <Col md={8} style={{ width: "100%" }}>
                             <img
                               src={`${config.backendUrl}/image/${item.image}`}
                               alt="homePicture1"
-                              width={"80%"}
+                              style={{
+                                width: "100%",
+                                height: "auto",
+                                objectFit: "cover",
+                                borderRadius: "5px",
+                              }}
                             />
                           </Col>
                           <Col md={16} className="container-item">
@@ -284,6 +307,7 @@ export const Home: React.FC<{}> = () => {
             </Row>
           </Col>
         </Row>
+
         {loadingPopular ? (
           <ProductSkeleton title="ยอดนิยม" />
         ) : (
@@ -296,7 +320,9 @@ export const Home: React.FC<{}> = () => {
         )}
 
         <Review />
-      </div>
+        {/* </div> */}
+      </Content>
+
       <Modal open={isModalOpen} onCancel={handleCancel} footer={null}>
         <Row justify={"center"}>
           {detail && (

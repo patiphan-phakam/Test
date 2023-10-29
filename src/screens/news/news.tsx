@@ -5,6 +5,7 @@ import { axiosBackend } from "../../config/axiosBackend";
 import { NewsService } from "../../service/news-service";
 import { INewsItem } from "../../types/news";
 import { config } from "../../config";
+import { Content } from "antd/es/layout/layout";
 
 export const News: React.FC<{}> = () => {
   const [loading, setLoading] = useState<boolean>(true);
@@ -42,7 +43,14 @@ export const News: React.FC<{}> = () => {
 
   return (
     <>
-      <div className="container-content">
+      <Content
+        style={{
+          paddingLeft: 24,
+          paddingRight: 24,
+          margin: 0,
+          minHeight: 280,
+        }}
+      >
         <Row className="container">
           <h2
             style={{
@@ -78,7 +86,7 @@ export const News: React.FC<{}> = () => {
               </Row>
               <Row style={{ margin: "3em 0" }}>
                 {dataSource.slice(1).map((data: INewsItem, index: number) => (
-                  <Col md={12} key={index + 1}>
+                  <Col md={12} key={index + 1} style={{ margin: "2em 0" }}>
                     <Row>
                       <Col md={8}>
                         <img
@@ -143,7 +151,8 @@ export const News: React.FC<{}> = () => {
             )}
           </Row>
         </Modal>
-      </div>
+      </Content>
+      {/* <div className="container-content"></div> */}
     </>
   );
 };
