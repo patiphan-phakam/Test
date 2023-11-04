@@ -47,44 +47,44 @@ const CardCarouselReview: React.FC<CardCarouselProps> = ({
 
   return (
     <>
-      <div style={{ margin: "0 5rem" }}>
-        <Carousel ssr itemClass="image-item" responsive={responsive}>
-          {dataList.map((review) => (
-            <Card className="card-review" key={review.id}>
-              <Row>
-                <Col span={4}>
-                  <Avatar icon={<UserOutlined />} />
-                </Col>
-                <Col span={20}>
-                  <div style={{ flex: 1, marginLeft: "12px" }}>
-                    <div style={{ fontWeight: "bold" }}>{review.store}</div>
-                    <div
-                      style={{
-                        display: "flex",
-                        fontSize: "10px",
-                      }}
-                    >
-                      {dayjs(review.createDate).format("YYYY-MM-DD HH:mm:ss")} |{" "}
-                      {review.productName}
-                    </div>
-                    <div style={{ padding: "0 0 0 8px" }}>
-                      <Rate
-                        disabled
-                        allowHalf
-                        defaultValue={5}
-                        style={{ fontSize: "8px" }}
-                      />
-                    </div>
+      {/* <div style={{ margin: "0 5rem" }}> */}
+      <Carousel ssr itemClass="image-item" responsive={responsive}>
+        {dataList.map((review) => (
+          <Card className="card-review" key={review.id}>
+            <Row>
+              <Col span={4}>
+                <Avatar icon={<UserOutlined />} />
+              </Col>
+              <Col span={20}>
+                <div style={{ flex: 1, marginLeft: "12px" }}>
+                  <div style={{ fontWeight: "bold" }}>{review.store}</div>
+                  <div
+                    style={{
+                      display: "flex",
+                      fontSize: "10px",
+                    }}
+                  >
+                    {dayjs(review.createDate).format("YYYY-MM-DD HH:mm:ss")} |{" "}
+                    {review.productName}
                   </div>
-                </Col>
-              </Row>
-              <Row>
-                <div>{review.message}</div>
-              </Row>
-            </Card>
-          ))}
-        </Carousel>
-      </div>
+                  <div style={{ padding: "0 0 0 8px" }}>
+                    <Rate
+                      disabled
+                      allowHalf
+                      defaultValue={5}
+                      style={{ fontSize: "8px" }}
+                    />
+                  </div>
+                </div>
+              </Col>
+            </Row>
+            <Row>
+              <div>{review.message}</div>
+            </Row>
+          </Card>
+        ))}
+      </Carousel>
+      {/* </div> */}
     </>
   );
 };

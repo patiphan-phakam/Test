@@ -2,7 +2,26 @@
   font-family: "Kanit", sans-serif !important;
 }
 
-.container {
+.body {
+  background-color: #edf0f2;
+}
+
+.content {
+  position: relative;
+  width: 100%;
+  padding: 1px 8px 8px;
+  margin-top: -1px;
+}
+
+@media only screen and (min-width: 992px) {
+  .content {
+    width: 984px;
+    margin: 0 auto;
+    padding: 0 0 8px;
+  }
+}
+
+/* .container {
   margin-left: 5rem;
   margin-right: 5rem;
 }
@@ -13,12 +32,23 @@
 
 .container-item {
   padding: 2rem;
-}
+} */
 
 .green-button,
 .green-button:hover {
   background-color: #028910;
   border-color: #028910 !important;
+  color: white !important;
+}
+
+.search-button,
+.search-button:hover {
+  background-color: #028910;
+  border-color: #028910 !important;
+  color: white !important;
+}
+
+.search-button span {
   color: white !important;
 }
 
@@ -395,4 +425,92 @@ a {
   .user-layout {
     margin-top: 6rem;
   }
+}
+
+.content-home-menu {
+  position: relative;
+  background-color: white;
+  width: 100vw;
+  height: 6em;
+}
+
+.home-menu {
+  display: flex;
+  justify-content: space-between;
+  margin-left: 2em;
+  margin-right: 2em;
+  margin-top: -4em;
+  margin-bottom: 4em;
+}
+
+.card-home {
+  background-color: white;
+  padding: 16px 0px;
+  border-radius: 8px;
+  border: 1px solid #e9ecee;
+  margin: 8px 0;
+}
+
+.card-home-no-bg {
+  padding: 16px 0px;
+  border-radius: 8px;
+  margin: 8px 0;
+}
+
+.carousel-container {
+  display: relative;
+}
+
+.carousel-image {
+  height: 350px;
+}
+
+/* .search-select {
+  width: 120px;
+} */
+
+@media (max-width: 768px) {
+  .carousel-container {
+    display: relative;
+    margin-top: 4em;
+  }
+}
+
+.card-product-home {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.card-product-home:hover {
+  cursor: pointer;
+}
+
+.image-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  justify-items: center;
+  width: 300px;
+  margin: 0 1em;
+  height: 150px;
+  overflow: hidden;
+  border-radius: 15px;
+}
+
+.image-container img {
+  width: 100%;
+  height: auto;
+  object-fit: cover;
+}
+
+.image-overlay {
+  position: absolute;
+  margin: 0 1em;
+  width: 300px;
+  height: 150px;
+  background-color: rgba(0, 0, 0, 0.5);
+  border-radius: 15px;
+  pointer-events: none;
 }

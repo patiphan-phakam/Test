@@ -55,6 +55,7 @@ export const LayoutMain: React.FC<prop> = ({
           handleMenu={setMenuOpen}
           menuOpen={menuOpen}
           menuSelected={current}
+          title={title}
         />
         <Layout>
           <SlidingMenu
@@ -78,7 +79,7 @@ export const LayoutMain: React.FC<prop> = ({
             </ul>
           </SlidingMenu>
 
-          <Content style={{ backgroundColor: "white" }}>{children}</Content>
+          <Content style={{ backgroundColor: "#edf0f2" }}>{children}</Content>
         </Layout>
         <Footers />
       </Layout>

@@ -39,7 +39,6 @@ export const MainLayout: React.FC<Prop> = ({ menuItems }) => {
                     <LayoutMain
                       menuItems={menuItems
                         .filter((menuItem) => menuItem.path !== "/")
-                        .filter((menuItem) => !menuItem.path.includes("*"))
                         .filter((menuItem) => menuItem.showInMenu)}
                       title={menuItem.label}
                       current={menuItem.name}

@@ -43,7 +43,11 @@
   width: 100%;
 }
 
-.menu-custom * {
+.menu-custom input {
+  color: #028910;
+}
+
+.menu-custom span {
   color: #028910;
 }
 
@@ -248,6 +252,10 @@
   padding-left: 2rem;
 }
 
+.search-mobile {
+  display: none;
+}
+
 @media (max-width: 768px) {
   .ant-layout-header {
     position: fixed;
@@ -259,13 +267,9 @@
     height: 15px;
   }
 
-  .logo {
+  /* .logo {
     display: none;
-  }
-
-  .menu-custom {
-    display: none;
-  }
+  } */
 
   .search {
     margin-left: 1rem;
@@ -305,5 +309,23 @@
 
   .menu-content {
     display: block;
+  }
+}
+
+@media (max-width: 600px) {
+  .menu-custom {
+    display: block;
+    flex-direction: column;
+    align-items: center;
+    margin-left: 0.5rem;
+    width: 100%;
+  }
+
+  .search-pc {
+    display: none;
+  }
+
+  .search-mobile {
+    display: flex;
   }
 }

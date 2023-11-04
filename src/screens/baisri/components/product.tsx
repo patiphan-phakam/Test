@@ -14,6 +14,7 @@ import { useAuth } from "../../../auth/auth";
 import { IUserData } from "../../../types/user";
 import { CommentService } from "../../../service/comment.service";
 import baisri from "../../../images/home-learn.png";
+import { Content } from "antd/es/layout/layout";
 
 export const Product: React.FC = () => {
   const { productId } = useParams();
@@ -120,10 +121,7 @@ export const Product: React.FC = () => {
 
   return (
     <>
-      <div
-        className="container-content"
-        style={{ marginLeft: "5rem", marginRight: "5rem" }}
-      >
+      <Content className="content">
         {product && (
           <>
             <ProductPreview images={product.productImages ?? [baisri]} />
@@ -199,10 +197,9 @@ export const Product: React.FC = () => {
             </Row>
           </>
         )}
-      </div>
-      <div style={{ marginBottom: "5rem" }}>
+
         <CardCarouselReview dataList={dataList} />
-      </div>
+      </Content>
       <Modal
         title="ยืนยันคำสั่งซื้อ"
         open={isModalOpen}

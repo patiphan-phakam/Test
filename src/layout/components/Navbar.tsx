@@ -2,33 +2,34 @@ import { Header } from "antd/es/layout/layout";
 import "./layout.css";
 import {
   Avatar,
+  Breadcrumb,
   Button,
   Col,
   Dropdown,
-  Input,
-  Menu,
   MenuProps,
   Modal,
   Row,
 } from "antd";
-import { CloseOutlined, MenuOutlined, UserOutlined } from "@ant-design/icons";
+import { UserOutlined } from "@ant-design/icons";
 import logoImage from "../../images/logo120.png";
-import logoImageMb from "../../images/logo-mb.png";
+// import logoImageMb from "../../images/logo-mb.png";
 import React, { useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useSearchParams } from "react-router-dom";
 import { useAuth } from "../../auth/auth";
 import Link from "antd/es/typography/Link";
 import { UserService } from "../../service/user-service";
 import { IUserData } from "../../types/user";
 import { axiosBackend } from "../../config/axiosBackend";
+import { Search } from "../../components/search";
 
-const { Search } = Input;
+// const { Search } = Input;
 
 interface prop {
   menu: MenuProps["items"];
   handleMenu: (status: boolean) => void;
   menuOpen: boolean;
   menuSelected: string;
+  title: string;
 }
 
 export const Navbar: React.FC<prop> = ({
@@ -36,6 +37,7 @@ export const Navbar: React.FC<prop> = ({
   handleMenu,
   menuOpen,
   menuSelected,
+  title,
 }) => {
   const { accessToken, signout } = useAuth();
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -43,9 +45,9 @@ export const Navbar: React.FC<prop> = ({
 
   const [userProfile, setUserProfile] = useState<IUserData | undefined>();
 
-  const onSearch = (value: string) => {
-    return;
-  };
+  // const onSearch = (value: string) => {
+  //   return;
+  // };
 
   const menus = [
     {
@@ -111,11 +113,19 @@ export const Navbar: React.FC<prop> = ({
     }
   }, []);
   /* eslint-disable */
+  const [searchParams] = useSearchParams();
+  const type = searchParams.get("type");
+  const text = searchParams.get("text");
+
+  // const { pathname } = useLocation();
+  // const defaultId = pathname.split("/");
+  // const getId = defaultId[2] === "product" ? defaultId[3] : defaultId[2];
 
   return (
     <>
-      <Header className="app-header">
-        <div
+      <div style={{ backgroundColor: "white" }}>
+        <Header className="app-header content">
+          {/* <div
           className="mobile-menu-toggle"
           onClick={(e) => handleMenu(!menuOpen)}
         >
@@ -124,81 +134,146 @@ export const Navbar: React.FC<prop> = ({
           ) : (
             <MenuOutlined style={{ color: "green" }} />
           )}
-        </div>
+        </div> */}
 
-        <div className="left-section">
-          <div className="logo-mobile">
+          <div className="left-section">
+            {/* <div className="logo-mobile">
             <img src={logoImageMb} alt="Logo" />
-          </div>
-          <div className="logo">
-            <img src={logoImage} alt="Logo" />
-          </div>
-          <div className="menu-custom">
-            <Menu
+          </div> */}
+            <div
+              className="logo"
+              style={{ marginTop: "1rem", cursor: "pointer" }}
+              onClick={() => navigate("/home")}
+            >
+              <img src={logoImage} alt="Logo" />
+            </div>
+            <div className="menu-custom">
+              {/* <Menu
               mode="horizontal"
               items={menu}
               selectedKeys={[menuSelected ?? "home"]}
-            />
+            /> */}
+              <Search />
+            </div>
           </div>
-        </div>
-        <div className="right-section">
-          <div className="search">
+          <div className="right-section">
+            {/* <div className="search">
             <Search
               className="custom-input"
               allowClear
               onSearch={onSearch}
               style={{ width: "100%" }}
             />
+          </div> */}
+            <div className="login" style={{ marginTop: "0.5rem" }}>
+              {accessToken ? (
+                <>
+                  <Dropdown
+                    menu={{
+                      items: userProfile
+                        ? menus.filter((menu) =>
+                            menu.level.includes(userProfile?.userLevel)
+                              ? menu
+                              : null
+                          )
+                        : menus,
+                    }}
+                    placement="bottomLeft"
+                    arrow
+                  >
+                    <Avatar icon={<UserOutlined />} className="avatar" />
+                  </Dropdown>
+                </>
+              ) : (
+                <>
+                  <Button
+                    className="white-button"
+                    onClick={() => navigate("/login")}
+                  >
+                    LOGIN
+                  </Button>
+                  <Button
+                    className="green-button"
+                    onClick={() => navigate("/register")}
+                  >
+                    SIGN UP
+                  </Button>
+                </>
+              )}
+            </div>
+            <div className="login-mobile" style={{ marginTop: "0.9rem" }}>
+              <Button
+                size="small"
+                className="white-button"
+                onClick={() => navigate("/login")}
+              >
+                LOGIN
+              </Button>
+            </div>
           </div>
-          <div className="login">
-            {accessToken ? (
+        </Header>
+      </div>
+      {menuSelected !== "home" && (
+        <div style={{ backgroundColor: "white", border: "1px solid #f0f0f0 " }}>
+          <Header
+            className="app-header content"
+            style={{ boxShadow: "inherit" }}
+          >
+            {type && text ? (
               <>
-                <Dropdown
-                  menu={{
-                    items: userProfile
-                      ? menus.filter((menu) =>
-                          menu.level.includes(userProfile?.userLevel)
-                            ? menu
-                            : null
-                        )
-                      : menus,
-                  }}
-                  placement="bottomLeft"
-                  arrow
-                >
-                  <Avatar icon={<UserOutlined />} className="avatar" />
-                </Dropdown>
+                <Breadcrumb
+                  items={
+                    type && text
+                      ? [
+                          {
+                            title: (
+                              <Link onClick={() => navigate("/home")}>
+                                หน้าหลัก
+                              </Link>
+                            ),
+                          },
+                          {
+                            title: `${title}${
+                              type === "store" ? "ร้านค้า" : "สินค้า"
+                            }`,
+                          },
+                          {
+                            title: text,
+                          },
+                        ]
+                      : [
+                          {
+                            title: (
+                              <Link onClick={() => navigate("/home")}>
+                                หน้าหลัก
+                              </Link>
+                            ),
+                          },
+                          {
+                            title: title,
+                          },
+                        ]
+                  }
+                />
               </>
             ) : (
-              <>
-                <Button
-                  size="small"
-                  className="white-button"
-                  onClick={() => navigate("/login")}
-                >
-                  LOGIN
-                </Button>
-                <Button
-                  size="small"
-                  className="green-button"
-                  onClick={() => navigate("/register")}
-                >
-                  SIGN UP
-                </Button>
-              </>
+              <Breadcrumb
+                items={[
+                  {
+                    title: (
+                      <Link onClick={() => navigate("/home")}>หน้าหลัก</Link>
+                    ),
+                  },
+                  {
+                    title: title,
+                  },
+                ]}
+              />
             )}
-          </div>
-          <div className="login-mobile">
-            <Button
-              size="small"
-              className="white-button"
-              onClick={() => navigate("/login")}
-            >
-              LOGIN
-            </Button>
-          </div>
+          </Header>
         </div>
-      </Header>
+      )}
+
       <Modal
         title="Profile"
         open={isModalOpen}
@@ -206,7 +281,10 @@ export const Navbar: React.FC<prop> = ({
         footer={null}
       >
         <Row
-          style={{ backgroundColor: "#f0f0f0", borderRadius: "15px" }}
+          style={{
+            backgroundColor: "#f0f0f0",
+            borderRadius: "15px",
+          }}
           justify={"center"}
         >
           <Col span={24} style={{ paddingLeft: "1rem" }}>

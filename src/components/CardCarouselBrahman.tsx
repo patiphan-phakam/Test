@@ -1,10 +1,7 @@
 import React from "react";
-// import { Card } from "antd";
 import Carousel from "react-multi-carousel";
 import "react-multi-carousel/lib/styles.css";
-// import Meta from "antd/es/card/Meta";
 import { useNavigate } from "react-router-dom";
-import baisri from "../images/home-learn.png";
 
 export interface ICardData {
   key: number;
@@ -19,7 +16,10 @@ interface CardCarouselProps {
   baseUrl?: string;
 }
 
-const CardCarousel: React.FC<CardCarouselProps> = ({ dataList, baseUrl }) => {
+const CardCarouselBrahman: React.FC<CardCarouselProps> = ({
+  dataList,
+  baseUrl,
+}) => {
   const navigate = useNavigate();
 
   const responsive = {
@@ -43,43 +43,17 @@ const CardCarousel: React.FC<CardCarouselProps> = ({ dataList, baseUrl }) => {
   return (
     <>
       <Carousel ssr itemClass="image-item" responsive={responsive}>
-        {dataList.map((item) => (
-          // <Card
-          //   className="card-product"
-          //   key={item.title}
-          //   cover={
-          //     <img
-          //       alt="example"
-          //       src={item.image ? item.image : baisri}
-          //       height={200}
-          //       style={{
-          //         objectFit: "cover",
-          //         width: "100%",
-          //         display: "flex",
-          //         justifyContent: "center",
-          //         alignItems: "center",
-          //       }}
-          //     />
-          //   }
-          //   onClick={() => navigate(`${baseUrl}/${item.id}`)}
-          // >
-          //   <Meta title={item.title} description={item.description} />
-          // </Card>
-          // <Card
-          //   className="card-product"
-          //   key={item.title}
-          //   cover={
-
-          //   }
-          //   onClick={() => navigate(`${baseUrl}/${item.id}`)}
-          // />
+        {dataList.map((item: any) => (
           <div
             key={item.title}
             className="card-product-home"
-            onClick={() => navigate(`${baseUrl}/${item.id}`)}
+            onClick={() => navigate(`${baseUrl}/${item.productId}`)}
           >
             <div className="image-container">
-              <img alt={item.title} src={item.image ? item.image : baisri} />
+              <img
+                alt={item.title}
+                src={item.productImages[0]?.productImageSource}
+              />
               <div className="image-overlay" />
             </div>
             <div
@@ -92,7 +66,7 @@ const CardCarousel: React.FC<CardCarouselProps> = ({ dataList, baseUrl }) => {
               }}
             >
               <div style={{ color: "white", fontSize: "25px" }}>
-                <p>{item.title}</p>
+                <p>{item.productName}</p>
               </div>
             </div>
           </div>
@@ -102,4 +76,4 @@ const CardCarousel: React.FC<CardCarouselProps> = ({ dataList, baseUrl }) => {
   );
 };
 
-export default CardCarousel;
+export default CardCarouselBrahman;

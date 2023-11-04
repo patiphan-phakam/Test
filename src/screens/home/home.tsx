@@ -1,11 +1,8 @@
-import { Col, Row, Image, Modal, Button } from "antd";
-import React, { Fragment, useEffect, useState } from "react";
+import { Col, Row, Modal } from "antd";
+import React, { useEffect, useState } from "react";
 import homePicture1 from "../../images/home-page-01.jpg";
 import homePicture2 from "../../images/home-page-02.jpg";
-import homePicture3 from "../../images/bg.jpg";
-import homeCirCle1 from "../../images/home-circle-1.png";
-import homeCirCle2 from "../../images/home-circle-2.png";
-import homeCirCle3 from "../../images/home-circle-3.png";
+import homePicture3 from "../../images/home-page-03.jpg";
 import { Popular } from "./components/popular";
 import { Recommend } from "./components/recommend";
 import { Carousel } from "react-responsive-carousel";
@@ -17,43 +14,44 @@ import { ProductService } from "../../service/product-service";
 import { IProductData } from "../../types/product";
 import { ProductSkeleton } from "./components/productSkeleton";
 import { config } from "../../config";
-import { NewsService } from "../../service/news-service";
-import { INewsItem } from "../../types/news";
-import { ArrowRightOutlined } from "@ant-design/icons";
+// import { NewsService } from "../../service/news-service";
+// import { INewsItem } from "../../types/news";
 import { Content } from "antd/es/layout/layout";
+import { HomeMenu } from "./components/homeMenu";
+// import { Search } from "../../components/search";
 
-const isEven = (number: number): boolean => {
-  return number % 2 === 0;
-};
+// const isEven = (number: number): boolean => {
+//   return number % 2 === 0;
+// };
 
 export const Home: React.FC<{}> = () => {
-  const [loading, setLoading] = useState<boolean>(true);
+  // const [loading, setLoading] = useState<boolean>(true);
   const [loadingPopular, setLoadingPopular] = useState<boolean>(true);
   const [loadingRecommand, setLoadingRecommend] = useState<boolean>(true);
   const [productPopular, setProductPopular] = useState<ICardData[]>([]);
-  const [dataSource, setDataSource] = useState<INewsItem[]>([]);
+  // const [dataSource, setDataSource] = useState<INewsItem[]>([]);
   const [productRecommand, setProductRecommend] = useState<ICardData[]>([]);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [detail, setDetail] = useState<any>({});
 
-  const newsService = NewsService(axiosBackend);
+  // const newsService = NewsService(axiosBackend);
 
   /* eslint-disable */
-  const fetchData = async () => {
-    try {
-      const { data } = await newsService.getAll();
-      if (data) {
-        setDataSource(data);
-      }
-    } catch (error) {
-      console.error(error);
-    }
-    setLoading(false);
-  };
+  // const fetchData = async () => {
+  //   try {
+  //     const { data } = await newsService.getAll();
+  //     if (data) {
+  //       setDataSource(data);
+  //     }
+  //   } catch (error) {
+  //     console.error(error);
+  //   }
+  //   setLoading(false);
+  // };
 
-  useEffect(() => {
-    fetchData();
-  }, [loading]);
+  // useEffect(() => {
+  //   fetchData();
+  // }, [loading]);
 
   useEffect(() => {
     const productService = ProductService(axiosBackend);
@@ -102,23 +100,16 @@ export const Home: React.FC<{}> = () => {
 
   return (
     <>
-      <Content
-        style={{
-          paddingLeft: "5em",
-          paddingRight: "5em",
-          margin: 0,
-          minHeight: 280,
-        }}
-      >
-        {/* <div className="container-content"> */}
+      <div>
         <Carousel
           autoPlay
           showThumbs={false}
           infiniteLoop
           showStatus={false}
           stopOnHover
+          className="carousel-container"
         >
-          <div>
+          <div className="carousel-image">
             <img
               src={homePicture1}
               alt="background one"
@@ -127,7 +118,7 @@ export const Home: React.FC<{}> = () => {
               style={{ objectFit: "cover" }}
             />
           </div>
-          <div>
+          <div className="carousel-image">
             <img
               src={homePicture2}
               alt="background two"
@@ -136,7 +127,7 @@ export const Home: React.FC<{}> = () => {
               style={{ objectFit: "cover" }}
             />
           </div>
-          <div>
+          <div className="carousel-image">
             <img
               src={homePicture3}
               alt="background three"
@@ -146,7 +137,11 @@ export const Home: React.FC<{}> = () => {
             />
           </div>
         </Carousel>
-        <div className="home-content">
+      </div>
+
+      <div className="content-home-menu" />
+      <Content className="content">
+        {/* <div className="home-content">
           <Row justify={"center"}>
             <div className="home-content-header">
               <h1 style={{ color: "white", margin: 0 }}>ทำไมต้องมูผ่านเรา?</h1>
@@ -235,12 +230,9 @@ export const Home: React.FC<{}> = () => {
               </Row>
             </Col>
           </Row>
-        </div>
-        {/* <div className="container">
-         
         </div> */}
 
-        <Row>
+        {/* <Row>
           <Col span={24}>
             <Row>
               {dataSource?.length > 0 ? (
@@ -306,21 +298,25 @@ export const Home: React.FC<{}> = () => {
               )}
             </Row>
           </Col>
-        </Row>
+        </Row> */}
 
-        {loadingPopular ? (
-          <ProductSkeleton title="ยอดนิยม" />
-        ) : (
-          <Popular productList={productPopular} />
-        )}
-        {loadingRecommand ? (
-          <ProductSkeleton title="แนะนำ" />
-        ) : (
-          <Recommend productList={productRecommand} />
-        )}
+        <HomeMenu />
+        <div className="card-home">
+          {loadingPopular ? (
+            <ProductSkeleton title="ยอดนิยม" />
+          ) : (
+            <Popular productList={productPopular} />
+          )}
+        </div>
 
+        <div className="card-home">
+          {loadingRecommand ? (
+            <ProductSkeleton title="แนะนำ" />
+          ) : (
+            <Recommend productList={productRecommand} />
+          )}
+        </div>
         <Review />
-        {/* </div> */}
       </Content>
 
       <Modal open={isModalOpen} onCancel={handleCancel} footer={null}>

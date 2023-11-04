@@ -8,14 +8,7 @@ import { Content } from "antd/es/layout/layout";
 export const About: React.FC<{}> = () => {
   return (
     <>
-      <Content
-        style={{
-          paddingLeft: "5em",
-          paddingRight: "5em",
-          margin: 0,
-          minHeight: 280,
-        }}
-      >
+      <Content className="content">
         <div className="container-content">
           <div className="about-image">
             <div className="about-text">เกียวกับเรา</div>

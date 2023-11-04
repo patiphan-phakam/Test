@@ -19,6 +19,7 @@ import { useAuth } from "../../auth/auth";
 import { CommentService } from "../../service/comment.service";
 import { useNavigate } from "react-router-dom";
 import { formatDateDefault } from "../../utils/date-helper";
+import { Content } from "antd/es/layout/layout";
 
 export const History: React.FC<{}> = () => {
   const [form] = Form.useForm();
@@ -149,28 +150,30 @@ export const History: React.FC<{}> = () => {
 
   return (
     <>
-      <div className="container-content">
-        <Row className="container">
-          <h2
-            style={{
-              color: "#028910",
-              wordWrap: "break-word",
-            }}
-          >
-            ประวัติการสั่งซื้อ
-          </h2>
-        </Row>
-        <Row>
-          <Col span={24} style={{ margin: "2em" }}>
-            <Table
-              columns={columns}
-              dataSource={dataSource}
-              loading={loading}
-              key={"no"}
-            />
-          </Col>
-        </Row>
-      </div>
+      <Content className="content">
+        <div className="container-content">
+          <Row className="container">
+            <h2
+              style={{
+                color: "#028910",
+                wordWrap: "break-word",
+              }}
+            >
+              ประวัติการสั่งซื้อ
+            </h2>
+          </Row>
+          <Row>
+            <Col span={24} style={{ margin: "1em 0" }}>
+              <Table
+                columns={columns}
+                dataSource={dataSource}
+                loading={loading}
+                key={"no"}
+              />
+            </Col>
+          </Row>
+        </div>
+      </Content>
       <Modal
         title={`แสดงความคิดเห็น`}
         open={isModal}

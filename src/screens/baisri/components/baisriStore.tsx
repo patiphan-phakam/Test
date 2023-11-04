@@ -1,6 +1,5 @@
 import { Col, Row, Rate } from "antd";
 import React, { useEffect, useState } from "react";
-// import CardCarouselProduct from "../../../components/CardCarouselProduct";
 import { useNavigate, useParams } from "react-router-dom";
 import { ProductService } from "../../../service/product-service";
 import { axiosBackend } from "../../../config/axiosBackend";
@@ -53,106 +52,99 @@ export const BaisriStore: React.FC<Props> = ({ baseUrl }) => {
 
   return (
     <>
-      <Content
-        style={{
-          paddingLeft: 24,
-          paddingRight: 24,
-          margin: 0,
-          minHeight: 280,
-        }}
-      >
-        <div className="container-content" style={{ marginBottom: "2rem" }}>
-          <Row>
-            <h2 style={{ marginLeft: "4rem" }}>{store.fullName} </h2>
-          </Row>
-          <Row>
-            <h2
-              style={{
-                color: "#028910",
-                marginLeft: "4rem",
-                wordWrap: "break-word",
-              }}
-            >
-              สินค้าค้าทั้งหมด
-            </h2>
-          </Row>
-          {loading ? (
-            <CarouselCardSkeleton />
-          ) : (
-            // (
-            //   <CardCarouselProduct dataList={product} baseUrl={baseUrl} />
-            // )
-
+      <Content className="content">
+        <div className="card-home">
+          <div className="container-content" style={{ marginBottom: "2rem" }}>
             <Row>
-              {product.map((item: any, index: number) => (
-                <Col lg={6} md={8} sm={12} key={index + 1}>
-                  <Card
-                    className="card-product"
-                    key={item.id}
-                    cover={
-                      <div
-                        style={{
-                          overflow: "hidden",
-                          height: "200px",
-                        }}
-                      >
-                        <img
-                          alt="example"
-                          src={item.productImages[0]?.productImageSource}
-                          height={200}
-                          style={{
-                            objectFit: "cover",
-                            width: "100%",
-                            display: "flex",
-                            justifyContent: "center",
-                            alignItems: "center",
-                          }}
-                        />
-                      </div>
-                    }
-                    onClick={() =>
-                      navigate(`${baseUrl}/product/${item.productId}`)
-                    }
-                    style={{
-                      marginBottom: "2em",
-                    }}
-                  >
-                    <Row>
-                      <p className="card-name-custom">{item.productName}</p>
-                    </Row>
-                    <Row>
-                      <Col md={6}>
-                        <p className="card-price-custom">{`฿${item.productPrice}`}</p>
-                      </Col>
-                      <Col md={18} style={{ textAlign: "right" }}>
-                        <Rate
-                          disabled
-                          allowHalf
-                          defaultValue={
-                            Number(item.productAvgStar) === 0
-                              ? 5
-                              : item.productAvgStar
-                          }
-                          className="card-rate-custom"
-                        />
-                      </Col>
-                    </Row>
-                    <Row>
-                      <Col md={12}>
-                        <p
-                          className="card-description-custom"
-                          style={{ fontSize: "12px" }}
-                        >{`${item.store}`}</p>
-                      </Col>
-                      <Col md={12} style={{ textAlign: "right" }}>
-                        <p className="card-description-custom">{`${item.province}`}</p>
-                      </Col>
-                    </Row>
-                  </Card>
-                </Col>
-              ))}
+              <h2 style={{ marginLeft: "3rem" }}>{store.fullName} </h2>
             </Row>
-          )}
+            <Row>
+              <h2
+                style={{
+                  color: "#028910",
+                  marginLeft: "3rem",
+                  wordWrap: "break-word",
+                }}
+              >
+                สินค้าค้าทั้งหมด
+              </h2>
+            </Row>
+
+            {loading ? (
+              <CarouselCardSkeleton />
+            ) : (
+              <Row>
+                {product.map((item: any, index: number) => (
+                  <Col lg={8} md={12} sm={24} key={index + 1}>
+                    <Card
+                      className="card-product"
+                      key={item.id}
+                      cover={
+                        <div
+                          style={{
+                            overflow: "hidden",
+                            height: "200px",
+                          }}
+                        >
+                          <img
+                            alt="example"
+                            src={item.productImages[0]?.productImageSource}
+                            height={200}
+                            style={{
+                              objectFit: "cover",
+                              width: "100%",
+                              display: "flex",
+                              justifyContent: "center",
+                              alignItems: "center",
+                            }}
+                          />
+                        </div>
+                      }
+                      onClick={() =>
+                        navigate(`${baseUrl}/product/${item.productId}`)
+                      }
+                      style={{
+                        marginBottom: "2em",
+                        width: "250px",
+                      }}
+                    >
+                      <Row>
+                        <p className="card-name-custom">{item.productName}</p>
+                      </Row>
+                      <Row>
+                        <Col md={6}>
+                          <p className="card-price-custom">{`฿${item.productPrice}`}</p>
+                        </Col>
+                        <Col md={18} style={{ textAlign: "right" }}>
+                          <Rate
+                            disabled
+                            allowHalf
+                            defaultValue={
+                              Number(item.productAvgStar) === 0
+                                ? 5
+                                : item.productAvgStar
+                            }
+                            className="card-rate-custom"
+                          />
+                        </Col>
+                      </Row>
+                      <Row>
+                        <Col md={12}>
+                          <p
+                            className="card-description-custom"
+                            style={{ fontSize: "12px" }}
+                          >{`${item.store}`}</p>
+                        </Col>
+                        <Col md={12} style={{ textAlign: "right" }}>
+                          <p className="card-description-custom">{`${item.province}`}</p>
+                        </Col>
+                      </Row>
+                    </Card>
+                  </Col>
+                ))}
+              </Row>
+            )}
+          </div>
         </div>
       </Content>
     </>

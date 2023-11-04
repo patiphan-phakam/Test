@@ -16,20 +16,20 @@ export const Footers = () => {
     <Layout>
       <Footer className="scrollable-footer">
         <Row justify={"center"} className="footer-section1">
-          <Col md={4}>
-            <img src={menu1} alt="Logo1" />
+          <Col span={4}>
+            <img className="footer-logo" src={menu1} alt="Logo1" />
           </Col>
-          <Col md={4}>
-            <img src={menu2} alt="Logo2" />
+          <Col span={4}>
+            <img className="footer-logo" src={menu2} alt="Logo2" />
           </Col>
-          <Col md={4}>
-            <img src={menu3} alt="Logo3" />
+          <Col span={4}>
+            <img className="footer-logo" src={menu3} alt="Logo3" />
           </Col>
-          <Col md={4}>
-            <img src={menu4} alt="Logo4" />
+          <Col span={4}>
+            <img className="footer-logo" src={menu4} alt="Logo4" />
           </Col>
-          <Col md={4}>
-            <img src={menu5} alt="Logo5" />
+          <Col span={4}>
+            <img className="footer-logo" src={menu5} alt="Logo5" />
           </Col>
         </Row>
         <Row className="footer-section2">

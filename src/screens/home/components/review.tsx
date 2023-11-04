@@ -18,22 +18,18 @@ export const Review: React.FC<{}> = () => {
   }, []);
   return (
     <>
-      <div style={{ marginBottom: "2rem" }}>
-        <Row style={{ display: "flex" }}>
-          <h2 style={{ color: "#028910", marginLeft: "5rem" }}>
-            รีวิวจากลูกค้า
-          </h2>
-          <p
-            style={{
-              fontSize: "16px",
-              marginTop: "20px",
-              marginLeft: "5px",
-              color: "rgba(0, 0, 0, 0.35)",
-            }}
-          >{`(${data.length})`}</p>
-        </Row>
-        <CardCarouselReview dataList={data} />
-      </div>
+      <Row style={{ display: "flex" }}>
+        <h2 style={{ color: "#028910", marginLeft: "1rem" }}>รีวิวจากลูกค้า</h2>
+        <p
+          style={{
+            fontSize: "16px",
+            marginTop: "20px",
+            marginLeft: "5px",
+            color: "rgba(0, 0, 0, 0.35)",
+          }}
+        >{`(${data.length})`}</p>
+      </Row>
+      <CardCarouselReview dataList={data} />
     </>
   );
 };
