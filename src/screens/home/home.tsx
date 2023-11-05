@@ -14,10 +14,11 @@ import { ProductService } from "../../service/product-service";
 import { IProductData } from "../../types/product";
 import { ProductSkeleton } from "./components/productSkeleton";
 import { config } from "../../config";
-// import { NewsService } from "../../service/news-service";
-// import { INewsItem } from "../../types/news";
+import { NewsService } from "../../service/news-service";
+import { INewsItem } from "../../types/news";
 import { Content } from "antd/es/layout/layout";
 import { HomeMenu } from "./components/homeMenu";
+import { HomeNews } from "./components/homeNews";
 // import { Search } from "../../components/search";
 
 // const isEven = (number: number): boolean => {
@@ -25,33 +26,33 @@ import { HomeMenu } from "./components/homeMenu";
 // };
 
 export const Home: React.FC<{}> = () => {
-  // const [loading, setLoading] = useState<boolean>(true);
+  const [loading, setLoading] = useState<boolean>(true);
   const [loadingPopular, setLoadingPopular] = useState<boolean>(true);
   const [loadingRecommand, setLoadingRecommend] = useState<boolean>(true);
   const [productPopular, setProductPopular] = useState<ICardData[]>([]);
-  // const [dataSource, setDataSource] = useState<INewsItem[]>([]);
+  const [dataSource, setDataSource] = useState<INewsItem[]>([]);
   const [productRecommand, setProductRecommend] = useState<ICardData[]>([]);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [detail, setDetail] = useState<any>({});
 
-  // const newsService = NewsService(axiosBackend);
+  const newsService = NewsService(axiosBackend);
 
   /* eslint-disable */
-  // const fetchData = async () => {
-  //   try {
-  //     const { data } = await newsService.getAll();
-  //     if (data) {
-  //       setDataSource(data);
-  //     }
-  //   } catch (error) {
-  //     console.error(error);
-  //   }
-  //   setLoading(false);
-  // };
+  const fetchData = async () => {
+    try {
+      const { data } = await newsService.getAll();
+      if (data) {
+        setDataSource(data);
+      }
+    } catch (error) {
+      console.error(error);
+    }
+    setLoading(false);
+  };
 
-  // useEffect(() => {
-  //   fetchData();
-  // }, [loading]);
+  useEffect(() => {
+    fetchData();
+  }, [loading]);
 
   useEffect(() => {
     const productService = ProductService(axiosBackend);
@@ -301,6 +302,15 @@ export const Home: React.FC<{}> = () => {
         </Row> */}
 
         <HomeMenu />
+
+        <div className="card-home">
+          {loadingRecommand ? (
+            <ProductSkeleton title="แนะนำ" />
+          ) : (
+            <HomeNews news={dataSource} showDetail={showDetail} />
+          )}
+        </div>
+
         <div className="card-home">
           {loadingPopular ? (
             <ProductSkeleton title="ยอดนิยม" />

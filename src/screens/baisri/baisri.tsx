@@ -1,4 +1,4 @@
-import { Card, Col, Rate, Row } from "antd";
+import { Col, Row } from "antd";
 import React, { useEffect, useState } from "react";
 import baisri from "../../images/home-learn.png";
 // import CardCarousel from "../../components/CardCarousel";
@@ -29,7 +29,6 @@ export const Baisri: React.FC<Props> = ({ baseUrl }) => {
           description: store.province,
           image: store.storeImage,
         }));
-        console.log(`🚀 ~ file: baisri.tsx:32 ~ setData ~ setData:`, setData);
         setStore(setData);
         setLoading(false);
       }
