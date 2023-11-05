@@ -1,4 +1,4 @@
-import { Col, Row } from "antd";
+import { Card, Col, Rate, Row } from "antd";
 import React, { useEffect, useState } from "react";
 import baisri from "../../images/home-learn.png";
 // import CardCarousel from "../../components/CardCarousel";
@@ -37,20 +37,6 @@ export const Baisri: React.FC<Props> = ({ baseUrl }) => {
     getStore();
   }, []);
 
-  // const renderRows = (data: any) => {
-  //   const rows = [];
-  //   for (let i = 0; i < data.length; i += 5) {
-  //     const rowItems = data.slice(i, i + 5);
-  //     const row = (
-  //       <div style={{ marginTop: "1em", marginBottom: "1em" }} key={i}>
-  //         <CardCarousel dataList={rowItems} baseUrl={baseUrl} />
-  //       </div>
-  //     );
-  //     rows.push(row);
-  //   }
-  //   return rows;
-  // };
-
   return (
     <>
       <Content className="content">
@@ -70,11 +56,54 @@ export const Baisri: React.FC<Props> = ({ baseUrl }) => {
             {loading ? (
               <CarouselCardSkeleton />
             ) : (
-              // renderRows(store)
-              // <CardCarousel dataList={store} baseUrl={baseUrl} />
               <Row>
                 {store.map((item: any, index: number) => (
                   <Col lg={8} md={12} sm={24} key={index + 1}>
+                    {/* <Card
+                      className="card-product"
+                      key={item.id}
+                      cover={
+                        <div
+                          style={{
+                            overflow: "hidden",
+                            height: "200px",
+                          }}
+                        >
+                          <img
+                            alt="example"
+                            src={
+                              item.image !== "" && item.image !== null
+                                ? item.image
+                                : baisri
+                            }
+                            height={200}
+                            style={{
+                              objectFit: "cover",
+                              width: "100%",
+                              display: "flex",
+                              justifyContent: "center",
+                              alignItems: "center",
+                            }}
+                          />
+                        </div>
+                      }
+                      onClick={() => navigate(`${baseUrl}/${item.id}`)}
+                      style={{
+                        marginBottom: "2em",
+                        width: "250px",
+                      }}
+                    >
+                      <Row>
+                        <p style={{ fontSize: "16px" }}>{item.title}</p>
+                      </Row>
+                      <Row>
+                        <Col md={24} style={{ textAlign: "right" }}>
+                          <p
+                            style={{ fontSize: "14px", color: "gray" }}
+                          >{`${item.description}`}</p>
+                        </Col>
+                      </Row>
+                    </Card> */}
                     <div
                       key={item.title}
                       className="card-product-home"
@@ -107,39 +136,6 @@ export const Baisri: React.FC<Props> = ({ baseUrl }) => {
                       </div>
                     </div>
                   </Col>
-                  // <Col lg={6} md={8} sm={12} key={index + 1}>
-                  //   <Card
-                  //     className="card-product"
-                  //     key={item.title}
-                  //     style={{
-                  //       marginBottom: "2em",
-                  //     }}
-                  //     cover={
-                  //       <div
-                  //         style={{
-                  //           overflow: "hidden",
-                  //           height: "200px",
-                  //         }}
-                  //       >
-                  //         <img
-                  //           alt="example"
-                  //           src={item.image ? item.image : ""}
-                  //           height={200}
-                  //           style={{
-                  //             objectFit: "cover",
-                  //             width: "100%",
-                  //             display: "flex",
-                  //             justifyContent: "center",
-                  //             alignItems: "center",
-                  //           }}
-                  //         />
-                  //       </div>
-                  //     }
-                  //     onClick={() => navigate(`${baseUrl}/${item.id}`)}
-                  //   >
-                  //     <Meta title={item.title} description={item.description} />
-                  //   </Card>
-                  // </Col>
                 ))}
               </Row>
             )}
