@@ -3,6 +3,7 @@ import "react-multi-carousel/lib/styles.css";
 import { Col, Row, Typography } from "antd";
 import { config } from "../../../config";
 import Link from "antd/es/typography/Link";
+import { useNavigate } from "react-router-dom";
 
 interface Prop {
   news: any;
@@ -10,14 +11,20 @@ interface Prop {
 }
 
 export const HomeNews: React.FC<Prop> = ({ news, showDetail }) => {
+  const navigate = useNavigate();
   return (
     <>
-      <Typography.Title
-        level={4}
-        style={{ color: "#028910", margin: "0 0 0.5rem 1rem" }}
-      >
-        ข่าวสาร
-      </Typography.Title>
+      <div style={{ display: "flex", justifyContent: "space-between" }}>
+        <Typography.Title
+          level={4}
+          style={{ color: "#028910", margin: "0 0 0.5rem 1rem" }}
+        >
+          ข่าวสาร
+        </Typography.Title>
+        <Link style={{ marginRight: "1rem" }} onClick={() => navigate("/news")}>
+          ทั้งหมด
+        </Link>
+      </div>
 
       {news.length > 0 && (
         <>
