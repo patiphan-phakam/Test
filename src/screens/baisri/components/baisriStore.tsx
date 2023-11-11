@@ -1,13 +1,14 @@
 import { Col, Row, Rate } from "antd";
 import React, { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
+import baisri from "../../../images/home-learn.png";
 import { ProductService } from "../../../service/product-service";
 import { axiosBackend } from "../../../config/axiosBackend";
 import { IProductData } from "../../../types/product";
 import { UserService } from "../../../service/user-service";
-import CarouselCardSkeleton from "../../../components/CardProductSkeleton";
 import Card from "antd/es/card/Card";
 import { Content } from "antd/es/layout/layout";
+import { ProductSkeleton } from "../../../components/ProductSkeleton";
 
 interface Props {
   baseUrl: string;
@@ -56,13 +57,13 @@ export const BaisriStore: React.FC<Props> = ({ baseUrl }) => {
         <div className="card-home">
           <div className="container-content" style={{ marginBottom: "2rem" }}>
             <Row>
-              <h2 style={{ marginLeft: "3rem" }}>{store.fullName} </h2>
+              <h2 style={{ marginLeft: "1.5rem" }}>{store.fullName} </h2>
             </Row>
             <Row>
               <h2
                 style={{
                   color: "#028910",
-                  marginLeft: "3rem",
+                  marginLeft: "1.5rem",
                   wordWrap: "break-word",
                 }}
               >
@@ -71,24 +72,27 @@ export const BaisriStore: React.FC<Props> = ({ baseUrl }) => {
             </Row>
 
             {loading ? (
-              <CarouselCardSkeleton />
+              <ProductSkeleton />
             ) : (
               <Row>
                 {product.map((item: any, index: number) => (
-                  <Col lg={8} md={12} sm={24} key={index + 1}>
+                  <Col lg={6} md={8} sm={12} key={index + 1}>
                     <Card
-                      className="card-product"
+                      className="card-product card-product-list"
                       key={item.id}
                       cover={
                         <div
                           style={{
                             overflow: "hidden",
-                            height: "200px",
+                            height: "150px",
                           }}
                         >
                           <img
-                            alt="example"
-                            src={item.productImages[0]?.productImageSource}
+                            alt={item.productId}
+                            src={
+                              item.productImages[0]?.productImageSource ??
+                              baisri
+                            }
                             height={200}
                             style={{
                               objectFit: "cover",
@@ -103,19 +107,15 @@ export const BaisriStore: React.FC<Props> = ({ baseUrl }) => {
                       onClick={() =>
                         navigate(`${baseUrl}/product/${item.productId}`)
                       }
-                      style={{
-                        marginBottom: "2em",
-                        width: "250px",
-                      }}
                     >
                       <Row>
                         <p className="card-name-custom">{item.productName}</p>
                       </Row>
                       <Row>
-                        <Col md={6}>
+                        <Col md={8} style={{ width: "100%" }}>
                           <p className="card-price-custom">{`฿${item.productPrice}`}</p>
                         </Col>
-                        <Col md={18} style={{ textAlign: "right" }}>
+                        <Col md={16} style={{ textAlign: "right" }}>
                           <Rate
                             disabled
                             allowHalf
@@ -129,11 +129,8 @@ export const BaisriStore: React.FC<Props> = ({ baseUrl }) => {
                         </Col>
                       </Row>
                       <Row>
-                        <Col md={12}>
-                          <p
-                            className="card-description-custom"
-                            style={{ fontSize: "12px" }}
-                          >{`${item.store}`}</p>
+                        <Col md={12} style={{ width: "100%" }}>
+                          <p className="card-description-custom">{`${item.store}`}</p>
                         </Col>
                         <Col md={12} style={{ textAlign: "right" }}>
                           <p className="card-description-custom">{`${item.province}`}</p>

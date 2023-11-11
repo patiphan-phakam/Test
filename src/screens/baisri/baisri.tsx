@@ -1,12 +1,10 @@
 import { Col, Row } from "antd";
 import React, { useEffect, useState } from "react";
 import baisri from "../../images/home-learn.png";
-// import CardCarousel from "../../components/CardCarousel";
 import { UserService } from "../../service/user-service";
 import { axiosBackend } from "../../config/axiosBackend";
 import CarouselCardSkeleton from "../../components/CardProductSkeleton";
 import { useNavigate } from "react-router-dom";
-// import Meta from "antd/es/card/Meta";
 import { Content } from "antd/es/layout/layout";
 
 interface Props {
@@ -57,52 +55,7 @@ export const Baisri: React.FC<Props> = ({ baseUrl }) => {
             ) : (
               <Row>
                 {store.map((item: any, index: number) => (
-                  <Col lg={8} md={12} sm={24} key={index + 1}>
-                    {/* <Card
-                      className="card-product"
-                      key={item.id}
-                      cover={
-                        <div
-                          style={{
-                            overflow: "hidden",
-                            height: "200px",
-                          }}
-                        >
-                          <img
-                            alt="example"
-                            src={
-                              item.image !== "" && item.image !== null
-                                ? item.image
-                                : baisri
-                            }
-                            height={200}
-                            style={{
-                              objectFit: "cover",
-                              width: "100%",
-                              display: "flex",
-                              justifyContent: "center",
-                              alignItems: "center",
-                            }}
-                          />
-                        </div>
-                      }
-                      onClick={() => navigate(`${baseUrl}/${item.id}`)}
-                      style={{
-                        marginBottom: "2em",
-                        width: "250px",
-                      }}
-                    >
-                      <Row>
-                        <p style={{ fontSize: "16px" }}>{item.title}</p>
-                      </Row>
-                      <Row>
-                        <Col md={24} style={{ textAlign: "right" }}>
-                          <p
-                            style={{ fontSize: "14px", color: "gray" }}
-                          >{`${item.description}`}</p>
-                        </Col>
-                      </Row>
-                    </Card> */}
+                  <Col lg={6} md={8} key={index + 1}>
                     <div
                       key={item.title}
                       className="card-product-home"

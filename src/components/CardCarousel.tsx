@@ -25,12 +25,12 @@ const CardCarousel: React.FC<CardCarouselProps> = ({ dataList, baseUrl }) => {
   const responsive = {
     desktop: {
       breakpoint: { max: 3000, min: 1024 },
-      items: 3,
+      items: 4,
       partialVisibilityGutter: 60,
     },
     tablet: {
       breakpoint: { max: 1024, min: 464 },
-      items: 2,
+      items: 3,
       partialVisibilityGutter: 50,
     },
     mobile: {
@@ -44,35 +44,6 @@ const CardCarousel: React.FC<CardCarouselProps> = ({ dataList, baseUrl }) => {
     <>
       <Carousel ssr itemClass="image-item" responsive={responsive}>
         {dataList.map((item) => (
-          // <Card
-          //   className="card-product"
-          //   key={item.title}
-          //   cover={
-          //     <img
-          //       alt="example"
-          //       src={item.image ? item.image : baisri}
-          //       height={200}
-          //       style={{
-          //         objectFit: "cover",
-          //         width: "100%",
-          //         display: "flex",
-          //         justifyContent: "center",
-          //         alignItems: "center",
-          //       }}
-          //     />
-          //   }
-          //   onClick={() => navigate(`${baseUrl}/${item.id}`)}
-          // >
-          //   <Meta title={item.title} description={item.description} />
-          // </Card>
-          // <Card
-          //   className="card-product"
-          //   key={item.title}
-          //   cover={
-
-          //   }
-          //   onClick={() => navigate(`${baseUrl}/${item.id}`)}
-          // />
           <div
             key={item.title}
             className="card-product-home"
@@ -91,7 +62,7 @@ const CardCarousel: React.FC<CardCarouselProps> = ({ dataList, baseUrl }) => {
                 textAlign: "center",
               }}
             >
-              <div style={{ color: "white", fontSize: "25px" }}>
+              <div style={{ color: "white", fontSize: "20px" }}>
                 <p>{item.title}</p>
               </div>
             </div>

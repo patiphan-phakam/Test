@@ -156,9 +156,9 @@
 }
 
 @media (max-width: 768px) {
-  .container-content {
+  /* .container-content {
     margin-top: 5rem;
-  }
+  } */
   .parent {
     height: 200px;
   }
@@ -172,7 +172,7 @@
 
 /* CARD */
 .card-product {
-  margin: 0 4rem;
+  margin: 0 1.5rem;
   .ant-card-body {
     padding: 10px;
   }
@@ -193,19 +193,19 @@
 
 .card-name-custom {
   font-weight: 500;
-  font-size: 24px;
+  font-size: 18px;
   margin: 0;
 }
 
 .card-price-custom {
   font-weight: 500;
-  font-size: 24px;
+  font-size: 16px;
   margin: 0;
   color: #ff5a5a;
 }
 
 .card-description-custom {
-  font-size: 16px;
+  font-size: 12px;
   margin: 0;
   color: #a8a8a8;
 }
@@ -288,36 +288,16 @@ a {
 }
 
 @media (max-width: 1400px) {
-  .card-product {
-    margin: 0 3rem;
-  }
   .card-review {
     margin: 0 2rem;
   }
 }
 
 @media (max-width: 1200px) {
-  .card-product {
-    margin: 0 2rem;
-  }
   .card-review {
     margin: 0 2rem;
   }
-  .card-name-custom {
-    font-size: 20px;
-  }
 
-  .card-price-custom {
-    font-size: 20px;
-  }
-
-  .card-rate-custom {
-    font-size: 14px;
-  }
-
-  .card-description-custom {
-    font-size: 14px;
-  }
   .text-store-detail-custom {
     font-size: 14px;
   }
@@ -336,28 +316,18 @@ a {
 }
 
 @media (max-width: 768px) {
-  .card-product {
-    margin: 0 1rem;
-  }
   .card-review {
     margin: 0 1rem;
   }
 
   .card-name-custom {
-    font-size: 18px;
-  }
-
-  .card-price-custom {
-    font-size: 18px;
+    font-size: 16px;
   }
 
   .card-rate-custom {
-    font-size: 18px;
+    font-size: 10px;
   }
 
-  .card-description-custom {
-    font-size: 13px;
-  }
   .text-store-detail-custom {
     font-size: 12px;
   }
@@ -379,10 +349,6 @@ a {
 
   .card-price-custom {
     font-size: 14px;
-  }
-
-  .card-rate-custom {
-    font-size: 16px;
   }
 
   .card-description-custom {
@@ -492,9 +458,9 @@ a {
   justify-content: center;
   align-items: center;
   justify-items: center;
-  width: 300px;
+  width: 200px;
   margin: 0 1em;
-  height: 150px;
+  height: 120px;
   overflow: hidden;
   border-radius: 15px;
 }
@@ -508,9 +474,21 @@ a {
 .image-overlay {
   position: absolute;
   margin: 0 1em;
-  width: 300px;
-  height: 150px;
+  width: 200px;
+  height: 120px;
   background-color: rgba(0, 0, 0, 0.5);
   border-radius: 15px;
   pointer-events: none;
+}
+
+.card-product-list {
+  width: 200px;
+  margin-bottom: 2em;
+}
+
+@media (max-width: 480px) {
+  .card-product-list {
+    width: 130px;
+    margin-bottom: 2em;
+  }
 }
