@@ -74,5 +74,16 @@ export const ProductService = (axiosInstance: AxiosInstance) => {
         .then((response: any) => response)
         .catch((error: any) => error);
     },
+    search: async (data: {
+      province: string | null;
+      productName: string | null;
+    }) => {
+      return await axiosInstance
+        .get(
+          `/product/search?province=${data.province}&productName=${data.productName}`
+        )
+        .then((response: any) => response)
+        .catch((error: any) => error);
+    },
   };
 };
