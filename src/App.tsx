@@ -21,6 +21,7 @@ export interface MenuItem {
   subMenu?: MenuItem[];
   component: ReactElement;
   home?: boolean;
+  iconMenu?: string;
 }
 
 export const menuItems: MenuItem[] = [
@@ -30,8 +31,9 @@ export const menuItems: MenuItem[] = [
     path: "/home",
     name: "home",
     showInMenu: true,
-    home: false,
+    home: true,
     component: <Home />,
+    iconMenu: "menu-icon1.png",
   },
   {
     label: "บายศรี",
@@ -50,6 +52,7 @@ export const menuItems: MenuItem[] = [
     showInMenu: true,
     home: true,
     component: <BaisriRoute baseUrl="/baisri" />,
+    iconMenu: "menu-icon2.png",
   },
   {
     label: "หมอพราหมณ์",
@@ -68,6 +71,7 @@ export const menuItems: MenuItem[] = [
     showInMenu: true,
     home: true,
     component: <BrahmanRoute baseUrl="/brahman" />,
+    iconMenu: "menu-icon3.png",
   },
   {
     label: "บน/แก้บน",
@@ -86,6 +90,7 @@ export const menuItems: MenuItem[] = [
     showInMenu: true,
     home: true,
     component: <VotiveRoute baseUrl="/votive" />,
+    iconMenu: "menu-icon4.png",
   },
   {
     label: "ข่าวสารความรู้",
@@ -95,6 +100,7 @@ export const menuItems: MenuItem[] = [
     showInMenu: true,
     home: true,
     component: <News />,
+    iconMenu: "menu-icon5.png",
   },
   {
     label: "เกี่ยวกับเรา",
@@ -104,6 +110,7 @@ export const menuItems: MenuItem[] = [
     showInMenu: true,
     home: true,
     component: <About />,
+    iconMenu: "menu-icon6.png",
   },
   {
     label: "ค้นหา",

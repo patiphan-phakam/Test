@@ -1,7 +1,7 @@
 import { Fragment } from "react";
 import { menuItems } from "../../../App";
-import { Button } from "antd";
 import { useNavigate } from "react-router-dom";
+import Link from "antd/es/typography/Link";
 
 export const HomeMenu: React.FC<{}> = () => {
   const navigate = useNavigate();
@@ -12,13 +12,13 @@ export const HomeMenu: React.FC<{}> = () => {
           .filter((menuItem) => menuItem.home)
           .map((m) => (
             <Fragment key={m.label}>
-              <Button
-                className="green-button"
-                style={{ margin: 0 }}
-                onClick={() => navigate(m.path)}
-              >
-                {m.label}
-              </Button>
+              <Link onClick={() => navigate(m.path)}>
+                <img
+                  src={`/menu/${m.iconMenu}`}
+                  style={{ width: "40px" }}
+                  alt={m.iconMenu}
+                />
+              </Link>
             </Fragment>
           ))}
       </div>

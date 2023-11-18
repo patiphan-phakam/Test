@@ -3,13 +3,13 @@ import { Row, Col, Select, Input, Button, Form } from "antd";
 import { useForm } from "antd/es/form/Form";
 import axios from "axios";
 import { useEffect, useState } from "react";
-import { useLocation, useNavigate, useSearchParams } from "react-router-dom";
+import { useSearchParams } from "react-router-dom";
 
 export const Search: React.FC<{}> = () => {
   const [form] = useForm();
   const [province, setProvince] = useState([]);
-  const navigate = useNavigate();
-  const { pathname } = useLocation();
+  // const navigate = useNavigate();
+  // const { pathname } = useLocation();
 
   const [searchParams] = useSearchParams();
   const provinceSearch = searchParams.get("province");
@@ -27,7 +27,7 @@ export const Search: React.FC<{}> = () => {
       };
 
       if (dataSearch) {
-        const search = pathname.split("/");
+        // const search = pathname.split("/");
         // if (search[1] && search[1] === "search") {
         //   window.location.href = `/search?province=${dataSearch.province}&productName=${dataSearch.productName}`;
         // }
