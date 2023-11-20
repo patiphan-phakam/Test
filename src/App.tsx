@@ -31,7 +31,7 @@ export const menuItems: MenuItem[] = [
     path: "/home",
     name: "home",
     showInMenu: true,
-    home: true,
+    home: false,
     component: <Home />,
     iconMenu: "menu-icon1.png",
   },
