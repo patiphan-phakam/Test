@@ -3,6 +3,9 @@ import React, { useEffect, useState } from "react";
 import homePicture1 from "../../images/home-page-01.jpg";
 import homePicture2 from "../../images/home-page-02.jpg";
 import homePicture3 from "../../images/home-page-03.jpg";
+import homeCirCle1 from "../../images/home-circle-1.png";
+import homeCirCle2 from "../../images/home-circle-2.png";
+import homeCirCle3 from "../../images/home-circle-3.png";
 import { Popular } from "./components/popular";
 import { Recommend } from "./components/recommend";
 import { Carousel } from "react-responsive-carousel";
@@ -19,6 +22,7 @@ import { INewsItem } from "../../types/news";
 import { Content } from "antd/es/layout/layout";
 import { HomeMenu } from "./components/homeMenu";
 import { HomeNews } from "./components/homeNews";
+// import { ProductAll } from "./components/productAll";
 // import { Search } from "../../components/search";
 
 // const isEven = (number: number): boolean => {
@@ -145,14 +149,6 @@ export const Home: React.FC<{}> = () => {
         <HomeMenu />
 
         <div className="card-home">
-          {loadingRecommand ? (
-            <ProductSkeleton title="แนะนำ" />
-          ) : (
-            <HomeNews news={dataSource} showDetail={showDetail} />
-          )}
-        </div>
-
-        <div className="card-home">
           {loadingPopular ? (
             <ProductSkeleton title="ยอดนิยม" />
           ) : (
@@ -167,6 +163,111 @@ export const Home: React.FC<{}> = () => {
             <Recommend productList={productRecommand} />
           )}
         </div>
+
+        {/* <div className="card-home">
+          {loadingRecommand ? (
+            <ProductSkeleton title="สินค้าทั้งหมด" />
+          ) : (
+            <ProductAll productList={productRecommand} />
+          )}
+        </div> */}
+
+        <div className="card-home">
+          {loadingRecommand ? (
+            <ProductSkeleton title="ข่าวสาร" />
+          ) : (
+            <HomeNews news={dataSource} showDetail={showDetail} />
+          )}
+        </div>
+
+        <div className="home-content">
+          <Row justify={"center"}>
+            <div className="home-content-header">
+              <h1 style={{ color: "white", margin: 0 }}>ทำไมต้องมูผ่านเรา?</h1>
+            </div>
+          </Row>
+          <Row justify={"center"} style={{ margin: "2rem 0" }}>
+            <Col md={5} className="home-content-center">
+              <Row justify={"center"}>
+                <div className="circle-container">
+                  <Row justify={"center"}>
+                    <div className="circle-content">
+                      <img
+                        className="circle-image"
+                        src={homeCirCle1}
+                        alt="home-circle-1"
+                        width="60%"
+                      />
+                    </div>
+                  </Row>
+                  <Row justify={"center"}>
+                    <h4 style={{ color: "#D4AF37", margin: "1rem 0" }}>
+                      ความสะดวกสบาย
+                    </h4>
+                  </Row>
+                  <Row justify={"center"}>
+                    <p style={{ color: "white", margin: "0 1rem" }}>
+                      ไม่ว่าคุณจะอยู่ที่ไหนก็สามารถมูได้ตลอดเวลา
+                    </p>
+                  </Row>
+                </div>
+              </Row>
+            </Col>
+            <Col md={5} className="home-content-center">
+              <Row justify={"center"}>
+                <div className="circle-container">
+                  <Row justify={"center"}>
+                    <div className="circle-content">
+                      <img
+                        className="circle-image"
+                        src={homeCirCle2}
+                        alt="home-circle-2"
+                        width="60%"
+                      />
+                    </div>
+                  </Row>
+                  <Row justify={"center"}>
+                    <h4 style={{ color: "#D4AF37", margin: "1rem 0" }}>
+                      ประหยัดค่าใช้จ่าย
+                    </h4>
+                  </Row>
+                  <Row justify={"center"}>
+                    <p style={{ color: "white", margin: "0 1rem" }}>
+                      ในหลายครั้งไม่ต้องเดินทางไปเองแต่สามารถทำกิจกรรมการมูได้
+                    </p>
+                  </Row>
+                </div>
+              </Row>
+            </Col>
+            <Col md={5} className="home-content-center">
+              <Row justify={"center"}>
+                <div className="circle-container">
+                  <Row justify={"center"}>
+                    <div className="circle-content">
+                      <img
+                        className="circle-image"
+                        src={homeCirCle3}
+                        alt="home-circle-4"
+                        width="60%"
+                      />
+                    </div>
+                  </Row>
+                  <Row justify={"center"}>
+                    <h4 style={{ color: "#D4AF37", margin: "1rem 0" }}>
+                      ผลงานที่ตรงใจ
+                    </h4>
+                  </Row>
+                  <Row justify={"center"}>
+                    <p style={{ color: "white", margin: "0 1rem" }}>
+                      สามารถเลือกร้านในพื้นที่ เช็คสินค้า ราคา รีวิวได้ง่ายๆ
+                    </p>
+                  </Row>
+                </div>
+              </Row>
+            </Col>
+          </Row>
+        </div>
+
         <Review />
       </Content>
 
