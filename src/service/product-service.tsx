@@ -34,7 +34,7 @@ export const ProductService = (axiosInstance: AxiosInstance) => {
     },
     getByStoreId: async (storeId: string) => {
       return await axiosInstance
-        .get(`/product/user/${storeId}`)
+        .get(`/product/user/${storeId}?type=1`)
         .then((response: any) => response)
         .catch((error: any) => error);
     },

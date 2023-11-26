@@ -45,5 +45,11 @@ export const UserService = (axiosInstance: AxiosInstance) => {
         .then((response: any) => response)
         .catch((error: any) => error);
     },
+    getStoreLimit: async (take: number) => {
+      return await axiosInstance
+        .get(`user/store/1?take=${take}`)
+        .then((response: any) => response)
+        .catch((error: any) => error);
+    },
   };
 };

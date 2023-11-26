@@ -22,7 +22,8 @@ import { INewsItem } from "../../types/news";
 import { Content } from "antd/es/layout/layout";
 import { HomeMenu } from "./components/homeMenu";
 import { HomeNews } from "./components/homeNews";
-// import { ProductAll } from "./components/productAll";
+import { UserService } from "../../service/user-service";
+import { StoreAll } from "./components/storeAll";
 // import { Search } from "../../components/search";
 
 // const isEven = (number: number): boolean => {
@@ -33,28 +34,31 @@ export const Home: React.FC<{}> = () => {
   const [loading, setLoading] = useState<boolean>(true);
   const [loadingPopular, setLoadingPopular] = useState<boolean>(true);
   const [loadingRecommand, setLoadingRecommend] = useState<boolean>(true);
+  const [loadingStoreAll, setLoadingStoreAll] = useState<boolean>(true);
   const [productPopular, setProductPopular] = useState<ICardData[]>([]);
+  const [storeAll, setStoreAll] = useState<any>([]);
   const [dataSource, setDataSource] = useState<INewsItem[]>([]);
   const [productRecommand, setProductRecommend] = useState<ICardData[]>([]);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [detail, setDetail] = useState<any>({});
 
   const newsService = NewsService(axiosBackend);
+  const userService = UserService(axiosBackend);
 
   /* eslint-disable */
-  const fetchData = async () => {
-    try {
-      const { data } = await newsService.getAll();
-      if (data) {
-        setDataSource(data);
-      }
-    } catch (error) {
-      console.error(error);
-    }
-    setLoading(false);
-  };
 
   useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const { data } = await newsService.getAll();
+        if (data) {
+          setDataSource(data);
+        }
+      } catch (error) {
+        console.error(error);
+      }
+      setLoading(false);
+    };
     fetchData();
   }, [loading]);
 
@@ -91,6 +95,22 @@ export const Home: React.FC<{}> = () => {
       }
     };
     getProductRecommend();
+
+    const getProductAll = async () => {
+      const res = await userService.getStore();
+      if (res.data) {
+        const setData = res.data.map((store: any, index: number) => ({
+          key: store.id,
+          id: store.userId,
+          title: store.fullName,
+          description: store.province,
+          image: store.storeImage,
+        }));
+        setStoreAll(setData);
+        setLoadingStoreAll(false);
+      }
+    };
+    getProductAll();
   }, []);
 
   const showDetail = (data: any) => {
@@ -164,13 +184,13 @@ export const Home: React.FC<{}> = () => {
           )}
         </div>
 
-        {/* <div className="card-home">
-          {loadingRecommand ? (
-            <ProductSkeleton title="สินค้าทั้งหมด" />
+        <div className="card-home">
+          {loadingStoreAll ? (
+            <ProductSkeleton title="ร้านค้ารวม" />
           ) : (
-            <ProductAll productList={productRecommand} />
+            <StoreAll store={storeAll} baseUrl="/baisri" />
           )}
-        </div> */}
+        </div>
 
         <div className="card-home">
           {loadingRecommand ? (
